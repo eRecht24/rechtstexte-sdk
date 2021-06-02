@@ -5,7 +5,7 @@ namespace ERecht24;
 
 use Exception as BaseException;
 
-class Exception
+class Exception extends BaseException
 {
 
 }
