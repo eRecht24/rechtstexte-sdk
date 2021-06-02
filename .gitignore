@@ -1,2 +1,6 @@
 /vendor
 /.idea
+composer.lock
+.DS_Store
+phpunit.xml
+phpcs.xml
