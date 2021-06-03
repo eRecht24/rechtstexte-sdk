@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace ERecht24;
 
-abstract class Collection
+class Collection
 {
     /**
      * The items contained in the collection.
@@ -77,6 +77,19 @@ abstract class Collection
         foreach ($values as $value) {
             $this->items[] = $value;
         }
+
+        return $this;
+    }
+
+    /**
+     * Add an item to the collection.
+     *
+     * @param  mixed  $item
+     * @return Collection
+     */
+    public function add($item)
+    {
+        $this->items[] = $item;
 
         return $this;
     }
