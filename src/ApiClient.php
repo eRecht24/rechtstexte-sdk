@@ -5,7 +5,7 @@ namespace ERecht24;
 
 use ERecht24\Model\Response;
 
-class Client
+class ApiClient
 {
     const API_SCHEME = "https";
     const API_HOST = "api.e-recht24.de";
