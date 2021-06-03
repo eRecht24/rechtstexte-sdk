@@ -95,4 +95,13 @@ abstract class Model
 
         return false;
     }
+
+    public function __get ( string $key )
+    {
+        $method = 'get'.Helper::studly($key).'Attribute';
+        if (method_exists($this, $method))
+            return $this->$method();
+
+        return $this->getAttribute($key);
+    }
 }
