@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace ERecht24;
 
+use ERecht24\Model\Response;
 
 class Client
 {
@@ -73,7 +74,10 @@ class Client
             );
         }
 
-        return new Response($httpCode, $response);
+        return new Response([
+            'code' => $httpCode,
+            'body' => $response
+        ]);
     }
 
     /**
