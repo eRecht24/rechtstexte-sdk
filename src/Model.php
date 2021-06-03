@@ -20,7 +20,6 @@ abstract class Model
     /**
      * Model constructor.
      * @param array $attributes
-     * @throws Exception
      */
     public function __construct(
         array $attributes
@@ -31,23 +30,29 @@ abstract class Model
     /**
      * Fill multiple attributes
      * @param array $attributes
+     * @return $this
      */
     public function fill(array $attributes)
     {
         foreach ($attributes as $key => $value) {
             $this->setAttribute($key, $value);
         }
+
+        return $this;
     }
 
     /**
      * Fill single attribute if allowed
      * @param $key
      * @param $value
+     * @return  $this
      */
     public function setAttribute($key, $value)
     {
         if ($this->isFillable($key))
             $this->attributes[$key] = $value;
+
+        return $this;
     }
 
     /**
@@ -96,6 +101,11 @@ abstract class Model
         return false;
     }
 
+    /**
+     * Magic getter
+     * @param string $key
+     * @return mixed|null
+     */
     public function __get ( string $key )
     {
         $method = 'get'.Helper::studly($key).'Attribute';
