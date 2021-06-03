@@ -10,7 +10,10 @@ class ApiClient
     const API_SCHEME = "https";
     const API_HOST = "api.e-recht24.de";
 
-    const ALLOWED_HTTP_METHODS = ['GET', 'POST', 'PUT', 'DELETE'];
+    const HTTP_GET = "GET";
+    const HTTP_POST = "POST";
+    const HTTP_PUT = "PUT";
+    const HTTP_DELETE = "DELETE";
 
     /**
      * @var string
@@ -112,16 +115,19 @@ class ApiClient
     /**
      * Set HTTP method for cURL
      * @param string $method
+     * @return ApiClient
      * @throws Exception
      */
     public function setMethod(
         string $method
-    ): void
+    ): ApiClient
     {
-        if (!in_array($method, self::ALLOWED_HTTP_METHODS))
+        if (!in_array($method, [self::HTTP_GET, self::HTTP_POST, self::HTTP_PUT, self::HTTP_DELETE]))
             throw new Exception('Invalid HTTP method specified.');
 
         $this->method = $method;
+
+        return $this;
     }
 
     /**
@@ -140,12 +146,15 @@ class ApiClient
     /**
      * Set Path for url generation
      * @param string $path
+     * @return ApiClient
      */
     public function setPath(
         string $path
-    ): void
+    ): ApiClient
     {
         $this->path = $path;
+
+        return $this;
     }
 
     /**

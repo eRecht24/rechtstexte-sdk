@@ -1,8 +1,8 @@
 <?php
 
-
 namespace ERecht24\Interfaces;
 
+use ERecht24\Model\Response;
 
 interface ServiceInterface
 {
@@ -10,11 +10,7 @@ interface ServiceInterface
 
     public function getApiEndpoint() : string;
 
-    public function getResponse();
+    public function getResponse() : Response;
 
-    public function getResponseArray() : array;
-
-    public function getResponseJson() : string;
-
-    public function getResponseCode() : int;
+    public function getResult();
 }
