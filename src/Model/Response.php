@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace ERecht24\Model;
 
+use ERecht24\Exception;
 use ERecht24\Model;
 
 /**
@@ -19,9 +20,13 @@ class Response extends Model
 {
     protected $fillable = ['code', 'body'];
 
-    public function getBodyDataAttribute()
+    public function getBodyDataAttribute() : array
     {
-        return json_decode($this->body, true);
+        try {
+            return json_decode($this->body, true);
+        } catch (Exception $e) {
+            return [];
+        }
     }
 
 }
