@@ -35,8 +35,11 @@ class ImprintGetService extends BaseService implements ServiceInterface
     /**
      * @return LegalText
      */
-    public function getLegalText() : LegalText
+    public function getLegalText() : ?LegalText
     {
+        if (200 != $this->getResponse()->code)
+            return null;
+
         if (is_null($this->result)) {
             $legalText = new LegalText(
                 $this->getResponse()->body_data

@@ -4,15 +4,17 @@ declare(strict_types=1);
 namespace ERecht24\Service;
 
 use ERecht24\ApiClient;
-use ERecht24\Collection;
 use ERecht24\Exception;
 use ERecht24\Interfaces\ServiceInterface;
+use ERecht24\Model;
 use ERecht24\Model\Client;
+use ERecht24\Model\LegalText;
+use ERecht24\Model\Response;
 use ERecht24\Service as BaseService;
 
-class ClientListService extends BaseService implements ServiceInterface
+class PrivacyPolicySocialMediaGetService extends BaseService implements ServiceInterface
 {
-    protected $apiEndpoint = '/v1/clients';
+    protected $apiEndpoint = '/v1/privacyPolicySocialMedia';
 
     /**
      * Execute service
@@ -31,16 +33,18 @@ class ClientListService extends BaseService implements ServiceInterface
     }
 
     /**
-     * @return Collection
+     * @return LegalText
      */
-    public function getCollection() : Collection
+    public function getLegalText() : ?LegalText
     {
-        if (is_null($this->result)) {
-            $this->result = new Collection();
+        if (200 != $this->getResponse()->code)
+            return null;
 
-            foreach ($this->getResponse()->body_data as $clientData) {
-                $this->result->add(new Client($clientData));
-            }
+        if (is_null($this->result)) {
+            $legalText = new LegalText(
+                $this->getResponse()->body_data
+            );
+            $this->result = $legalText->setType(LegalText::TYPE_PRIVACY_POLICY_SOCIAL_MEDIA);
         }
 
         return $this->result;
