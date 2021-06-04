@@ -31,6 +31,11 @@ class ApiClient
     private $method;
 
     /**
+     * @var array
+     */
+    private $postFields;
+
+    /**
      * Client constructor.
      * @param string $apiKey
      */
@@ -63,6 +68,8 @@ class ApiClient
                 sprintf("eRecht24: %s", $this->getApiKey())
             ]);
 
+            if (self::HTTP_POST === $this->getMethod() && !empty($this->getPostFields()))
+                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($this->getPostFields()));
 
             $response = curl_exec($ch);
             $httpCode = intval(curl_getinfo($ch, CURLINFO_HTTP_CODE));
@@ -168,6 +175,25 @@ class ApiClient
             throw new Exception('Url path not set');
 
         return $this->path;
+    }
+
+    /**
+     * @param array $postFields
+     * @return ApiClient
+     */
+    public function setPostFields(array $postFields): ApiClient
+    {
+        $this->postFields = $postFields;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPostFields(): array
+    {
+        return $this->postFields;
     }
 
     /**

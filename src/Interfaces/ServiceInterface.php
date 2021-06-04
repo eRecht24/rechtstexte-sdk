@@ -11,6 +11,4 @@ interface ServiceInterface
     public function getApiEndpoint() : string;
 
     public function getResponse() : Response;
-
-    public function getResult();
 }

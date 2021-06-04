@@ -43,12 +43,4 @@ class ClientDeleteService extends BaseService implements ServiceInterface
 
         return $this;
     }
-
-    /**
-     * @return Response
-     */
-    public function getResult() : Response
-    {
-        return $this->getResponse();
-    }
 }
