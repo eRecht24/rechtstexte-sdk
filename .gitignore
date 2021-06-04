@@ -4,3 +4,4 @@ composer.lock
 .DS_Store
 phpunit.xml
 phpcs.xml
+docker-compose.yml
