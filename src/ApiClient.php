@@ -189,9 +189,9 @@ class ApiClient
     }
 
     /**
-     * @return array
+     * @return ?array
      */
-    public function getPostFields(): array
+    public function getPostFields(): ?array
     {
         return $this->postFields;
     }
