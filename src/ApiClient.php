@@ -52,6 +52,7 @@ class ApiClient
     public function makeRequest() : Response
     {
         $this->cURLcheckBasicFunctions();
+
         try {
             $ch = curl_init();
 
@@ -178,10 +179,13 @@ class ApiClient
     }
 
     /**
+     * Set Post fields for Request
      * @param array $postFields
      * @return ApiClient
      */
-    public function setPostFields(array $postFields): ApiClient
+    public function setPostFields(
+        array $postFields
+    ): ApiClient
     {
         $this->postFields = $postFields;
 
@@ -189,6 +193,7 @@ class ApiClient
     }
 
     /**
+     * Provide post fields for Request
      * @return ?array
      */
     public function getPostFields(): ?array

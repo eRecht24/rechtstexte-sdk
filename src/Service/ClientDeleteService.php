@@ -19,11 +19,15 @@ class ClientDeleteService extends BaseService implements ServiceInterface
      */
     private $clientId;
 
+    /**
+     * ClientDeleteService constructor.
+     * @param ApiClient $apiClient
+     * @param int $clientId
+     */
     public function __construct(
         ApiClient $apiClient,
         int $clientId
-    )
-    {
+    ) {
         parent::__construct($apiClient);
         $this->clientId = $clientId;
     }

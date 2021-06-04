@@ -17,6 +17,11 @@ class PrivacyPolicySocialMediaGetService extends BaseService implements ServiceI
     protected $apiEndpoint = '/v1/privacyPolicySocialMedia';
 
     /**
+     * @var LegalText|null
+     */
+    protected $result;
+
+    /**
      * Execute service
      * @return ServiceInterface
      * @throws Exception
@@ -33,6 +38,7 @@ class PrivacyPolicySocialMediaGetService extends BaseService implements ServiceI
     }
 
     /**
+     * Get Legal Text model filled with response data
      * @return LegalText
      */
     public function getLegalText() : ?LegalText

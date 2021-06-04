@@ -17,6 +17,11 @@ class PrivacyPolicyGetService extends BaseService implements ServiceInterface
     protected $apiEndpoint = '/v1/privacyPolicy';
 
     /**
+     * @var LegalText|null
+     */
+    protected $result;
+
+    /**
      * Execute service
      * @return ServiceInterface
      * @throws Exception
@@ -33,6 +38,7 @@ class PrivacyPolicyGetService extends BaseService implements ServiceInterface
     }
 
     /**
+     * Get Legal Text model filled with response data
      * @return LegalText
      */
     public function getLegalText() : ?LegalText

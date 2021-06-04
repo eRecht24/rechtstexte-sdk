@@ -45,7 +45,7 @@ class LegalText extends Model
      * @param mixed $type
      * @return $this
      */
-    public function setType($type)
+    public function setType(string $type)
     {
         if (in_array($type, [self::TYPE_IMPRINT, self::TYPE_PRIVACY_POLICY, self::TYPE_PRIVACY_POLICY_SOCIAL_MEDIA]))
             $this->type = $type;
@@ -57,7 +57,7 @@ class LegalText extends Model
      * Provide legal text type
      * @return string
      */
-    public function getType()
+    public function getType() : string
     {
         return $this->type;
     }

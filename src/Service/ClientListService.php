@@ -15,6 +15,11 @@ class ClientListService extends BaseService implements ServiceInterface
     protected $apiEndpoint = '/v1/clients';
 
     /**
+     * @var Collection|null
+     */
+    protected $result;
+
+    /**
      * Execute service
      * @return ServiceInterface
      * @throws Exception
@@ -31,6 +36,7 @@ class ClientListService extends BaseService implements ServiceInterface
     }
 
     /**
+     * Get collection model filled with response data
      * @return Collection
      */
     public function getCollection() : Collection

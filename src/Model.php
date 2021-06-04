@@ -32,11 +32,10 @@ abstract class Model
      * @param array $attributes
      * @return $this
      */
-    public function fill(array $attributes)
+    public function fill(array $attributes) : Model
     {
-        foreach ($attributes as $key => $value) {
+        foreach ($attributes as $key => $value)
             $this->setAttribute($key, $value);
-        }
 
         return $this;
     }
@@ -47,7 +46,7 @@ abstract class Model
      * @param $value
      * @return  $this
      */
-    public function setAttribute($key, $value)
+    public function setAttribute($key, $value) : Model
     {
         if ($this->isFillable($key))
             $this->attributes[$key] = $value;
@@ -65,7 +64,7 @@ abstract class Model
     }
 
     /**
-     * Provide single specific attribute value
+     * Provide single attribute value
      * @param string $key
      * @return mixed|null
      */
@@ -83,7 +82,7 @@ abstract class Model
      *
      * @return array
      */
-    protected function getFillable()
+    protected function getFillable() : array
     {
         return $this->fillable;
     }
@@ -93,7 +92,7 @@ abstract class Model
      * @param $key
      * @return bool
      */
-    protected function isFillable($key)
+    protected function isFillable($key) : bool
     {
         if (in_array($key, $this->getFillable()))
             return true;

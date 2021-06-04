@@ -27,8 +27,7 @@ class ClientUpdateService extends BaseService implements ServiceInterface
     public function __construct(
         ApiClient $apiClient,
         Client $client
-    )
-    {
+    ) {
         parent::__construct($apiClient);
         $this->client = $client;
     }

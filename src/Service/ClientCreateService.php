@@ -7,7 +7,6 @@ use ERecht24\ApiClient;
 use ERecht24\Exception;
 use ERecht24\Interfaces\ServiceInterface;
 use ERecht24\Model\Client;
-use ERecht24\Model\Response;
 use ERecht24\Service as BaseService;
 
 class ClientCreateService extends BaseService implements ServiceInterface
@@ -19,11 +18,15 @@ class ClientCreateService extends BaseService implements ServiceInterface
      */
     private $client;
 
+    /**
+     * ClientCreateService constructor.
+     * @param ApiClient $apiClient
+     * @param Client $client
+     */
     public function __construct(
         ApiClient $apiClient,
         Client $client
-    )
-    {
+    ) {
         parent::__construct($apiClient);
         $this->client = $client;
     }

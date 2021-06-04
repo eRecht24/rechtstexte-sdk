@@ -20,6 +20,10 @@ class Response extends Model
 {
     protected $fillable = ['code', 'body'];
 
+    /**
+     * Provide response body as array
+     * @return array
+     */
     public function getBodyDataAttribute() : array
     {
         try {

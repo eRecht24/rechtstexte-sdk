@@ -25,11 +25,6 @@ abstract class Service implements ServiceInterface
     protected $apiClient;
 
     /**
-     * @var Collection|Model|null
-     */
-    protected $result;
-
-    /**
      * Service constructor.
      * @param ApiClient $apiClient
      */
@@ -56,5 +51,4 @@ abstract class Service implements ServiceInterface
     {
         return  $this->response;
     }
-
 }
