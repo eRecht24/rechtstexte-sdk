@@ -68,7 +68,7 @@ class ApiClient
                 sprintf("eRecht24: %s", $this->getApiKey())
             ]);
 
-            if (self::HTTP_POST === $this->getMethod() && !empty($this->getPostFields()))
+            if (!empty($this->getPostFields()))
                 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($this->getPostFields()));
 
             $response = curl_exec($ch);
