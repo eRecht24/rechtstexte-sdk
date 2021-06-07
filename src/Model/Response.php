@@ -33,4 +33,13 @@ class Response extends Model
         }
     }
 
+    /**
+     * Function checks if request was successful
+     * @return bool
+     */
+    public function isSuccess() :bool
+    {
+        return (200 === $this->code);
+    }
+
 }

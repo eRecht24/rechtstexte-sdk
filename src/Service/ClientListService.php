@@ -37,10 +37,13 @@ class ClientListService extends BaseService implements ServiceInterface
 
     /**
      * Get collection model filled with response data
-     * @return Collection
+     * @return ?Collection
      */
-    public function getCollection() : Collection
+    public function getCollection() : ?Collection
     {
+        if ($this->getResponse()->isSuccess())
+            return null;
+
         if (is_null($this->result)) {
             $this->result = new Collection();
 

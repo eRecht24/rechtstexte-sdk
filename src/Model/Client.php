@@ -6,7 +6,7 @@ namespace ERecht24\Model;
 use ERecht24\Model;
 
 /**
- * Class Response
+ * Class Client
  * @package ERecht24\Model
  *
  * @property int client_id

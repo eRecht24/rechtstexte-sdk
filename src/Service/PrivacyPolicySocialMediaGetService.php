@@ -43,7 +43,7 @@ class PrivacyPolicySocialMediaGetService extends BaseService implements ServiceI
      */
     public function getLegalText() : ?LegalText
     {
-        if (200 != $this->getResponse()->code)
+        if ($this->getResponse()->isSuccess())
             return null;
 
         if (is_null($this->result)) {
