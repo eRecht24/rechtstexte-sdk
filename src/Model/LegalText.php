@@ -25,8 +25,6 @@ class LegalText extends Model
     const TYPE_PRIVACY_POLICY_SOCIAL_MEDIA = 'privacy_policy_social_media';
 
     protected $fillable = [
-        'client_id',
-        'project_id',
         'html_de',
         'html_en',
         'created',
@@ -45,7 +43,9 @@ class LegalText extends Model
      * @param mixed $type
      * @return $this
      */
-    public function setType(string $type)
+    public function setType(
+        string $type
+    ) : LegalText
     {
         if (in_array($type, [self::TYPE_IMPRINT, self::TYPE_PRIVACY_POLICY, self::TYPE_PRIVACY_POLICY_SOCIAL_MEDIA]))
             $this->type = $type;
@@ -55,9 +55,9 @@ class LegalText extends Model
 
     /**
      * Provide legal text type
-     * @return string
+     * @return null|string
      */
-    public function getType() : string
+    public function getType() : ?string
     {
         return $this->type;
     }

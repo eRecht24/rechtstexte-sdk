@@ -12,7 +12,7 @@ abstract class Model
     protected $fillable = [];
 
     /**
-     * The model's attributes.
+     * model's attributes.
      * @var array
      */
     protected $attributes = [];
@@ -22,9 +22,13 @@ abstract class Model
      * @param array $attributes
      */
     public function __construct(
-        array $attributes
+        ?array $attributes = null
     ) {
-       $this->fill($attributes);
+        foreach ($this->getFillable() as $attribute)
+            $this->setAttribute($attribute, null);
+
+        if ($attributes)
+            $this->fill($attributes);
     }
 
     /**
@@ -55,15 +59,6 @@ abstract class Model
     }
 
     /**
-     * Provide all attributes
-     * @return array
-     */
-    public function getAttributes(): array
-    {
-        return $this->attributes;
-    }
-
-    /**
      * Provide single attribute value
      * @param string $key
      * @return mixed|null
@@ -75,6 +70,30 @@ abstract class Model
             return $this->attributes[$key];
 
         return null;
+    }
+
+
+    /**
+     * Provide all attributes
+     * @return array
+     */
+    public function getAttributes(): array
+    {
+        return $this->attributes;
+    }
+
+    /**
+     * Magic getter
+     * @param string $key
+     * @return mixed|null
+     */
+    public function __get ( string $key )
+    {
+        $method = 'get'.Helper::studly($key).'Attribute';
+        if (method_exists($this, $method))
+            return $this->$method();
+
+        return $this->getAttribute($key);
     }
 
     /**
@@ -98,19 +117,5 @@ abstract class Model
             return true;
 
         return false;
-    }
-
-    /**
-     * Magic getter
-     * @param string $key
-     * @return mixed|null
-     */
-    public function __get ( string $key )
-    {
-        $method = 'get'.Helper::studly($key).'Attribute';
-        if (method_exists($this, $method))
-            return $this->$method();
-
-        return $this->getAttribute($key);
     }
 }

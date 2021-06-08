@@ -86,4 +86,16 @@ class Collection
 
         return $this;
     }
+
+    /**
+     * Provide last element
+     * @return null|mixed
+     */
+    public function last()
+    {
+        if (empty($this->items))
+            return null;
+
+        return end($this->items);
+    }
 }

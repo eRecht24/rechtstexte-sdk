@@ -41,7 +41,7 @@ class ClientListService extends BaseService implements ServiceInterface
      */
     public function getCollection() : ?Collection
     {
-        if ($this->getResponse()->isSuccess())
+        if (!$this->getResponse()->isSuccess())
             return null;
 
         if (is_null($this->result)) {

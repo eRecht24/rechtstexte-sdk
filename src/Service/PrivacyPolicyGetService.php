@@ -43,7 +43,7 @@ class PrivacyPolicyGetService extends BaseService implements ServiceInterface
      */
     public function getLegalText() : ?LegalText
     {
-        if ($this->getResponse()->isSuccess())
+        if (!$this->getResponse()->isSuccess())
             return null;
 
         if (is_null($this->result)) {

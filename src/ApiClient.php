@@ -141,14 +141,10 @@ class ApiClient
     /**
      * Provide HTTP method for cURL
      * @return string
-     * @throws Exception
      */
     public function getMethod(): string
     {
-        if(!$this->method)
-            throw new Exception('Http Method not set');
-
-        return $this->method;
+        return $this->method ?: self::HTTP_GET;
     }
 
     /**
@@ -160,7 +156,11 @@ class ApiClient
         string $path
     ): ApiClient
     {
-        $this->path = $path;
+        if (strpos($path, '/') === 0) {
+            $this->path = $path;
+        } else {
+            $this->path = '/' . $path;
+        }
 
         return $this;
     }
@@ -168,14 +168,10 @@ class ApiClient
     /**
      * Provide path for url generation
      * @return string
-     * @throws Exception
      */
     public function getPath(): string
     {
-        if(!$this->path)
-            throw new Exception('Url path not set');
-
-        return $this->path;
+        return $this->path ?: '/';
     }
 
     /**

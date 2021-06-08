@@ -22,14 +22,14 @@ class Response extends Model
 
     /**
      * Provide response body as array
-     * @return array
+     * @return ?array
      */
-    public function getBodyDataAttribute() : array
+    public function getBodyDataAttribute() : ?array
     {
         try {
             return json_decode($this->body, true);
         } catch (Exception $e) {
-            return [];
+            return null;
         }
     }
 
