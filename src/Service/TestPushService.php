@@ -6,30 +6,27 @@ namespace ERecht24\Service;
 use ERecht24\ApiClient;
 use ERecht24\Exception;
 use ERecht24\Interfaces\ServiceInterface;
+use ERecht24\Model;
 use ERecht24\Model\Client;
+use ERecht24\Model\LegalText;
 use ERecht24\Model\Response;
 use ERecht24\Service as BaseService;
 
-class ClientUpdateService extends BaseService implements ServiceInterface
+class TestPushService extends BaseService implements ServiceInterface
 {
-    protected $apiEndpoint = '/v1/clients/%s';
+    protected $apiEndpoint = '/v1/clients/%s/testPush';
 
     /**
-     * @var Client
+     * @var int
      */
-    private $client;
+    private $clientId;
 
-    /**
-     * ClientCreateService constructor.
-     * @param ApiClient $apiClient
-     * @param Client $client
-     */
     public function __construct(
         ApiClient $apiClient,
-        Client $client
+        int $clientId
     ) {
         parent::__construct($apiClient);
-        $this->client = $client;
+        $this->clientId = $clientId;
     }
 
     /**
@@ -40,9 +37,8 @@ class ClientUpdateService extends BaseService implements ServiceInterface
     public function execute(): ServiceInterface
     {
         $this->response = $this->apiClient
-            ->setPath(sprintf($this->getApiEndpoint(), $this->client->client_id))
-            ->setMethod(ApiClient::HTTP_PUT)
-            ->setPostFields($this->client->getAttributes())
+            ->setPath(sprintf($this->getApiEndpoint(), $this->clientId))
+            ->setMethod(ApiClient::HTTP_POST)
             ->makeRequest()
         ;
 

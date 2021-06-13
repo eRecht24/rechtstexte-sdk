@@ -13,7 +13,7 @@ use ERecht24\Service as BaseService;
 
 class ClientDeleteService extends BaseService implements ServiceInterface
 {
-    protected $apiEndpoint = '/v1/clients';
+    protected $apiEndpoint = '/v1/clients/%s';
     /**
      * @var int
      */
@@ -40,7 +40,7 @@ class ClientDeleteService extends BaseService implements ServiceInterface
     public function execute(): ServiceInterface
     {
         $this->response = $this->apiClient
-            ->setPath($this->getApiEndpoint() . '/' . $this->clientId)
+            ->setPath(sprintf($this->getApiEndpoint(), $this->clientId))
             ->setMethod(ApiClient::HTTP_DELETE)
             ->makeRequest()
         ;
