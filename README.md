@@ -289,3 +289,136 @@ $service = new MessageGetService($client);
 $result = $service->execute()->getResult();
 ```
 use `$result->isSuccess()` to check if request was successful
+
+## Receiving Pushes
+Please register a client with a `push_uri` and a `push_method`.
+If done correctly you receive, you receive a `secret` that has to be saved in you database.
+Ensure that the `given push_uri` is publicly accessible with the given `push_method` (GET || POST).
+To verify that access to this url is authorized, 
+the `erecht24_secret` from the request must be matched with the `secret` from your database.
+You can use the following controller examples as starting point four your custom implementations.
+
+### Example Push Controller
+
+```php
+
+use ERecht24\ApiClient;
+use ERecht24\Model\LegalText;
+use ERecht24\Service\ImprintGetService;
+use ERecht24\Service\PrivacyPolicyGetService;
+use ERecht24\Service\PrivacyPolicySocialMediaGetService;
+
+// require composer autoloader if not done by framework
+require_once 'vendor/autoload.php';
+
+
+class PushController
+{
+    const ALLOWED_PUSH_TYPES = [
+        'ping',
+        'imprint',
+        'privacyPolicy',
+        'privacyPolicySocialMedia',
+    ];
+
+    /**
+     * This function should be called if when push_uri is requested 
+     */
+    public function handleRequest()
+    {
+        $requestSecret = $_POST['erecht24_secret'] ?? $_GET['erecht24_secret'];
+        $databaseSecret = $this->getDatabaseSecret();
+        if (is_null($databaseSecret) || $databaseSecret != $requestSecret)
+            return $this->sendResponse('Unauthorized request. Wrong Secret.', 'Unautorisierte Anfrage. Falsches Secret', 401);
+    
+        $type = $_POST['erecht24_type'] ?? $_GET['erecht24_type'];
+        if(!in_array($type, self::ALLOWED_PUSH_TYPES))
+            return $this->sendResponse('Failed request. Wrong Type.', 'Fehlgeschlagene Anfrage. Falscher Typ', 400);;
+    
+        switch ($type){
+            case 'ping':
+                return $this->sendResponse('pong'); // this is only needed for testPushService
+            case 'imprint':
+            case 'privacyPolicy':
+            case 'privacyPolicySocialMedia':
+                return $this->handleLegalDocument($type);
+        }
+    }
+
+    /**
+     * Provide stored client secret from database
+     * @return string|null
+     */
+    private function getDatabaseSecret() : ?string
+    {
+        // add your logik here
+    }
+
+    /**
+     * Update legal_text in database
+     * @param LegalText $legal_text
+     */
+    private function importLegalText(
+	    LegalText $legal_text
+    ) : void
+    {
+        // add your logik here
+    }
+
+    /**
+     * @param string $message
+     * @param string $message_de
+     * @param int $code
+     */
+    private function sendResponse(
+        string $message,
+        string $message_de = '',
+        int $code = 200
+    ) {
+        $body = [
+            'code'    => $code,
+            'message' => $message,
+            'message_de' => $message_de
+        ];
+        
+        // add further logik here.
+        // Make sure that request status_code = $code and request body = json from $body
+    }
+
+    /**
+     * @param string $type
+     */
+    private function handleLegalDocument( 
+        string $type
+    ) {
+        // Initalize api client
+        $apiKey = 'ENTER-YOUR-API-KEY-HERE';
+        $client = new ApiClient($apiKey);
+    
+        switch ($type) {
+            case 'imprint':
+                $service = new ImprintGetService($client);
+                break;
+            case 'privacyPolicy':
+                $service = new PrivacyPolicyGetService($client);
+                break;
+            case 'privacyPolicySocialMedia':
+                $service = new PrivacyPolicySocialMediaGetService($client);
+                break;
+        }
+    
+        $service->execute();
+    
+        if (!$service->getResponse()->isSuccess)
+            return $this->sendResponse('Failed request. Error while importing the document.', 'Fehlgeschlagene Anfrage. Fehler beim Importieren des Dokuments', 400);
+    
+        $legal_text = $service->getLegalText();
+        if (!$legal_text)
+            return $this->sendResponse('Failed request. Error while importing the document.', 'Fehlgeschlagene Anfrage. Fehler beim Importieren des Dokuments', 400);
+    
+        $this->importLegalText($legal_text);
+    
+        return $this->sendResponse('Document successfully imported', 'Dokument erfolgreich importiert', 200);
+    }
+}
+```
