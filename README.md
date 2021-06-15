@@ -30,7 +30,7 @@ Finally, be sure to include the autoloader:
   require_once '/path/to/your-project/vendor/autoload.php';
 ```
 
-### Download the Release
+### Download the release
 If you prefer not to use composer, you can download the package in its entirety.
 The Releases page lists all stable versions.
 Download any file with the name google-api-php-client-[RELEASE_NAME].zip for a package including this library.
