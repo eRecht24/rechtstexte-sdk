@@ -1,6 +1,6 @@
 # List all Project Clients
-This service registers a new project client for the given `api_key`. You can register up to 3 clients per `api_key`.
-After you created a new client, you will receive its `client_id` and a secret.
+This service updates an existing project client for the given `api_key`.
+After updating client, you will receive a new secret.
 
 ## Step by step integration
 ### Preparation
@@ -11,6 +11,7 @@ Now you have to collect all information that should be sent to our api server.
 You can either collect data in an associative array:
 ```php 
 $data = [
+    'client_id' => 1, // (required)
     'push_method' => 'POST',  // (required) either "POST" or "GET"
     'push_uri' => 'https://www.test.de', // (required) valid url
     'cms' => 'WORDPRESS', // (optional)
@@ -22,6 +23,7 @@ $data = [
 or you can simply use our client model:
 ```php
 $data = new \ERecht24\Model\Client([
+    'client_id' => 1, // (required)
     'push_method' => 'POST',  // (required) either "POST" or "GET"
     'push_uri' => 'https://www.test.de', // (required) valid url
     'cms' => 'WORDPRESS', // (optional)
@@ -32,6 +34,7 @@ $data = new \ERecht24\Model\Client([
 ```
 Both ways will work the same way. 
 However, we recommend using our model, since it validates that only valid data will be handed over to the api client.
+**Note: You always have to specify a valid `client_id`. All Other attributes are optional. Only given data will be updated. Data other than that will stay untouched. Even using our model.**
 
 ### Execute service
 With the help of our `$apiClient` and `$data` we are now able to initialize and execute our service.
@@ -39,18 +42,17 @@ With the help of our `$apiClient` and `$data` we are now able to initialize and 
 ```php
 /** @var \ERecht24\ApiClient $apiClient */
 /** @var \ERecht24\Model\Client|array $data */
-$service = new \ERecht24\Service\ClientCreateService($apiClient, $data);
+$service = new \ERecht24\Service\ClientUpdateService($apiClient, $data);
 $service->execute();
 ```
 
 ### Handle response
 Learn how to handle responses in general [here](../handle_api_responses.md).
 
-**Note: After you created a new client, you have to store the secret in your database. It will be used to check if pushes are authorized.**
+**Note: After you updated a client, you have to store the new secret in your database. It will be used to check if pushes are authorized.**
 
 ```php
 $secret = $service->getResponse()->getBodyDataByKey('secret');
-$client_id = $service->getResponse()->getBodyDataByKey('client_id');
 ```
 
 
@@ -66,6 +68,7 @@ $apiClient = new \ERecht24\ApiClient($apiKey);
 
 // collect data
 $data = new \ERecht24\Model\Client([
+    'client_id' => 1, // (required)
     'push_method' => 'POST',  // (required) either "POST" or "GET"
     'push_uri' => 'https://www.test.de', // (required) valid url
     'cms' => 'WORDPRESS', // (optional)
@@ -75,10 +78,9 @@ $data = new \ERecht24\Model\Client([
 ]);
 
 // execute service
-$service = new \ERecht24\Service\ClientCreateService($apiClient, $data);
+$service = new \ERecht24\Service\ClientUpdateService($apiClient, $data);
 $service->execute();
 
-// get secret & client_id
+// get secret
 $secret = $service->getResponse()->getBodyDataByKey('secret');
-$client_id = $service->getResponse()->getBodyDataByKey('client_id');
 ```
