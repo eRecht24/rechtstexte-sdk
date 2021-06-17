@@ -42,4 +42,20 @@ class Response extends Model
         return (200 === $this->code);
     }
 
+    /**
+     * Function provides specific body_data by key
+     * @param string $key
+     * @return mixed|null
+     */
+    public function getBodyDataByKey(
+        string $key
+    ) {
+        if (is_null($this->body_data))
+            return null;
+
+        if (!array_key_exists($key, $this->body_data))
+            return null;
+
+        return $this->body_data[$key];
+    }
 }
