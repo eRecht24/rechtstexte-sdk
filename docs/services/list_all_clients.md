@@ -1,4 +1,4 @@
-# List all Project Clients
+# List all project clients
 This service provides a collection of all project clients that are currently registered for the given `api_key`. 
 
 ## Step by step integration

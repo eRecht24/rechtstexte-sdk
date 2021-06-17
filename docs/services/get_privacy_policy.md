@@ -1,4 +1,4 @@
-# Get Privacy Policy Data
+# Get privacy policy data
 This service provides privacy policy data for the given `api_key`.
 
 ## Step by step integration
@@ -24,7 +24,7 @@ $privacy_policy = $service->execute()->getLegalText();
 $english_html = $privacy_policy->html_en;
 $german_html = $privacy_policy->html_de;
 ```
-**Note: If Request was not successfull, $imprint will be `null`. In this case you may use raw response to get more information**
+**Note: If Request was not successfull, $privacy_policy will be `null`. In this case you may use raw response to get more information**
 ```php
 if (is_null($privacy_policy)) {
     /** @var \ERecht24\Model\Response $response */
@@ -47,6 +47,6 @@ $service = new \ERecht24\Service\PrivacyPolicyGetService($apiClient);
 $service->execute();
 
 // get privacy policy
-/** @var \ERecht24\Model\LegalText|null $imprint */
+/** @var \ERecht24\Model\LegalText|null $privacy_policy */
 $privacy_policy = $service->execute()->getLegalText();
 ```

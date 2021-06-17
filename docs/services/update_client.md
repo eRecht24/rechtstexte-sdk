@@ -1,4 +1,4 @@
-# Update existing Project Client
+# Update existing project client
 This service updates an existing project client for the given `api_key`.
 After updating client, you will receive a new secret.
 
@@ -57,7 +57,6 @@ $secret = $service->getResponse()->getBodyDataByKey('secret');
 
 
 ## Full Script
-
 ```php
 // require composer autoloader
 require_once '<path_to_project_root>/vendor/autoload.php'; // update to your needs

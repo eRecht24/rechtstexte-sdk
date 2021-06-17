@@ -1,4 +1,4 @@
-# Delete existing Project Client
+# Delete existing project client
 This service deletes an existing project client for the given `api_key`.
 
 ## Step by step integration

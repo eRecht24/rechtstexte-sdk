@@ -1,4 +1,4 @@
-# Create new Project Client
+# Create new project client
 This service registers a new project client for the given `api_key`. You can register up to 3 clients per `api_key`.
 After you created a new client, you will receive its `client_id` and a secret.
 

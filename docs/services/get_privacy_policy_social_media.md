@@ -1,5 +1,5 @@
-# Get imprint data
-This service provides imprint data for the given `api_key`.
+# Get privacy policy for social media data
+This service provides privacy policy for social media data for the given `api_key`.
 
 ## Step by step integration
 ### Preparation
@@ -9,7 +9,7 @@ Before getting started, you should ensure that you have already finished the ste
 With the help of our `$apiClient` we are now able to initialize and execute our service.
 ```php
 /** @var \ERecht24\ApiClient $apiClient */
-$service = new \ERecht24\Service\ImprintGetService($apiClient);
+$service = new \ERecht24\Service\PrivacyPolicySocialMediaGetService($apiClient);
 $service->execute();
 ```
 
@@ -19,14 +19,14 @@ If you do not want to work with raw response data, you can use the function `get
 It will be filled with all information provided by our api. 
 
 ```php
-/** @var \ERecht24\Model\LegalText|null $imprint */
-$imprint = $service->execute()->getLegalText();
-$english_html = $imprint->html_en;
-$german_html = $imprint->html_de;
+/** @var \ERecht24\Model\LegalText|null $privacy_policy_social_media */
+$privacy_policy_social_media = $service->execute()->getLegalText();
+$english_html = $privacy_policy_social_media->html_en;
+$german_html = $privacy_policy_social_media->html_de;
 ```
-**Note: If Request was not successfull, $imprint will be `null`. In this case you may use raw response to get more information**
+**Note: If Request was not successfull, $privacy_policy_social_media will be `null`. In this case you may use raw response to get more information**
 ```php
-if (is_null($imprint)) {
+if (is_null($privacy_policy_social_media)) {
     /** @var \ERecht24\Model\Response $response */
     $response = $service->getResponse();
 }
@@ -43,10 +43,10 @@ $apiKey = 'ENTER-YOUR-API-KEY-HERE'; // update to your needs
 $apiClient = new \ERecht24\ApiClient($apiKey);
 
 // execute service
-$service = new \ERecht24\Service\ImprintGetService($apiClient);
+$service = new \ERecht24\Service\PrivacyPolicySocialMediaGetService($apiClient);
 $service->execute();
 
-// get imprint
-/** @var \ERecht24\Model\LegalText|null $imprint */
-$imprint = $service->execute()->getLegalText();
+// get privacy policy
+/** @var \ERecht24\Model\LegalText|null $privacy_policy_social_media */
+$privacy_policy_social_media = $service->execute()->getLegalText();
 ```
