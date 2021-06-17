@@ -1,4 +1,4 @@
-# List all Project Clients
+# Update existing Project Client
 This service updates an existing project client for the given `api_key`.
 After updating client, you will receive a new secret.
 
