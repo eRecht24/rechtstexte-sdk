@@ -14,25 +14,25 @@ $service->execute();  // service was initialized and executed
 $response = $service->getResponse();
 ```
 
-## check if Response was successful
+## Check if response was successful
 ```php 
 /** @var \ERecht24\Model\Response $response */
 $success = $response->isSuccess(); // bool
 ```
 
-## retrieve status code
+## Retrieve status code
 ```php 
 /** @var \ERecht24\Model\Response $response */
 $status_code = $response->code; // ?int
 ```
 
-## retrieve raw body
+## Retrieve raw body (json)
 ```php 
 /** @var \ERecht24\Model\Response $response */
 $body = $response->body; // ?string
 ```
 
-## retrieve body as array
+## Retrieve body as array
 ```php 
 /** @var \ERecht24\Model\Response $response */
 $data = $response->body_data; // ?array
