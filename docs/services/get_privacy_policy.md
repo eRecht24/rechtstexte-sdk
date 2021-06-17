@@ -20,7 +20,7 @@ It will be filled with all information provided by our api.
 
 ```php
 /** @var \ERecht24\Model\LegalText|null $privacy_policy */
-$privacy_policy = $service->execute()->getLegalText();
+$privacy_policy = $service->getLegalText();
 $english_html = $privacy_policy->html_en;
 $german_html = $privacy_policy->html_de;
 ```
@@ -48,5 +48,5 @@ $service->execute();
 
 // get privacy policy
 /** @var \ERecht24\Model\LegalText|null $privacy_policy */
-$privacy_policy = $service->execute()->getLegalText();
+$privacy_policy = $service->getLegalText();
 ```

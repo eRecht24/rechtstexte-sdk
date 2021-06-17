@@ -20,7 +20,7 @@ It will be filled with all information provided by our api.
 
 ```php
 /** @var \ERecht24\Model\LegalText|null $imprint */
-$imprint = $service->execute()->getLegalText();
+$imprint = $service->getLegalText();
 $english_html = $imprint->html_en;
 $german_html = $imprint->html_de;
 ```
@@ -48,5 +48,5 @@ $service->execute();
 
 // get imprint
 /** @var \ERecht24\Model\LegalText|null $imprint */
-$imprint = $service->execute()->getLegalText();
+$imprint = $service->getLegalText();
 ```

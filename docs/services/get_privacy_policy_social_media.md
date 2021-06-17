@@ -20,7 +20,7 @@ It will be filled with all information provided by our api.
 
 ```php
 /** @var \ERecht24\Model\LegalText|null $privacy_policy_social_media */
-$privacy_policy_social_media = $service->execute()->getLegalText();
+$privacy_policy_social_media = $service->getLegalText();
 $english_html = $privacy_policy_social_media->html_en;
 $german_html = $privacy_policy_social_media->html_de;
 ```
@@ -46,7 +46,7 @@ $apiClient = new \ERecht24\ApiClient($apiKey);
 $service = new \ERecht24\Service\PrivacyPolicySocialMediaGetService($apiClient);
 $service->execute();
 
-// get privacy policy
+// get privacy policy social media
 /** @var \ERecht24\Model\LegalText|null $privacy_policy_social_media */
-$privacy_policy_social_media = $service->execute()->getLegalText();
+$privacy_policy_social_media = $service->getLegalText();
 ```
