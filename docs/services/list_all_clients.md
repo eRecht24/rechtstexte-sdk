@@ -17,13 +17,14 @@ $service->execute();
 
 ### Handle response
 Learn how to handle responses in general [here](../handle_api_responses.md).
-If you do not want to work with raw response data, you can use the function `getCollection()` to retrieve a collection of all clients.
+If you do not want to work with raw response data, you can use the function `getCollection()` to retrieve a [collection](../../src/Collection.php).
+It will be filled with all information provided by our api.
 
 ```php
 /** @var \ERecht24\Collection|null $collection */
 $collection = $service->getCollection();
 ```
-**Note: If Request was not successfull, $collection will be `null`. In this case you should use raw response to get more information**
+**Note: If Request was not successfull, $collection will be `null`. In this case you may use raw response to get more information**
 
 ```php
 if (is_null($collection)) {
