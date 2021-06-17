@@ -32,10 +32,10 @@ $apiKey = 'ENTER-YOUR-API-KEY-HERE'; // update to your needs
 $apiClient = new \ERecht24\ApiClient($apiKey);
 
 // execute service
-$service = new \ERecht24\Service\ImprintGetService($apiClient);
+$service = new \ERecht24\Service\MessageGetService($apiClient);
 $service->execute();
 
-// get message
+// get messages
 $german_message = $service->getResponse()->getBodyDataByKey('message_de');
 $english_message = $service->getResponse()->getBodyDataByKey('message');
 ```
