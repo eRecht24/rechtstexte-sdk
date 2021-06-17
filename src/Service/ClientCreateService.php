@@ -21,14 +21,21 @@ class ClientCreateService extends BaseService implements ServiceInterface
     /**
      * ClientCreateService constructor.
      * @param ApiClient $apiClient
-     * @param Client $client
+     * @param Client|array $client
+     * @throws Exception
      */
     public function __construct(
         ApiClient $apiClient,
-        Client $client
+        $client
     ) {
         parent::__construct($apiClient);
-        $this->client = $client;
+
+        if ($client instanceof Client)
+            $this->client = $client;
+        elseif (is_array($client))
+            $this->client = new Client($client);
+        else
+            throw new Exception('Argument 2 passed to ERecht24\Service\ClientCreateService::__construct() must be an instance of ERecht24\Model\Client or array.', 500);
     }
 
     /**
