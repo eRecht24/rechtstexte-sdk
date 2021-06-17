@@ -7,7 +7,7 @@ Otherwise, services can not be executed correctly.
 Please make sure that you installed this package as described in [README.md](../README.md) and your application makes use of composer autoloader. 
 The most modern frameworks already include all necessary files. If not, simply modify and add this line to your script.
 
-```php 
+```php
 require_once '<path_to_project_root>/vendor/autoload.php'; // update to your needs
 ```
 

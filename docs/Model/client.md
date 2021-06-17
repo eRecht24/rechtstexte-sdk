@@ -39,25 +39,25 @@ You can only modify those properties when creating or updating a client via api.
 ### Receiving attribute values
 You can receive a property like this:
 ```php
-/** @var ERecht24\Model\LegalText $model */
+/** @var \ERecht24\Model\Client $model */
 $cms = $model->cms;
 ```
 or like this:
 ```php
-/** @var ERecht24\Model\LegalText $model */
+/** @var \ERecht24\Model\Client $model */
 $cms_version = $model->getAttribute('cms_version');
 ```
 
 ### Setting attribute values
 You can set a property like this:
 ```php
-/** @var ERecht24\Model\LegalText $model */
-$html_en = $model->setAttribute('cms_version', '1.0.9');
+/** @var \ERecht24\Model\Client $model */
+$model->setAttribute('cms_version', '1.0.9');
 ```
 or like this:
 ```php
-/** @var ERecht24\Model\LegalText $model */
-$html_en = $model->fill([
+/** @var \ERecht24\Model\Client $model */
+$model->fill([
     'plugin_name' => 'custom_plugin',
     'push_method' => 'POST'
 ]);

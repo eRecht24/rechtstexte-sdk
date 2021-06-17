@@ -9,7 +9,7 @@ Before getting started, you should ensure that you have already finished the ste
 ### Prepare api data
 Now you have to collect all information that should be sent to our api server.
 You can either collect data in an associative array:
-```php 
+```php
 $data = [
     'client_id' => 1, // (required)
     'push_method' => 'POST',  // (required) either "POST" or "GET"

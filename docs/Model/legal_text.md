@@ -21,25 +21,25 @@ With the help of the **eRecht24 Rechtstexte Api Package** you are able to import
 ### Receiving attribute values
 You can receive a property like this:
 ```php
-/** @var ERecht24\Model\LegalText $model */
+/** @var \ERecht24\Model\LegalText $model */
 $html_de = $model->html_de;
 ```
 or like this:
 ```php
-/** @var ERecht24\Model\LegalText $model */
+/** @var \ERecht24\Model\LegalText $model */
 $html_en = $model->getAttribute('html_en');
 ```
 
 ### Setting attribute values
 You can set a property like this:
 ```php
-/** @var ERecht24\Model\LegalText $model */
-$html_en = $model->setAttribute('html_en', '<body>...</body>');
+/** @var \ERecht24\Model\LegalText $model */
+$model->setAttribute('html_en', '<body>...</body>');
 ```
 or like this:
 ```php
-/** @var ERecht24\Model\LegalText $model */
-$html_en = $model->fill([
+/** @var \ERecht24\Model\LegalText $model */
+$model->fill([
     'html_en' => '<body>...</body>',
     'client_id' => 123
 ]);
@@ -54,7 +54,7 @@ const TYPE_PRIVACY_POLICY = 'privacy_policy';
 const TYPE_PRIVACY_POLICY_SOCIAL_MEDIA = 'privacy_policy_social_media';
 
 // getting a type
-/** @var ERecht24\Model\LegalText $model */
+/** @var \ERecht24\Model\LegalText $model */
 $type = $model->getType();
 
 // setting a type

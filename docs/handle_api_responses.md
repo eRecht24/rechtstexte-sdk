@@ -4,7 +4,7 @@ For more information check out our [response model](../src/Model/Response.php).
 
 ## Retrieve response from a service
 After executing one of our services, you have access to the response.
-```php 
+```php
 ...
 
 /** @var \ERecht24\Service $service */
@@ -15,31 +15,32 @@ $response = $service->getResponse();
 ```
 
 ## Check if response was successful
-```php 
+```php
 /** @var \ERecht24\Model\Response $response */
 $success = $response->isSuccess(); // bool
 ```
 
 ## Retrieve status code
-```php 
+```php
 /** @var \ERecht24\Model\Response $response */
 $status_code = $response->code; // ?int
 ```
 
 ## Retrieve raw body (json)
-```php 
+```php
 /** @var \ERecht24\Model\Response $response */
 $body = $response->body; // ?string
 ```
 
 ## Retrieve body as array
-```php 
+```php
 /** @var \ERecht24\Model\Response $response */
 $data = $response->body_data; // ?array
 ```
 
 ## Troubleshooting: get error message from failed Response
-```php 
+```php
+/** @var \ERecht24\Model\Response $response */
 if (!$response->isSuccess()) {
     $german_message = $response->getBodyDataByKey('message_de');
     $english_message = $response->getBodyDataByKey('message');
