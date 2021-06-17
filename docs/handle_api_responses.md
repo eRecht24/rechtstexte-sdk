@@ -37,3 +37,11 @@ $body = $response->body; // ?string
 /** @var \ERecht24\Model\Response $response */
 $data = $response->body_data; // ?array
 ```
+
+## Troubleshooting: get error message from failed Response
+```php 
+if (!$response->isSuccess()) {
+    $german_message = $response->getBodyDataByKey('message_de');
+    $english_message = $response->getBodyDataByKey('message');
+}
+```
