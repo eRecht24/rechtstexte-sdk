@@ -24,9 +24,6 @@ abstract class Model
     public function __construct(
         ?array $attributes = null
     ) {
-        foreach ($this->getFillable() as $attribute)
-            $this->setAttribute($attribute, null);
-
         if ($attributes)
             $this->fill($attributes);
     }
