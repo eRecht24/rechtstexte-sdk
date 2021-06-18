@@ -3,12 +3,6 @@ The eRecht24 API client library enables you to work with eRecht24 APIs such as l
 These client libraries are officially supported by eRecht24.
 We encourage you to implement this package in order to use the eRecht24.de services in your custom application.
 
-## Licence 
-Apache 2.0
-
-## Requirements
-[PHP 7.1 or higher](https://www.php.net/)
-
 ## Installation
 You can use Composer or simply download the release
 
@@ -45,3 +39,9 @@ When requested in [eRecht24 Projekt-Manager](https://www.e-recht24.de/mitglieder
 To verify that access to this url is authorized, the `erecht24_secret` from the request must be matched with the `secret` from your database.
 You can use the following controller examples as starting point four your custom implementations.
 [Push controller example](docs/services/create_client.md)
+
+## Licence
+Please check out our [Terms of use](LICENSE).
+
+## Requirements
+[PHP 7.1 or higher](https://www.php.net/)
