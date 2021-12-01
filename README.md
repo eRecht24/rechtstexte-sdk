@@ -1,5 +1,5 @@
-# eRecht24 Rechtstexte-Api-Package
-The eRecht24-API-Package allows your service/server to interact with the eRecht24.de API.
+# eRecht24 Rechtstexte-SDK
+The eRecht24 Rechtstexte-SDK allows your service/server to interact with the eRecht24.de API.
 This package is under official supported by eRecht24.de, considered to be final and in maintenance mode.
 However, this means we will address critical bugs and security issues but will not add any new features.
 We would recommend using this package in order to use the eRecht24.de services.
@@ -16,10 +16,10 @@ You can use ```composer``` or simply download the package.
 ### Composer
 Our preferred method is via composer.
 
-Use the following command in your project root to install this package:
+Use the following command to install this package (execute in project root):
 
 ```shell
-  composer require eRecht24/apiclient:"<2.0"
+  composer require erecht24/rechtstexte-sdk:"<2.0"
 ```
 
 and ensure to include the autoloader:
@@ -29,28 +29,26 @@ and ensure to include the autoloader:
 ```
 
 ### Download the package
-##################################################################################################
-The Releases page lists all stable versions. <-- wo?
-
-Download any file with the name google-api-php-client-[RELEASE_NAME].zip for a package including this library.
-##################################################################################################
+##############################################################################
+(if available at any packagist/satis there will be text here)
+##############################################################################
 
 ## How to use it
 ### Basics
-#### Getting an API Key
+#### Getting an API key
 Keys may be generated using the [eRecht24 Projekt-Manager](https://www.e-recht24.de/mitglieder/tools/projekt-manager/).
 All keys are ```SHA256``` hashes.
 You can store them as varchar(64).
 
-There is also a special key for development. Feel free to use it:
+There is also a key for development and testing purposes. Feel free to use it:
 
 ```e81cbf18a5239377aa4972773d34cc2b81ebc672879581bce29a0a4c414bf117```
 
-#### Legal Text - Model
+#### Legal text - model
 
 Legal texts may be generated using the [eRecht24 Projekt-Manager](https://www.e-recht24.de/mitglieder/tools/projekt-manager/).
 
-With the help of the **eRecht24-Rechtstexte-Api-Package** you are able to import those texts.
+With the **eRecht24 Rechtstexte-SDK** you are able to import those texts in a simple way.
 
 ```php
 /**
@@ -67,11 +65,9 @@ With the help of the **eRecht24-Rechtstexte-Api-Package** you are able to import
  */
 ```
 
-#### Project Client - Model
+#### Project client - model
 Clients have to be registered in order to receive push notifications.
-
-Without registration, you won't be able to push legal documents to the client.
-
+This means, without registration, you won't be able to push legal documents to the client.
 Every registered client receives a client_id and a secret. Please store both values on the client side.
 The secret is used to check whether incoming push notifications are from eRecht24 and to prevent DoS attacks against our servers.
 The client_id can be used to update stored client information or to delete the client.
@@ -93,9 +89,9 @@ The client_id can be used to update stored client information or to delete the c
  */
 ```
 
-#### Response - Model
-We introduced a Model for Api responses to help you to work with our api client.
-However, we want to minimize dependencies in order to keep the package slim.
+#### Response - model
+We introduced a model for responses to help you to work with our client.
+However, we want to minimize dependencies in order to keep the package slim and simple.
 
 ```php
 /**
@@ -108,14 +104,18 @@ However, we want to minimize dependencies in order to keep the package slim.
  * @property array body_data    // HTTP body as array
  */
 
-// checks if request was successful
+// check if request was successful
 public function isSuccess() : bool
 ```
 
 ### Services
-The full documentation can be found here: [https://docs.api.e-recht24.de/](https://docs.api.e-recht24.de/)
+The API documentation can be found [here](https://docs.api.e-recht24.de/).
 
-#### List all Project Clients
+For each route there is a service class for easy use.
+Simply initialize, execute and finally get any result data.
+The following lines demonstrates usage of any service classes.
+
+#### List all project clients
 ```php 
 use eRecht24\RechtstexteSDK\ApiClient;
 use eRecht24\RechtstexteSDK\Service\ClientListService;
@@ -130,11 +130,9 @@ $client = new ApiClient($apiKey);
 // Receive collection of project clients
 $service = new ClientListService($client);
 $result = $service->execute()->getCollection();
-
 ```
-`$result = null` if api request is not successful
 
-#### create Project Client
+#### Create project client
 ```php 
 use eRecht24\RechtstexteSDK\ApiClient;
 use eRecht24\RechtstexteSDK\Model\Client;
@@ -163,9 +161,8 @@ $service = new ClientCreateService($client, $clientModel);
 /** @var Response $result */
 $result = $service->execute()->getResponse();
 ```
-use `$result->isSuccess()` to check if request was successful
 
-#### update Project Client
+#### Update project client
 ```php 
 use eRecht24\RechtstexteSDK\ApiClient;
 use eRecht24\RechtstexteSDK\Model\Client;
@@ -204,9 +201,8 @@ $service = new ClientUpdateService($client, $clientModel);
 /** @var Response $result */
 $result = $service->execute()->getResponse();
 ```
-use `$result->isSuccess()` to check if request was successful
 
-#### delete Project Client
+#### Delete project client
 ```php 
 use eRecht24\RechtstexteSDK\ApiClient;
 use eRecht24\RechtstexteSDK\Model\Response;
@@ -225,9 +221,8 @@ $service = new ClientDeleteService($client, $id);
 /** @var Response $result */
 $result = $service->execute()->getResponse();
 ```
-use `$result->isSuccess()` to check if request was successful
 
-#### get imprint
+#### Get imprint
 ```php 
 use eRecht24\RechtstexteSDK\ApiClient;
 use eRecht24\RechtstexteSDK\Model\Response;
@@ -244,9 +239,8 @@ $client = new ApiClient($apiKey);
 $service = new ImprintGetService($client);
 $result = $service->execute()->getLegalText();
 ```
-`$result = null` if api request is not successful
 
-#### get privacy policy
+#### Get privacy policy
 ```php 
 use eRecht24\RechtstexteSDK\ApiClient;
 use eRecht24\RechtstexteSDK\Model\Response;
@@ -263,9 +257,8 @@ $client = new ApiClient($apiKey);
 $service = new PrivacyPolicyGetService($client);
 $result = $service->execute()->getLegalText();
 ```
-`$result = null` if api request is not successful
 
-#### get privacy policy social media
+#### Get privacy policy social media
 ```php 
 use eRecht24\RechtstexteSDK\ApiClient;
 use eRecht24\RechtstexteSDK\Model\Response;
@@ -282,9 +275,8 @@ $client = new ApiClient($apiKey);
 $service = new PrivacyPolicySocialMediaGetService($client);
 $result = $service->execute()->getLegalText();
 ```
-`$result = null` if api request is not successful
 
-#### get messages
+#### Get messages
 ```php 
 use eRecht24\RechtstexteSDK\ApiClient;
 use eRecht24\RechtstexteSDK\Model\Response;
@@ -301,20 +293,26 @@ $client = new ApiClient($apiKey);
 $service = new MessageGetService($client);
 $result = $service->execute()->getResult();
 ```
-use `$result->isSuccess()` to check if request was successful
 
-## Receiving Pushes
+For all `$result` above, there is either
+
+`$result == null` if api request was not successful
+
+or, if object mode,
+
+`$result->isSuccess() == true` if request was successful
+
+## Receiving pushes
 Please register a client with a `push_uri` and a `push_method`.
-If done correctly you receive, you receive a `secret` that has to be saved in you database.
-Ensure that the `given push_uri` is publicly accessible with the given `push_method` (GET || POST).
-To verify that access to this url is authorized, 
-the `erecht24_secret` from the request must be matched with the `secret` from your database.
-You can use the following controller examples as starting point four your custom implementations.
+If registration is done correctly you'll get a `secret`.
+Ensure the given `push_uri` is publicly accessible with the given `push_method` (GET or POST).
+Incoming requests to the `push_uri` are authorized, if the `erecht24_secret` parameter in the request matches the `secret` you got while registration process.
 
-### Example Push Controller
+Feel free to use the following controller example as initial point four your custom implementation.
+
+### Example push controller
 
 ```php
-
 use eRecht24\RechtstexteSDK\ApiClient;
 use eRecht24\RechtstexteSDK\Model\LegalText;
 use eRecht24\RechtstexteSDK\Service\ImprintGetService;
@@ -349,7 +347,9 @@ class PushController
     
         switch ($type){
             case 'ping':
-                return $this->sendResponse('pong'); // this is only needed for testPushService
+                // this is needed for testPushService only
+                return $this->sendResponse('pong');
+                break;
             case 'imprint':
             case 'privacyPolicy':
             case 'privacyPolicySocialMedia':
@@ -359,6 +359,7 @@ class PushController
 
     /**
      * Provide stored client secret from database
+     * 
      * @return string|null
      */
     private function getDatabaseSecret() : ?string
@@ -368,6 +369,7 @@ class PushController
 
     /**
      * Update legal_text in database
+     * 
      * @param LegalText $legal_text
      */
     private function importLegalText(
@@ -417,6 +419,8 @@ class PushController
             case 'privacyPolicySocialMedia':
                 $service = new PrivacyPolicySocialMediaGetService($client);
                 break;
+            default:
+                return $this->sendResponse('Failed request. Unsupported document type.', 'Fehlgeschlagene Anfrage. Dokumententyp unbekannt.', 400);
         }
     
         $service->execute();
