@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-use ERecht24\Model\LegalText;
+use eRecht24\RechtstexteSDK\Model\LegalText;
 
 use PHPUnit\Framework\TestCase;
 
@@ -73,7 +73,6 @@ final class LegalTextTest extends TestCase
         $legalText->setAttribute('created', 100);
 
         $this->assertSame(100, $legalText->created);
-
     }
 
     public function testGetAttribute(): void
@@ -108,7 +107,6 @@ final class LegalTextTest extends TestCase
 
         foreach ($invalid as $key => $value)
             $this->assertSame(null, $legalText->$key);
-
     }
 
     public function testCanHandleValidType(): void
@@ -132,8 +130,4 @@ final class LegalTextTest extends TestCase
         $legalText->setType('Home');
         $this->assertSame(null, $legalText->getType());
     }
-
 }
-
-
-

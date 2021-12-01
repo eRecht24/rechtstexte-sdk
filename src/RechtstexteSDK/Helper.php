@@ -1,18 +1,19 @@
 <?php
 declare(strict_types=1);
 
-namespace ERecht24;
+namespace eRecht24\RechtstexteSDK;
 
 abstract class Helper
 {
     /**
      * Convert a value to studly caps case.
-     * @param  string  $value
+     *
+     * @param string $value
      * @return string
      */
     public static function studly(
         string $value
-    ) : string
+    ): string
     {
         $value = ucwords(str_replace(['-', '_'], ' ', $value));
 

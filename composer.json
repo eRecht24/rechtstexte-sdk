@@ -1,16 +1,23 @@
 {
-  "name": "erecht24/apiclient",
-  "description": "Api Client library for eRecht24 APIs",
+  "name": "erecht24/rechtstexte-sdk",
+  "description": "API client library for eRecht24 Rechtstexte-API",
   "type": "library",
+  "version": "1.0.0",
   "license": "Apache-2.0",
-  "minimum-stability": "stable",
+  "authors": [
+    {
+      "name": "eRecht24 GmbH & Co. KG",
+      "email": "api@e-recht24.de",
+      "homepage": "https://api.e-recht24.de"
+    }
+  ],
   "require": {
     "php": ">=7.1",
     "ext-json": "*"
   },
   "autoload": {
     "psr-4": {
-      "ERecht24\\": "src/"
+      "eRecht24\\RechtstexteSDK\\": "src/RechtstexteSDK"
     }
   },
   "require-dev": {

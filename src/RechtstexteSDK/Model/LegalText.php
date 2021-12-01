@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace ERecht24\Model;
+namespace eRecht24\RechtstexteSDK\Model;
 
-use ERecht24\Model;
+use eRecht24\RechtstexteSDK\Model;
 
 /**
- * Class Response
- * @package ERecht24\Model
+ * Class LegalText
+ * @package eRecht24\RechtstexteSDK
  *
  * @property int client_id
  * @property int project_id
@@ -24,6 +24,9 @@ class LegalText extends Model
     const TYPE_PRIVACY_POLICY = 'privacy_policy';
     const TYPE_PRIVACY_POLICY_SOCIAL_MEDIA = 'privacy_policy_social_media';
 
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'html_de',
         'html_en',
@@ -40,12 +43,13 @@ class LegalText extends Model
 
     /**
      * Set legal text type
+     *
      * @param mixed $type
      * @return $this
      */
     public function setType(
         string $type
-    ) : LegalText
+    ): LegalText
     {
         if (in_array($type, [self::TYPE_IMPRINT, self::TYPE_PRIVACY_POLICY, self::TYPE_PRIVACY_POLICY_SOCIAL_MEDIA]))
             $this->type = $type;
@@ -55,9 +59,10 @@ class LegalText extends Model
 
     /**
      * Provide legal text type
+     *
      * @return null|string
      */
-    public function getType() : ?string
+    public function getType(): ?string
     {
         return $this->type;
     }

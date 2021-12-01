@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-use ERecht24\ApiClient;
+use eRecht24\RechtstexteSDK\ApiClient;
 
-use ERecht24\Model\LegalText;
-use ERecht24\Model\Response;
-use ERecht24\Service\PrivacyPolicySocialMediaGetService;
+use eRecht24\RechtstexteSDK\Model\LegalText;
+use eRecht24\RechtstexteSDK\Model\Response;
+use eRecht24\RechtstexteSDK\Service\PrivacyPolicySocialMediaGetService;
 use PHPUnit\Framework\TestCase;
 
 final class PrivacyPolicySocialMediaGetServiceTest extends TestCase
@@ -29,7 +29,6 @@ final class PrivacyPolicySocialMediaGetServiceTest extends TestCase
         $this->assertArrayHasKey('message_de', $response->body_data);
         $this->assertArrayHasKey('token', $response->body_data);
     }
-
 
     public function testShouldHandleValidApiKey(): void
     {
@@ -57,17 +56,13 @@ final class PrivacyPolicySocialMediaGetServiceTest extends TestCase
         $this->assertArrayHasKey('warnings', $response->body_data);
         $this->assertArrayHasKey('pushed', $response->body_data);
 
-
         $this->assertSame(LegalText::TYPE_PRIVACY_POLICY_SOCIAL_MEDIA, $service->getLegalText()->getType());
     }
 
     private function getApiClient(
         string $key = "e81cbf18a5239377aa4972773d34cc2b81ebc672879581bce29a0a4c414bf117"
-    ) : ApiClient
+    ): ApiClient
     {
         return new ApiClient($key);
     }
 }
-
-
-

@@ -1,17 +1,20 @@
 <?php
 declare(strict_types=1);
 
-namespace ERecht24\Service;
+namespace eRecht24\RechtstexteSDK\Service;
 
-use ERecht24\ApiClient;
-use ERecht24\Collection;
-use ERecht24\Exception;
-use ERecht24\Interfaces\ServiceInterface;
-use ERecht24\Model\Client;
-use ERecht24\Service as BaseService;
+use eRecht24\RechtstexteSDK\ApiClient;
+use eRecht24\RechtstexteSDK\Collection;
+use eRecht24\RechtstexteSDK\Exception;
+use eRecht24\RechtstexteSDK\Interfaces\ServiceInterface;
+use eRecht24\RechtstexteSDK\Model\Client;
+use eRecht24\RechtstexteSDK\Service as BaseService;
 
 class ClientListService extends BaseService implements ServiceInterface
 {
+    /**
+     * @var string
+     */
     protected $apiEndpoint = '/v1/clients';
 
     /**
@@ -21,6 +24,7 @@ class ClientListService extends BaseService implements ServiceInterface
 
     /**
      * Execute service
+     *
      * @return ServiceInterface
      * @throws Exception
      */
@@ -29,17 +33,17 @@ class ClientListService extends BaseService implements ServiceInterface
         $this->response = $this->apiClient
             ->setPath($this->getApiEndpoint())
             ->setMethod(ApiClient::HTTP_GET)
-            ->makeRequest()
-        ;
+            ->makeRequest();
 
         return $this;
     }
 
     /**
      * Get collection model filled with response data
+     *
      * @return ?Collection
      */
-    public function getCollection() : ?Collection
+    public function getCollection(): ?Collection
     {
         if (!$this->getResponse()->isSuccess())
             return null;

@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace ERecht24\Model;
+namespace eRecht24\RechtstexteSDK\Model;
 
-use ERecht24\Model;
+use eRecht24\RechtstexteSDK\Model;
 
 /**
  * Class Client
- * @package ERecht24\Model
+ * @package eRecht24\RechtstexteSDK
  *
  * @property int client_id
  * @property int project_id
@@ -22,6 +22,9 @@ use ERecht24\Model;
  */
 class Client extends Model
 {
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'client_id',
         'project_id',

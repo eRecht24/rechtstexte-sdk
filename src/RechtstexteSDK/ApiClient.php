@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace ERecht24;
+namespace eRecht24\RechtstexteSDK;
 
-use ERecht24\Model\Response;
+use eRecht24\RechtstexteSDK\Model\Response;
 
 class ApiClient
 {
@@ -37,6 +37,7 @@ class ApiClient
 
     /**
      * Client constructor.
+     *
      * @param string $apiKey
      */
     public function __construct(string $apiKey)
@@ -46,10 +47,11 @@ class ApiClient
 
     /**
      * Make cURL request
+     *
      * @return Response
      * @throws Exception
      */
-    public function makeRequest() : Response
+    public function makeRequest(): Response
     {
         $this->cURLcheckBasicFunctions();
 
@@ -62,8 +64,8 @@ class ApiClient
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
             curl_setopt($ch, CURLOPT_ENCODING, "");
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST , $this->getMethod());
-            curl_setopt($ch, CURLOPT_HTTPHEADER , [
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $this->getMethod());
+            curl_setopt($ch, CURLOPT_HTTPHEADER, [
                 "cache-control: no-cache",
                 "content-type: application/json",
                 sprintf("eRecht24: %s", $this->getApiKey())
@@ -93,6 +95,7 @@ class ApiClient
 
     /**
      * Provide API key for Authorisation
+     *
      * @return string
      */
     public function getApiKey(): string
@@ -102,14 +105,15 @@ class ApiClient
 
     /**
      * Function provides full url for cURL
-     * @throws Exception
+     *
+     * @return string
      */
-    public function getFullUrl() : string
+    public function getFullUrl(): string
     {
-        if(function_exists('http_build_url'))
+        if (function_exists('http_build_url'))
             return http_build_url(self::API_HOST, [
                 "scheme" => self::API_SCHEME,
-                "host" =>  self::API_HOST,
+                "host" => self::API_HOST,
                 "path" => $this->getPath(),
             ]);
 
@@ -122,6 +126,7 @@ class ApiClient
 
     /**
      * Set HTTP method for cURL
+     *
      * @param string $method
      * @return ApiClient
      * @throws Exception
@@ -140,6 +145,7 @@ class ApiClient
 
     /**
      * Provide HTTP method for cURL
+     *
      * @return string
      */
     public function getMethod(): string
@@ -149,6 +155,7 @@ class ApiClient
 
     /**
      * Set Path for url generation
+     *
      * @param string $path
      * @return ApiClient
      */
@@ -167,6 +174,7 @@ class ApiClient
 
     /**
      * Provide path for url generation
+     *
      * @return string
      */
     public function getPath(): string
@@ -176,6 +184,7 @@ class ApiClient
 
     /**
      * Set Post fields for Request
+     *
      * @param array $postFields
      * @return ApiClient
      */
@@ -190,6 +199,7 @@ class ApiClient
 
     /**
      * Provide post fields for Request
+     *
      * @return ?array
      */
     public function getPostFields(): ?array
@@ -198,15 +208,28 @@ class ApiClient
     }
 
     /**
+     * @return $this
+     */
+    public function reset(): ApiClient
+    {
+        $this->path = null;
+        $this->method = null;
+        $this->postFields = [];
+
+        return $this;
+    }
+
+    /**
      * Check needed functions
+     *
      * @throws Exception
      */
     private function cURLcheckBasicFunctions()
     {
-        if( !function_exists("curl_init") ||
+        if (!function_exists("curl_init") ||
             !function_exists("curl_setopt") ||
             !function_exists("curl_exec") ||
-            !function_exists("curl_close") )
+            !function_exists("curl_close"))
             throw new Exception('Required cURL Functions does not exist');
     }
 }

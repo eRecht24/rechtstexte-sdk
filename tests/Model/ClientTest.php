@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-use ERecht24\Model\Client;
+use eRecht24\RechtstexteSDK\Model\Client;
 
 use PHPUnit\Framework\TestCase;
 
@@ -89,7 +89,6 @@ final class ClientTest extends TestCase
         $client->setAttribute('client_id', 100);
 
         $this->assertSame(100, $client->client_id);
-
     }
 
     public function testGetAttribute(): void
@@ -129,9 +128,5 @@ final class ClientTest extends TestCase
 
         foreach ($invalid as $key => $value)
             $this->assertSame(null, $client->$key);
-
     }
 }
-
-
-

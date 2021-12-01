@@ -1,52 +1,60 @@
-# eRecht24 Rechtstexte Api Package
-
-The eRecht24 API Client Library enables you to work with eRecht24 APIs such as Legal texts on your server.
-These client libraries are officially supported by eRecht24.
-However, the libraries are considered complete and are in maintenance mode. This means that we will address critical bugs and security issues but will not add any new features.
-
-We encourage you to implement this Package in order to use the eRecht24.de services in your custom application.
+# eRecht24 Rechtstexte-Api-Package
+The eRecht24-API-Package allows your service/server to interact with the eRecht24.de API.
+This package is under official supported by eRecht24.de, considered to be final and in maintenance mode.
+However, this means we will address critical bugs and security issues but will not add any new features.
+We would recommend using this package in order to use the eRecht24.de services.
 
 ## Licence 
 Apache 2.0
 
 ## Requirements
-[PHP 7.1 or higher](https://www.php.net/)
+[PHP 7.1 or better](https://www.php.net/)
 
 ## Installation
-You can use Composer or simply Download the Release
+You can use ```composer``` or simply download the package.
 
 ### Composer
+Our preferred method is via composer.
 
-The preferred method is via composer. Follow the installation instructions if you do not already have composer installed.
-Once composer is installed, execute the following command in your project root to install this library:
+Use the following command in your project root to install this package:
 
 ```shell
   composer require eRecht24/apiclient:"<2.0"
 ```
 
-Finally, be sure to include the autoloader:
+and ensure to include the autoloader:
 
 ```php
   require_once '/path/to/your-project/vendor/autoload.php';
 ```
 
-### Download the Release
-If you prefer not to use composer, you can download the package in its entirety.
-The Releases page lists all stable versions.
+### Download the package
+##################################################################################################
+The Releases page lists all stable versions. <-- wo?
+
 Download any file with the name google-api-php-client-[RELEASE_NAME].zip for a package including this library.
+##################################################################################################
 
 ## How to use it
 ### Basics
-#### Get an API key
-Keys can be created in the future using the [eRecht24 Projekt-Manager](https://www.e-recht24.de/mitglieder/tools/projekt-manager/). All API keys are sha256 hashes. You can save them as varchar(64).
-For development you can use the API key **e81cbf18a5239377aa4972773d34cc2b81ebc672879581bce29a0a4c414bf117**.
+#### Getting an API Key
+Keys may be generated using the [eRecht24 Projekt-Manager](https://www.e-recht24.de/mitglieder/tools/projekt-manager/).
+All keys are ```SHA256``` hashes.
+You can store them as varchar(64).
+
+There is also a special key for development. Feel free to use it:
+
+```e81cbf18a5239377aa4972773d34cc2b81ebc672879581bce29a0a4c414bf117```
 
 #### Legal Text - Model
-Legal Texts can be created using the [eRecht24 Projekt-Manager](https://www.e-recht24.de/mitglieder/tools/projekt-manager/).
-With the help of the **eRecht24 Rechtstexte Api Package** you are able to import those texts.
+
+Legal texts may be generated using the [eRecht24 Projekt-Manager](https://www.e-recht24.de/mitglieder/tools/projekt-manager/).
+
+With the help of the **eRecht24-Rechtstexte-Api-Package** you are able to import those texts.
+
 ```php
 /**
- * @class ERecht24\Model\LegalText
+ * @class eRecht24\RechtstexteSDK\Model\LegalText
  *
  * @property int client_id          // client_id is used to identify user`s client 
  * @property int project_id         // project_id is used to identify user`s project
@@ -60,13 +68,17 @@ With the help of the **eRecht24 Rechtstexte Api Package** you are able to import
 ```
 
 #### Project Client - Model
-A client needs to register in order to receive push notifications. Without registration, you won't be able to push legal documents to the client.
+Clients have to be registered in order to receive push notifications.
+
+Without registration, you won't be able to push legal documents to the client.
+
 Every registered client receives a client_id and a secret. Please store both values on the client side.
 The secret is used to check whether incoming push notifications are from eRecht24 and to prevent DoS attacks against our servers.
 The client_id can be used to update stored client information or to delete the client.
+
 ```php
 /**
- * @class ERecht24\Model\Client
+ * @class eRecht24\RechtstexteSDK\Model\Client
  *
  * @property int client_id          // client_id is used to identify user`s client 
  * @property int project_id         // project_id is used to identify user`s project
@@ -84,9 +96,10 @@ The client_id can be used to update stored client information or to delete the c
 #### Response - Model
 We introduced a Model for Api responses to help you to work with our api client.
 However, we want to minimize dependencies in order to keep the package slim.
+
 ```php
 /**
- * @class ERecht24\Model\Response
+ * @class eRecht24\RechtstexteSDK\Model\Response
  *
  * @property int code           // HTTP status code
  * @property string body        // HTTP body string
@@ -104,8 +117,8 @@ The full documentation can be found here: [https://docs.api.e-recht24.de/](https
 
 #### List all Project Clients
 ```php 
-use ERecht24\ApiClient;
-use ERecht24\Service\ClientListService;
+use eRecht24\RechtstexteSDK\ApiClient;
+use eRecht24\RechtstexteSDK\Service\ClientListService;
 
 // require composer autoloader
 require_once 'vendor/autoload.php';
@@ -123,15 +136,15 @@ $result = $service->execute()->getCollection();
 
 #### create Project Client
 ```php 
-use ERecht24\ApiClient;
-use ERecht24\Model\Client;
-use ERecht24\Model\Response;
-use ERecht24\Service\ClientCreateService;
+use eRecht24\RechtstexteSDK\ApiClient;
+use eRecht24\RechtstexteSDK\Model\Client;
+use eRecht24\RechtstexteSDK\Model\Response;
+use eRecht24\RechtstexteSDK\Service\ClientCreateService;
 
 // require composer autoloader
 require_once 'vendor/autoload.php';
 
-// Initalize api client
+// initialize api client
 $apiKey = 'ENTER-YOUR-API-KEY-HERE'
 $client = new ApiClient($apiKey);
 
@@ -154,15 +167,15 @@ use `$result->isSuccess()` to check if request was successful
 
 #### update Project Client
 ```php 
-use ERecht24\ApiClient;
-use ERecht24\Model\Client;
-use ERecht24\Model\Response;
-use ERecht24\Service\ClientUpdateService;
+use eRecht24\RechtstexteSDK\ApiClient;
+use eRecht24\RechtstexteSDK\Model\Client;
+use eRecht24\RechtstexteSDK\Model\Response;
+use eRecht24\RechtstexteSDK\Service\ClientUpdateService;
 
 // require composer autoloader
 require_once 'vendor/autoload.php';
 
-// Initalize api client
+// initialize api client
 $apiKey = 'ENTER-YOUR-API-KEY-HERE'
 $client = new ApiClient($apiKey);
 
@@ -195,14 +208,14 @@ use `$result->isSuccess()` to check if request was successful
 
 #### delete Project Client
 ```php 
-use ERecht24\ApiClient;
-use ERecht24\Model\Response;
-use ERecht24\Service\ClientDeleteService;
+use eRecht24\RechtstexteSDK\ApiClient;
+use eRecht24\RechtstexteSDK\Model\Response;
+use eRecht24\RechtstexteSDK\Service\ClientDeleteService;
 
 // require composer autoloader
 require_once 'vendor/autoload.php';
 
-// Initalize api client
+// initialize api client
 $apiKey = 'ENTER-YOUR-API-KEY-HERE'
 $client = new ApiClient($apiKey);
 
@@ -216,14 +229,14 @@ use `$result->isSuccess()` to check if request was successful
 
 #### get imprint
 ```php 
-use ERecht24\ApiClient;
-use ERecht24\Model\Response;
-use ERecht24\Service\ImprintGetService;
+use eRecht24\RechtstexteSDK\ApiClient;
+use eRecht24\RechtstexteSDK\Model\Response;
+use eRecht24\RechtstexteSDK\Service\ImprintGetService;
 
 // require composer autoloader
 require_once 'vendor/autoload.php';
 
-// Initalize api client
+// initialize api client
 $apiKey = 'ENTER-YOUR-API-KEY-HERE'
 $client = new ApiClient($apiKey);
 
@@ -235,14 +248,14 @@ $result = $service->execute()->getLegalText();
 
 #### get privacy policy
 ```php 
-use ERecht24\ApiClient;
-use ERecht24\Model\Response;
-use ERecht24\Service\PrivacyPolicyGetService;
+use eRecht24\RechtstexteSDK\ApiClient;
+use eRecht24\RechtstexteSDK\Model\Response;
+use eRecht24\RechtstexteSDK\Service\PrivacyPolicyGetService;
 
 // require composer autoloader
 require_once 'vendor/autoload.php';
 
-// Initalize api client
+// initialize api client
 $apiKey = 'ENTER-YOUR-API-KEY-HERE'
 $client = new ApiClient($apiKey);
 
@@ -254,14 +267,14 @@ $result = $service->execute()->getLegalText();
 
 #### get privacy policy social media
 ```php 
-use ERecht24\ApiClient;
-use ERecht24\Model\Response;
-use ERecht24\Service\PrivacyPolicySocialMediaGetService;
+use eRecht24\RechtstexteSDK\ApiClient;
+use eRecht24\RechtstexteSDK\Model\Response;
+use eRecht24\RechtstexteSDK\Service\PrivacyPolicySocialMediaGetService;
 
 // require composer autoloader
 require_once 'vendor/autoload.php';
 
-// Initalize api client
+// initialize api client
 $apiKey = 'ENTER-YOUR-API-KEY-HERE'
 $client = new ApiClient($apiKey);
 
@@ -273,14 +286,14 @@ $result = $service->execute()->getLegalText();
 
 #### get messages
 ```php 
-use ERecht24\ApiClient;
-use ERecht24\Model\Response;
-use ERecht24\Service\MessageGetService;
+use eRecht24\RechtstexteSDK\ApiClient;
+use eRecht24\RechtstexteSDK\Model\Response;
+use eRecht24\RechtstexteSDK\Service\MessageGetService;
 
 // require composer autoloader
 require_once 'vendor/autoload.php';
 
-// Initalize api client
+// initialize api client
 $apiKey = 'ENTER-YOUR-API-KEY-HERE'
 $client = new ApiClient($apiKey);
 
@@ -302,15 +315,14 @@ You can use the following controller examples as starting point four your custom
 
 ```php
 
-use ERecht24\ApiClient;
-use ERecht24\Model\LegalText;
-use ERecht24\Service\ImprintGetService;
-use ERecht24\Service\PrivacyPolicyGetService;
-use ERecht24\Service\PrivacyPolicySocialMediaGetService;
+use eRecht24\RechtstexteSDK\ApiClient;
+use eRecht24\RechtstexteSDK\Model\LegalText;
+use eRecht24\RechtstexteSDK\Service\ImprintGetService;
+use eRecht24\RechtstexteSDK\Service\PrivacyPolicyGetService;
+use eRecht24\RechtstexteSDK\Service\PrivacyPolicySocialMediaGetService;
 
 // require composer autoloader if not done by framework
 require_once 'vendor/autoload.php';
-
 
 class PushController
 {
@@ -322,7 +334,7 @@ class PushController
     ];
 
     /**
-     * This function should be called if when push_uri is requested 
+     * This function should be called when push_uri is requested 
      */
     public function handleRequest()
     {
@@ -351,7 +363,7 @@ class PushController
      */
     private function getDatabaseSecret() : ?string
     {
-        // add your logik here
+        // add your logic here
     }
 
     /**
@@ -362,7 +374,7 @@ class PushController
 	    LegalText $legal_text
     ) : void
     {
-        // add your logik here
+        // add your logic here
     }
 
     /**
@@ -381,7 +393,7 @@ class PushController
             'message_de' => $message_de
         ];
         
-        // add further logik here.
+        // add further logic here.
         // Make sure that request status_code = $code and request body = json from $body
     }
 
@@ -391,7 +403,7 @@ class PushController
     private function handleLegalDocument( 
         string $type
     ) {
-        // Initalize api client
+        // initialize api client
         $apiKey = 'ENTER-YOUR-API-KEY-HERE';
         $client = new ApiClient($apiKey);
     

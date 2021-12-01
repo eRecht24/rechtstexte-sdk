@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-use ERecht24\Model\Response;
+use eRecht24\RechtstexteSDK\Model\Response;
 
 use PHPUnit\Framework\TestCase;
 
@@ -63,7 +63,6 @@ final class ResponseTest extends TestCase
         $response->setAttribute('code', 100);
 
         $this->assertSame(100, $response->code);
-
     }
 
     public function testGetAttribute(): void
@@ -95,7 +94,6 @@ final class ResponseTest extends TestCase
 
         foreach ($invalid as $key => $value)
             $this->assertSame(null, $response->$key);
-
     }
 
     public function testIsSuccessWorks(): void
@@ -125,6 +123,3 @@ final class ResponseTest extends TestCase
         $this->assertSame($newData, $response->body_data);
     }
 }
-
-
-
