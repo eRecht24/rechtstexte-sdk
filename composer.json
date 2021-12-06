@@ -2,7 +2,7 @@
   "name": "erecht24/apiclient",
   "description": "Api Client library for eRecht24 APIs",
   "type": "library",
-  "license": "Apache-2.0",
+  "license": "proprietary",
   "minimum-stability": "stable",
   "require": {
     "php": ">=7.1",
