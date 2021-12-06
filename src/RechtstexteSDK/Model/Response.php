@@ -24,6 +24,22 @@ class Response extends Model
     protected $fillable = ['code', 'body'];
 
     /**
+     * @return mixed
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+    /**
      * Provide response body as array
      *
      * @return ?array

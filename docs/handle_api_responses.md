@@ -7,40 +7,40 @@ After executing one of our services, you have access to the response.
 ```php
 ...
 
-/** @var \ERecht24\Service $service */
+/** @var \eRecht24\RechtstexteSDK\Service $service */
 $service->execute();  // service was initialized and executed
 
-/** @var \ERecht24\Model\Response $response */
+/** @var \eRecht24\RechtstexteSDK\Model\Response $response */
 $response = $service->getResponse();
 ```
 
 ## Check if response was successful
 ```php
-/** @var \ERecht24\Model\Response $response */
+/** @var \eRecht24\RechtstexteSDK\Model\Response $response */
 $success = $response->isSuccess(); // bool
 ```
 
 ## Retrieve status code
 ```php
-/** @var \ERecht24\Model\Response $response */
+/** @var \eRecht24\RechtstexteSDK\Model\Response $response */
 $status_code = $response->code; // ?int
 ```
 
 ## Retrieve raw body (json)
 ```php
-/** @var \ERecht24\Model\Response $response */
+/** @var \eRecht24\RechtstexteSDK\Model\Response $response */
 $body = $response->body; // ?string
 ```
 
 ## Retrieve body as array
 ```php
-/** @var \ERecht24\Model\Response $response */
+/** @var \eRecht24\RechtstexteSDK\Model\Response $response */
 $data = $response->body_data; // ?array
 ```
 
-## Troubleshooting: get error message from failed Response
+## Troubleshooting: get error message from failed response
 ```php
-/** @var \ERecht24\Model\Response $response */
+/** @var \eRecht24\RechtstexteSDK\Model\Response $response */
 if (!$response->isSuccess()) {
     $german_message = $response->getBodyDataByKey('message_de');
     $english_message = $response->getBodyDataByKey('message');

@@ -1,11 +1,11 @@
-# Legal Text - Model
-Legal Texts can be created using the [eRecht24 Projekt-Manager](https://www.e-recht24.de/mitglieder/tools/projekt-manager/).
-With the help of the **eRecht24 Rechtstexte Api Package** you are able to import those texts.
+# Legal text model
+Legal texts can be created using the [eRecht24 Projekt-Manager](https://www.e-recht24.de/mitglieder/tools/projekt-manager/).
+With the **eRecht24 Rechtstexte-SDK** you are able to import those texts in a simple way.
 
 ## Properties
 ```php
 /**
- * @class ERecht24\Model\LegalText
+ * @class eRecht24\RechtstexteSDK\Model\LegalText
  *
  * @property int client_id          // client_id is used to identify user`s client 
  * @property int project_id         // project_id is used to identify user`s project
@@ -21,24 +21,24 @@ With the help of the **eRecht24 Rechtstexte Api Package** you are able to import
 ### Receiving attribute values
 You can receive a property like this:
 ```php
-/** @var \ERecht24\Model\LegalText $model */
+/** @var \eRecht24\RechtstexteSDK\Model\LegalText $model */
 $html_de = $model->html_de;
 ```
 or like this:
 ```php
-/** @var \ERecht24\Model\LegalText $model */
+/** @var \eRecht24\RechtstexteSDK\Model\LegalText $model */
 $html_en = $model->getAttribute('html_en');
 ```
 
 ### Setting attribute values
 You can set a property like this:
 ```php
-/** @var \ERecht24\Model\LegalText $model */
+/** @var \eRecht24\RechtstexteSDK\Model\LegalText $model */
 $model->setAttribute('html_en', '<body>...</body>');
 ```
 or like this:
 ```php
-/** @var \ERecht24\Model\LegalText $model */
+/** @var \eRecht24\RechtstexteSDK\Model\LegalText $model */
 $model->fill([
     'html_en' => '<body>...</body>',
     'client_id' => 123
@@ -54,7 +54,7 @@ const TYPE_PRIVACY_POLICY = 'privacy_policy';
 const TYPE_PRIVACY_POLICY_SOCIAL_MEDIA = 'privacy_policy_social_media';
 
 // getting a type
-/** @var \ERecht24\Model\LegalText $model */
+/** @var \eRecht24\RechtstexteSDK\Model\LegalText $model */
 $type = $model->getType();
 
 // setting a type

@@ -59,4 +59,14 @@ class PrivacyPolicySocialMediaGetService extends BaseService implements ServiceI
 
         return $this->result;
     }
+
+    /**
+     * Provide Service Result
+     *
+     * @return mixed
+     */
+    public function getResult()
+    {
+        return $this->getLegalText();
+    }
 }

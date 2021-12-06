@@ -1,14 +1,14 @@
-# Client - Model
-A client needs to be registerer in order to receive push notifications. Without registration, you won't be able to push legal documents to the client.
+# Client model
+Clients have to be registered in order to receive push notifications.
+This means, without registration, you won't be able to push legal documents to the client.
 Every registered client receives a client_id and a secret. Please store both values on the client side.
 The secret is used to check whether incoming push notifications are from eRecht24 and to prevent DoS attacks against our servers.
 The client_id can be used to update stored client information or to delete the client.
 
-
 ## Properties
 ```php
 /**
- * @class ERecht24\Model\Client
+ * @class eRecht24\RechtstexteSDK\Model\Client
  *
  * @property int client_id          // client_id is used to identify user`s client 
  * @property int project_id         // project_id is used to identify user`s project
@@ -39,24 +39,24 @@ You can only modify those properties when creating or updating a client via api.
 ### Receiving attribute values
 You can receive a property like this:
 ```php
-/** @var \ERecht24\Model\Client $model */
+/** @var \eRecht24\RechtstexteSDK\Model\Client $model */
 $cms = $model->cms;
 ```
 or like this:
 ```php
-/** @var \ERecht24\Model\Client $model */
+/** @var \eRecht24\RechtstexteSDK\Model\Client $model */
 $cms_version = $model->getAttribute('cms_version');
 ```
 
 ### Setting attribute values
 You can set a property like this:
 ```php
-/** @var \ERecht24\Model\Client $model */
+/** @var \eRecht24\RechtstexteSDK\Model\Client $model */
 $model->setAttribute('cms_version', '1.0.9');
 ```
 or like this:
 ```php
-/** @var \ERecht24\Model\Client $model */
+/** @var \eRecht24\RechtstexteSDK\Model\Client $model */
 $model->fill([
     'plugin_name' => 'custom_plugin',
     'push_method' => 'POST'

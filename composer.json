@@ -3,7 +3,7 @@
   "description": "API client library for eRecht24 Rechtstexte-API",
   "type": "library",
   "version": "1.0.0",
-  "license": "Apache-2.0",
+  "license": "proprietary",
   "authors": [
     {
       "name": "eRecht24 GmbH & Co. KG",

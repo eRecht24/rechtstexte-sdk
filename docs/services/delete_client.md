@@ -9,8 +9,8 @@ Before getting started, you should ensure that you have already finished the ste
 With the help of our `$apiClient` we are now able to initialize and execute our service.
 ```php
 $client_id = 123;
-/** @var \ERecht24\ApiClient $apiClient */
-$service = new \ERecht24\Service\ClientDeleteService($apiClient, $client_id);
+/** @var \eRecht24\RechtstexteSDK\ApiClient $apiClient */
+$service = new \eRecht24\RechtstexteSDK\Service\ClientDeleteService($apiClient, $client_id);
 $service->execute();
 ```
 
@@ -22,7 +22,7 @@ However, checking response success might be a good idea.
 $success = $service->getResponse()->isSuccess();
 ```
 
-## Full Script
+## Full script
 
 ```php
 // require composer autoloader
@@ -30,11 +30,11 @@ require_once '<path_to_project_root>/vendor/autoload.php'; // update to your nee
 
 // Initalize api client
 $apiKey = 'ENTER-YOUR-API-KEY-HERE'; // update to your needs
-$apiClient = new \ERecht24\ApiClient($apiKey);
+$apiClient = new \eRecht24\RechtstexteSDK\ApiClient($apiKey);
 
 // execute service
 $client_id = 123; // update to your needs
-$service = new \ERecht24\Service\ClientDeleteService($apiClient, $client_id);
+$service = new \eRecht24\RechtstexteSDK\Service\ClientDeleteService($apiClient, $client_id);
 $service->execute();
 
 // get secret

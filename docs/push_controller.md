@@ -1,9 +1,9 @@
 ```php
-use ERecht24\ApiClient;
-use ERecht24\Model\LegalText;
-use ERecht24\Service\ImprintGetService;
-use ERecht24\Service\PrivacyPolicyGetService;
-use ERecht24\Service\PrivacyPolicySocialMediaGetService;
+use eRecht24\RechtstexteSDK\ApiClient;
+use eRecht24\RechtstexteSDK\Model\LegalText;
+use eRecht24\RechtstexteSDK\Service\ImprintGetService;
+use eRecht24\RechtstexteSDK\Service\PrivacyPolicyGetService;
+use eRecht24\RechtstexteSDK\Service\PrivacyPolicySocialMediaGetService;
 
 // require composer autoloader if not done by framework
 require_once 'vendor/autoload.php';
@@ -89,7 +89,7 @@ class PushController
 
     /**
      * @param string $type
-     * @throws \ERecht24\Exception
+     * @throws \eRecht24\RechtstexteSDK\Exception
      */
     private function handleLegalDocument( 
         string $type

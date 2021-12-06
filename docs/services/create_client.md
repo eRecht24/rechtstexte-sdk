@@ -21,7 +21,7 @@ $data = [
 ```
 or you can simply use our client model:
 ```php
-$data = new \ERecht24\Model\Client([
+$data = new \eRecht24\RechtstexteSDK\Model\Client([
     'push_method' => 'POST',  // (required) either "POST" or "GET"
     'push_uri' => 'https://www.test.de', // (required) valid url
     'cms' => 'WORDPRESS', // (optional)
@@ -37,9 +37,9 @@ However, we recommend using our model, since it validates that only valid data w
 With the help of our `$apiClient` and `$data` we are now able to initialize and execute our service.
 
 ```php
-/** @var \ERecht24\ApiClient $apiClient */
-/** @var \ERecht24\Model\Client|array $data */
-$service = new \ERecht24\Service\ClientCreateService($apiClient, $data);
+/** @var \eRecht24\RechtstexteSDK\ApiClient $apiClient */
+/** @var \eRecht24\RechtstexteSDK\Model\Client|array $data */
+$service = new \eRecht24\RechtstexteSDK\Service\ClientCreateService($apiClient, $data);
 $service->execute();
 ```
 
@@ -53,8 +53,7 @@ $secret = $service->getResponse()->getBodyDataByKey('secret');
 $client_id = $service->getResponse()->getBodyDataByKey('client_id');
 ```
 
-
-## Full Script
+## Full script
 
 ```php
 // require composer autoloader
@@ -62,10 +61,10 @@ require_once '<path_to_project_root>/vendor/autoload.php'; // update to your nee
 
 // Initalize api client
 $apiKey = 'ENTER-YOUR-API-KEY-HERE'; // update to your needs
-$apiClient = new \ERecht24\ApiClient($apiKey);
+$apiClient = new \eRecht24\RechtstexteSDK\ApiClient($apiKey);
 
 // collect data
-$data = new \ERecht24\Model\Client([
+$data = new \eRecht24\RechtstexteSDK\Model\Client([
     'push_method' => 'POST',  // (required) either "POST" or "GET"
     'push_uri' => 'https://www.test.de', // (required) valid url
     'cms' => 'WORDPRESS', // (optional)
@@ -75,7 +74,7 @@ $data = new \ERecht24\Model\Client([
 ]);
 
 // execute service
-$service = new \ERecht24\Service\ClientCreateService($apiClient, $data);
+$service = new \eRecht24\RechtstexteSDK\Service\ClientCreateService($apiClient, $data);
 $service->execute();
 
 // get secret & client_id

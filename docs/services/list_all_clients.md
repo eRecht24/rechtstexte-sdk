@@ -10,8 +10,8 @@ With the help of our `$apiClient` we are now able to initialize and execute our 
 The service prepares the api client, makes the request to our api server and provides all important information.
 
 ```php
-/** @var \ERecht24\ApiClient $apiClient */
-$service = new \ERecht24\Service\ClientListService($apiClient);
+/** @var \eRecht24\RechtstexteSDK\ApiClient $apiClient */
+$service = new \eRecht24\RechtstexteSDK\Service\ClientListService($apiClient);
 $service->execute();
 ```
 
@@ -21,20 +21,19 @@ If you do not want to work with raw response data, you can use the function `get
 It will be filled with all information provided by our api.
 
 ```php
-/** @var \ERecht24\Collection|null $collection */
+/** @var \eRecht24\RechtstexteSDK\Collection|null $collection */
 $collection = $service->getCollection();
 ```
 **Note: If Request was not successfull, $collection will be `null`. In this case you may use raw response to get more information**
 
 ```php
 if (is_null($collection)) {
-    /** @var \ERecht24\Model\Response $response */
+    /** @var \eRecht24\RechtstexteSDK\Model\Response $response */
     $response = $service->getResponse();
 }
 ```
 
-
-## Full Script
+## Full script
 
 ```php
 // require composer autoloader
@@ -42,13 +41,13 @@ require_once '<path_to_project_root>/vendor/autoload.php'; // update to your nee
 
 // Initalize api client
 $apiKey = 'ENTER-YOUR-API-KEY-HERE'; // update to your needs
-$apiClient = new \ERecht24\ApiClient($apiKey);
+$apiClient = new \eRecht24\RechtstexteSDK\ApiClient($apiKey);
 
 // execute service
-$service = new \ERecht24\Service\ClientListService($apiClient);
+$service = new \eRecht24\RechtstexteSDK\Service\ClientListService($apiClient);
 $service->execute();
 
 // get collection of project clients
-/** @var \ERecht24\Collection|null $collection */
+/** @var \eRecht24\RechtstexteSDK\Collection|null $collection */
 $collection = $service->getCollection();
 ```

@@ -8,8 +8,8 @@ Before getting started, you should ensure that you have already finished the ste
 ### Execute service
 With the help of our `$apiClient` we are now able to initialize and execute our service.
 ```php
-/** @var \ERecht24\ApiClient $apiClient */
-$service = new \ERecht24\Service\MessageGetService($apiClient);
+/** @var \eRecht24\RechtstexteSDK\ApiClient $apiClient */
+$service = new \eRecht24\RechtstexteSDK\Service\MessageGetService($apiClient);
 $service->execute();
 ```
 
@@ -21,7 +21,7 @@ $german_message = $service->getResponse()->getBodyDataByKey('message_de');
 $english_message = $service->getResponse()->getBodyDataByKey('message');
 ```
 
-## Full Script
+## Full script
 
 ```php
 // require composer autoloader
@@ -29,10 +29,10 @@ require_once '<path_to_project_root>/vendor/autoload.php'; // update to your nee
 
 // Initalize api client
 $apiKey = 'ENTER-YOUR-API-KEY-HERE'; // update to your needs
-$apiClient = new \ERecht24\ApiClient($apiKey);
+$apiClient = new \eRecht24\RechtstexteSDK\ApiClient($apiKey);
 
 // execute service
-$service = new \ERecht24\Service\MessageGetService($apiClient);
+$service = new \eRecht24\RechtstexteSDK\Service\MessageGetService($apiClient);
 $service->execute();
 
 // get messages

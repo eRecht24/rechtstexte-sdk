@@ -56,4 +56,14 @@ abstract class Service implements ServiceInterface
     {
         return $this->response;
     }
+
+    /**
+     * Provide Service Result
+     *
+     * @return mixed
+     */
+    public function getResult()
+    {
+        return $this->getResponse();
+    }
 }

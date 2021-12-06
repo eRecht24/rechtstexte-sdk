@@ -20,4 +20,9 @@ interface ServiceInterface
      * @return Response
      */
     public function getResponse(): Response;
+
+    /**
+     * @return mixed
+     */
+    public function getResult();
 }

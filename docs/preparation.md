@@ -17,9 +17,8 @@ You can get your `api_key` here: [eRecht24 Projekt-Manager](https://www.e-recht2
 
 ```php
 $apiKey = 'ENTER-YOUR-API-KEY-HERE'; // update to your needs
-$apiClient = new \ERecht24\ApiClient($apiKey);
+$apiClient = new \eRecht24\RechtstexteSDK\ApiClient($apiKey);
 ```
-
 
 ## Full script
 ```php
@@ -28,7 +27,7 @@ require_once '<path_to_project_root>/vendor/autoload.php'; // update to your nee
 
 // Initalize api client
 $apiKey = 'ENTER-YOUR-API-KEY-HERE'; // update to your needs
-$client = new \ERecht24\ApiClien($apiKey);
+$client = new \eRecht24\RechtstexteSDK\ApiClien($apiKey);
 
 // add services here
 

@@ -22,7 +22,7 @@ $data = [
 ```
 or you can simply use our client model:
 ```php
-$data = new \ERecht24\Model\Client([
+$data = new \eRecht24\RechtstexteSDK\Model\Client([
     'client_id' => 1, // (required)
     'push_method' => 'POST',  // (required) either "POST" or "GET"
     'push_uri' => 'https://www.test.de', // (required) valid url
@@ -40,9 +40,9 @@ However, we recommend using our model, since it validates that only valid data w
 With the help of our `$apiClient` and `$data` we are now able to initialize and execute our service.
 
 ```php
-/** @var \ERecht24\ApiClient $apiClient */
-/** @var \ERecht24\Model\Client|array $data */
-$service = new \ERecht24\Service\ClientUpdateService($apiClient, $data);
+/** @var \eRecht24\RechtstexteSDK\ApiClient $apiClient */
+/** @var \eRecht24\RechtstexteSDK\Model\Client|array $data */
+$service = new \eRecht24\RechtstexteSDK\Service\ClientUpdateService($apiClient, $data);
 $service->execute();
 ```
 
@@ -55,18 +55,17 @@ Learn how to handle responses in general [here](../handle_api_responses.md).
 $secret = $service->getResponse()->getBodyDataByKey('secret');
 ```
 
-
-## Full Script
+## Full script
 ```php
 // require composer autoloader
 require_once '<path_to_project_root>/vendor/autoload.php'; // update to your needs
 
 // Initalize api client
 $apiKey = 'ENTER-YOUR-API-KEY-HERE'; // update to your needs
-$apiClient = new \ERecht24\ApiClient($apiKey);
+$apiClient = new \eRecht24\RechtstexteSDK\ApiClient($apiKey);
 
 // collect data
-$data = new \ERecht24\Model\Client([
+$data = new \eRecht24\RechtstexteSDK\Model\Client([
     'client_id' => 1, // (required)
     'push_method' => 'POST',  // (required) either "POST" or "GET"
     'push_uri' => 'https://www.test.de', // (required) valid url
@@ -77,7 +76,7 @@ $data = new \ERecht24\Model\Client([
 ]);
 
 // execute service
-$service = new \ERecht24\Service\ClientUpdateService($apiClient, $data);
+$service = new \eRecht24\RechtstexteSDK\Service\ClientUpdateService($apiClient, $data);
 $service->execute();
 
 // get secret

@@ -59,4 +59,14 @@ class PrivacyPolicyGetService extends BaseService implements ServiceInterface
 
         return $this->result;
     }
+
+    /**
+     * Provide Service Result
+     *
+     * @return mixed
+     */
+    public function getResult()
+    {
+        return $this->getLegalText();
+    }
 }
