@@ -54,7 +54,7 @@ final class ClientTest extends TestCase
             $this->assertSame($value, $client->$key);
     }
 
-    public function testUnsetPropertiesAreNull(): void
+    public function testUnsetPropertiesAreIgnoredInitially(): void
     {
         $client = new Client([
             "client_id" => 1,
@@ -64,19 +64,11 @@ final class ClientTest extends TestCase
         $expected = [
             "client_id" => 1,
             "project_id" => 2,
-            "push_method" => null,
-            "push_uri" => null,
-            "cms" => null,
-            "cms_version" => null,
-            "plugin_name" => null,
-            "author_mail" => null,
-            "created_at" => null,
-            "updated_at" => null,
         ];
 
         $attributes = $client->getAttributes();
-        foreach ($expected as $key => $value)
-            $this->assertSame($value, $attributes[$key]);
+
+        $this->assertSame($expected, $attributes);
     }
 
     public function testSetAttribute(): void

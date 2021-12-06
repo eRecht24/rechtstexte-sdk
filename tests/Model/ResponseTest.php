@@ -109,6 +109,21 @@ final class ResponseTest extends TestCase
         $this->assertSame(false, $response->isSuccess());
     }
 
+    public function testGetBodyDataByKeyWorks(): void
+    {
+        $response = new Response([
+            "code" => 200,
+            "body" => json_encode([
+                "secret" => "TestSecret",
+                "client_id" => 123
+            ]),
+        ]);
+
+        $this->assertSame('TestSecret', $response->getBodyDataByKey('secret'));
+        $this->assertSame(123, $response->getBodyDataByKey('client_id'));
+        $this->assertSame(null, $response->getBodyDataByKey('invalid'));
+    }
+
     public function testGetBodyDataAsArrayWorks(): void
     {
         $response = new Response([

@@ -28,9 +28,6 @@ abstract class Model
         ?array $attributes = null
     )
     {
-        foreach ($this->getFillable() as $attribute)
-            $this->setAttribute($attribute, null);
-
         if ($attributes)
             $this->fill($attributes);
     }

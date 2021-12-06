@@ -89,7 +89,7 @@ final class ClientCreateServiceTest extends TestCase
         $this->assertArrayHasKey('message_de', $response->body_data);
     }
 
-    public function testCanCreateNewClient(): void
+    public function testCanCreateNewClientWithClientModel(): void
     {
         $this->force2Clients();
 
@@ -102,6 +102,38 @@ final class ClientCreateServiceTest extends TestCase
 
         $client = new Client($data);
         $service = new ClientCreateService($this->getApiClient(), $client);
+
+        $service->execute();
+        $response = $service->getResponse();
+
+        $this->assertInstanceOf(
+            Response::class,
+            $response
+        );
+
+        $this->assertSame(true, $response->isSuccess());
+        $this->assertSame(200, $response->code);
+
+        $this->assertArrayHasKey('secret', $response->body_data);
+        $this->assertArrayHasKey('client_id', $response->body_data);
+
+        $createdClient = $this->getNewestClient();
+        foreach ($data as $key => $value)
+            $this->assertSame($value, $createdClient->$key);
+    }
+
+    public function testCanCreateNewClientWithArray(): void
+    {
+        $this->force2Clients();
+
+        $data = [
+            'push_method' => 'GET',
+            'push_uri' => 'https://www.test.de',
+            'cms' => 'CI',
+            'plugin_name' => 'erecht24/apiclient',
+        ];
+
+        $service = new ClientCreateService($this->getApiClient(), $data);
 
         $service->execute();
         $response = $service->getResponse();
