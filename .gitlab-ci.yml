@@ -9,6 +9,8 @@ stages:
 .phpunit:
   image: php:latest
   script:
+    - apt-get update -yqq
+    - apt-get install git zip -yqq
     # Install composer
     - curl -sS https://getcomposer.org/installer | php
     # Install all project dependencies
