@@ -15,9 +15,10 @@ stages:
     - curl -sS https://getcomposer.org/installer | php
     # Install all project dependencies
     - php composer.phar install
-    - vendor/bin/phpunit tests --log-junit report.xml
+    - vendor/bin/phpunit --testdox tests --log-junit report.xml
   artifacts:
     when: always
+    expire_in: 30 days
     reports:
       junit: report.xml
 
@@ -28,19 +29,29 @@ php 7.1:
 php 7.2:
   extends: .phpunit
   image: php:7.2
+  variables:
+    ERECHT24_API_KEY: $ERECHT24_API_KEY_PHP72
 
 php 7.3:
   extends: .phpunit
   image: php:7.3
+  variables:
+    ERECHT24_API_KEY: $ERECHT24_API_KEY_PHP73
 
 php 7.4:
   extends: .phpunit
   image: php:7.4
+  variables:
+    ERECHT24_API_KEY: $ERECHT24_API_KEY_PHP74
 
 php 8.0:
   extends: .phpunit
   image: php:8.0
+  variables:
+    ERECHT24_API_KEY: $ERECHT24_API_KEY_PHP80
 
 php 8.1:
   extends: .phpunit
   image: php:8.1
+  variables:
+    ERECHT24_API_KEY: $ERECHT24_API_KEY_PHP81
