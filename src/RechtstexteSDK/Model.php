@@ -28,9 +28,6 @@ abstract class Model
         ?array $attributes = null
     )
     {
-        foreach ($this->getFillable() as $attribute)
-            $this->setAttribute($attribute, null);
-
         if ($attributes)
             $this->fill($attributes);
     }
@@ -111,7 +108,7 @@ abstract class Model
      *
      * @return array
      */
-    protected function getFillable(): array
+    public function getFillable(): array
     {
         return $this->fillable;
     }
@@ -122,7 +119,7 @@ abstract class Model
      * @param $key
      * @return bool
      */
-    protected function isFillable($key): bool
+    public function isFillable($key): bool
     {
         if (in_array($key, $this->getFillable()))
             return true;

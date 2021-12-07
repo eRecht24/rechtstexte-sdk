@@ -37,20 +37,21 @@ final class ResponseTest extends TestCase
             $this->assertSame($value, $response->$key);
     }
 
-    public function testUnsetPropertiesAreNull(): void
+    public function testUnsetPropertiesAreNotInitialized(): void
     {
-        $response = new Response([
+        $attributes = [
             "code" => 200,
-        ]);
-
-        $expected = [
-            "code" => 200,
-            "body" => null,
         ];
+        $response = new Response($attributes);
+
+        $notExpectedKeys = array_diff(
+            array_keys($response->getFillable()),
+            array_keys($attributes)
+        );
 
         $attributes = $response->getAttributes();
-        foreach ($expected as $key => $value)
-            $this->assertSame($value, $attributes[$key]);
+        foreach ($notExpectedKeys as $key)
+            $this->assertArrayNotHasKey($key, $attributes);
     }
 
     public function testSetAttribute(): void

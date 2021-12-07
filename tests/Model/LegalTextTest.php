@@ -45,25 +45,22 @@ final class LegalTextTest extends TestCase
             $this->assertSame($value, $legalText->$key);
     }
 
-    public function testUnsetPropertiesAreNull(): void
+    public function testUnsetPropertiesAreNotInitialized(): void
     {
-        $legalText = new LegalText([
+        $attributes = [
             "html_de" => "html_de",
             "html_en" => "html_en",
-        ]);
-
-        $expected = [
-            "html_de" => "html_de",
-            "html_en" => "html_en",
-            "created" => null,
-            "modified" => null,
-            "warnings" => null,
-            "pushed" => null,
         ];
+        $legalText = new LegalText($attributes);
+
+        $notExpectedKeys = array_diff(
+            array_keys($legalText->getFillable()),
+            array_keys($attributes)
+        );
 
         $attributes = $legalText->getAttributes();
-        foreach ($expected as $key => $value)
-            $this->assertSame($value, $attributes[$key]);
+        foreach ($notExpectedKeys as $key)
+            $this->assertArrayNotHasKey($key, $attributes);
     }
 
     public function testSetAttribute(): void
