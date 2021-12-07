@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-use ERecht24\Model\LegalText;
+use eRecht24\RechtstexteSDK\Model\LegalText;
 
 use PHPUnit\Framework\TestCase;
 
@@ -45,25 +45,22 @@ final class LegalTextTest extends TestCase
             $this->assertSame($value, $legalText->$key);
     }
 
-    public function testUnsetPropertiesAreNull(): void
+    public function testUnsetPropertiesAreNotInitialized(): void
     {
-        $legalText = new LegalText([
+        $attributes = [
             "html_de" => "html_de",
             "html_en" => "html_en",
-        ]);
-
-        $expected = [
-            "html_de" => "html_de",
-            "html_en" => "html_en",
-            "created" => null,
-            "modified" => null,
-            "warnings" => null,
-            "pushed" => null,
         ];
+        $legalText = new LegalText($attributes);
+
+        $notExpectedKeys = array_diff(
+            array_keys($legalText->getFillable()),
+            array_keys($attributes)
+        );
 
         $attributes = $legalText->getAttributes();
-        foreach ($expected as $key => $value)
-            $this->assertSame($value, $attributes[$key]);
+        foreach ($notExpectedKeys as $key)
+            $this->assertArrayNotHasKey($key, $attributes);
     }
 
     public function testSetAttribute(): void
@@ -73,7 +70,6 @@ final class LegalTextTest extends TestCase
         $legalText->setAttribute('created', 100);
 
         $this->assertSame(100, $legalText->created);
-
     }
 
     public function testGetAttribute(): void
@@ -108,7 +104,6 @@ final class LegalTextTest extends TestCase
 
         foreach ($invalid as $key => $value)
             $this->assertSame(null, $legalText->$key);
-
     }
 
     public function testCanHandleValidType(): void
@@ -132,8 +127,4 @@ final class LegalTextTest extends TestCase
         $legalText->setType('Home');
         $this->assertSame(null, $legalText->getType());
     }
-
 }
-
-
-

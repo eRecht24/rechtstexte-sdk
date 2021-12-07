@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-use ERecht24\Model\Response;
+use eRecht24\RechtstexteSDK\Model\Response;
 
 use PHPUnit\Framework\TestCase;
 
@@ -37,20 +37,21 @@ final class ResponseTest extends TestCase
             $this->assertSame($value, $response->$key);
     }
 
-    public function testUnsetPropertiesAreNull(): void
+    public function testUnsetPropertiesAreNotInitialized(): void
     {
-        $response = new Response([
+        $attributes = [
             "code" => 200,
-        ]);
-
-        $expected = [
-            "code" => 200,
-            "body" => null,
         ];
+        $response = new Response($attributes);
+
+        $notExpectedKeys = array_diff(
+            array_keys($response->getFillable()),
+            array_keys($attributes)
+        );
 
         $attributes = $response->getAttributes();
-        foreach ($expected as $key => $value)
-            $this->assertSame($value, $attributes[$key]);
+        foreach ($notExpectedKeys as $key)
+            $this->assertArrayNotHasKey($key, $attributes);
     }
 
     public function testSetAttribute(): void
@@ -63,7 +64,6 @@ final class ResponseTest extends TestCase
         $response->setAttribute('code', 100);
 
         $this->assertSame(100, $response->code);
-
     }
 
     public function testGetAttribute(): void
@@ -95,7 +95,6 @@ final class ResponseTest extends TestCase
 
         foreach ($invalid as $key => $value)
             $this->assertSame(null, $response->$key);
-
     }
 
     public function testIsSuccessWorks(): void
@@ -109,6 +108,21 @@ final class ResponseTest extends TestCase
 
         $response->setAttribute('code', 404);
         $this->assertSame(false, $response->isSuccess());
+    }
+
+    public function testGetBodyDataByKeyWorks(): void
+    {
+        $response = new Response([
+            "code" => 200,
+            "body" => json_encode([
+                "secret" => "TestSecret",
+                "client_id" => 123
+            ]),
+        ]);
+
+        $this->assertSame('TestSecret', $response->getBodyDataByKey('secret'));
+        $this->assertSame(123, $response->getBodyDataByKey('client_id'));
+        $this->assertSame(null, $response->getBodyDataByKey('invalid'));
     }
 
     public function testGetBodyDataAsArrayWorks(): void
@@ -125,6 +139,3 @@ final class ResponseTest extends TestCase
         $this->assertSame($newData, $response->body_data);
     }
 }
-
-
-

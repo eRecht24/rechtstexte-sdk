@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-use ERecht24\Collection;
+use eRecht24\RechtstexteSDK\Collection;
 use PHPUnit\Framework\TestCase;
 
 final class CollectionTest extends TestCase
@@ -20,7 +20,7 @@ final class CollectionTest extends TestCase
         $collection = new Collection();
         $this->assertSame(true, $collection->isEmpty());
 
-        $collection = new Collection([1,2]);
+        $collection = new Collection([1, 2]);
         $this->assertSame(false, $collection->isEmpty());
     }
 
@@ -29,7 +29,7 @@ final class CollectionTest extends TestCase
         $collection = new Collection();
         $this->assertSame(0, $collection->count());
 
-        $collection = new Collection([1,2]);
+        $collection = new Collection([1, 2]);
         $this->assertSame(2, $collection->count());
     }
 
@@ -39,7 +39,6 @@ final class CollectionTest extends TestCase
         $collection = new Collection($array);
         $this->assertSame($array, $collection->all());
     }
-
 
     public function testCanFindElement(): void
     {
@@ -63,8 +62,4 @@ final class CollectionTest extends TestCase
         $this->assertSame("new", $collection->get(0));
         $this->assertSame("also new", $collection->get(1));
     }
-
 }
-
-
-

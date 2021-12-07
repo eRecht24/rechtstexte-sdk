@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-use ERecht24\Model\Client;
+use eRecht24\RechtstexteSDK\Model\Client;
 
 use PHPUnit\Framework\TestCase;
 
@@ -54,7 +54,7 @@ final class ClientTest extends TestCase
             $this->assertSame($value, $client->$key);
     }
 
-    public function testUnsetPropertiesAreNull(): void
+    public function testUnsetPropertiesAreIgnoredInitially(): void
     {
         $client = new Client([
             "client_id" => 1,
@@ -64,19 +64,11 @@ final class ClientTest extends TestCase
         $expected = [
             "client_id" => 1,
             "project_id" => 2,
-            "push_method" => null,
-            "push_uri" => null,
-            "cms" => null,
-            "cms_version" => null,
-            "plugin_name" => null,
-            "author_mail" => null,
-            "created_at" => null,
-            "updated_at" => null,
         ];
 
         $attributes = $client->getAttributes();
-        foreach ($expected as $key => $value)
-            $this->assertSame($value, $attributes[$key]);
+
+        $this->assertSame($expected, $attributes);
     }
 
     public function testSetAttribute(): void
@@ -89,7 +81,6 @@ final class ClientTest extends TestCase
         $client->setAttribute('client_id', 100);
 
         $this->assertSame(100, $client->client_id);
-
     }
 
     public function testGetAttribute(): void
@@ -129,9 +120,5 @@ final class ClientTest extends TestCase
 
         foreach ($invalid as $key => $value)
             $this->assertSame(null, $client->$key);
-
     }
 }
-
-
-

@@ -1,15 +1,14 @@
 <?php
 declare(strict_types=1);
 
-use ERecht24\ApiClient;
-
-use ERecht24\Collection;
-use ERecht24\Model\Client;
-use ERecht24\Model\Response;
-use ERecht24\Service\ClientCreateService;
-use ERecht24\Service\ClientDeleteService;
-use ERecht24\Service\ClientListService;
-use ERecht24\Service\ClientUpdateService;
+use eRecht24\RechtstexteSDK\ApiClient;
+use eRecht24\RechtstexteSDK\Collection;
+use eRecht24\RechtstexteSDK\Model\Client;
+use eRecht24\RechtstexteSDK\Model\Response;
+use eRecht24\RechtstexteSDK\Service\ClientCreateService;
+use eRecht24\RechtstexteSDK\Service\ClientDeleteService;
+use eRecht24\RechtstexteSDK\Service\ClientListService;
+use eRecht24\RechtstexteSDK\Service\ClientUpdateService;
 use PHPUnit\Framework\TestCase;
 
 final class ClientUpdateServiceTest extends TestCase
@@ -83,16 +82,16 @@ final class ClientUpdateServiceTest extends TestCase
         $this->assertArrayHasKey('message_de', $response->body_data);
     }
 
-    public function testShouldUpdateClient(): void
+    public function testShouldUpdateClientWithClient(): void
     {
         $client = $this->getRemoteClient();
 
         $updates = [
             'push_method' => 'PUT',
-            'push_uri' => 'https://www.test.de/update',
+            'push_uri' => 'https://www.test.de/update' . rand(1,1000),
             'cms' => 'WORDPRESS Update',
-            'cms_version' => '5.7.1 Update',
-            'plugin_name' => 'erecht24/apiclient',
+            'cms_version' => 'v' . rand(1,100),
+            'plugin_name' => 'erecht24/apiclient:' . rand(1,1000),
             'author_mail' => 'update@update.de',
         ];
 
@@ -119,11 +118,48 @@ final class ClientUpdateServiceTest extends TestCase
             $this->assertSame($value, $updatedClient->$key);
     }
 
+    public function testShouldUpdateClientWithArray(): void
+    {
+        $client = $this->getRemoteClient();
+
+        $updates = [
+            'client_id' => $client->client_id,
+            'push_method' => 'PUT',
+            'push_uri' => 'https://www.test.de/update' . rand(1,1000),
+            'cms' => 'WORDPRESS Update',
+            'cms_version' => 'v' . rand(1,100),
+            'plugin_name' => 'erecht24/apiclient:' . rand(1,1000),
+            'author_mail' => 'update@update.de',
+        ];
+
+        $service = new ClientUpdateService($this->getApiClient(), $updates);
+
+        $service->execute();
+        $response = $service->getResponse();
+
+        $this->assertInstanceOf(
+            Response::class,
+            $response
+        );
+
+        $this->assertSame(true, $response->isSuccess());
+        $this->assertSame(200, $response->code);
+
+        $this->assertArrayHasKey('secret', $response->body_data);
+
+        $updatedClient = $this->getRemoteClient();
+
+        foreach ($updates as $key => $value)
+            $this->assertSame($value, $updatedClient->$key);
+    }
 
     private function getApiClient(
         string $key = "e81cbf18a5239377aa4972773d34cc2b81ebc672879581bce29a0a4c414bf117"
-    ) : ApiClient
+    ): ApiClient
     {
+        if ($key == "e81cbf18a5239377aa4972773d34cc2b81ebc672879581bce29a0a4c414bf117" && getenv('ERECHT24_API_KEY') !== false) {
+            $key = getenv('ERECHT24_API_KEY');
+        }
         return new ApiClient($key);
     }
 
@@ -140,18 +176,15 @@ final class ClientUpdateServiceTest extends TestCase
         $service->execute();
     }
 
-    private function getRemoteClient() : Client
+    private function getRemoteClient(): Client
     {
         $service = new ClientListService($this->getApiClient());
         /** @var Collection $collection */
         $collection = $service->execute()->getCollection();
 
-        if($collection->count() === 0)
+        if ($collection->count() === 0)
             $this->addDummyClient();
 
         return $service->execute()->getCollection()->get(0);
     }
 }
-
-
-

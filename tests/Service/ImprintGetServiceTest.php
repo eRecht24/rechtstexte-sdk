@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-use ERecht24\ApiClient;
+use eRecht24\RechtstexteSDK\ApiClient;
 
-use ERecht24\Model\LegalText;
-use ERecht24\Model\Response;
-use ERecht24\Service\ImprintGetService;
+use eRecht24\RechtstexteSDK\Model\LegalText;
+use eRecht24\RechtstexteSDK\Model\Response;
+use eRecht24\RechtstexteSDK\Service\ImprintGetService;
 use PHPUnit\Framework\TestCase;
 
 final class ImprintGetServiceTest extends TestCase
@@ -61,11 +61,11 @@ final class ImprintGetServiceTest extends TestCase
 
     private function getApiClient(
         string $key = "e81cbf18a5239377aa4972773d34cc2b81ebc672879581bce29a0a4c414bf117"
-    ) : ApiClient
+    ): ApiClient
     {
+        if ($key == "e81cbf18a5239377aa4972773d34cc2b81ebc672879581bce29a0a4c414bf117" && getenv('ERECHT24_API_KEY') !== false) {
+            $key = getenv('ERECHT24_API_KEY');
+        }
         return new ApiClient($key);
     }
 }
-
-
-

@@ -1,15 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace ERecht24;
+namespace eRecht24\RechtstexteSDK;
 
-use ERecht24\Interfaces\ServiceInterface;
-use ERecht24\Model\Response;
+use eRecht24\RechtstexteSDK\Interfaces\ServiceInterface;
+use eRecht24\RechtstexteSDK\Model\Response;
 
 abstract class Service implements ServiceInterface
 {
     /**
      * path for url generation
+     *
      * @var array
      */
     protected $apiEndpoint = '';
@@ -26,29 +27,43 @@ abstract class Service implements ServiceInterface
 
     /**
      * Service constructor.
+     *
      * @param ApiClient $apiClient
      */
     public function __construct(
         ApiClient $apiClient
-    ) {
+    )
+    {
         $this->apiClient = $apiClient;
     }
 
     /**
      * Provide api endpoint
+     *
      * @return string
      */
-    public function getApiEndpoint() : string
+    public function getApiEndpoint(): string
     {
         return $this->apiEndpoint;
     }
 
     /**
      * Provide Response
+     *
      * @return Response
      */
     public function getResponse(): Response
     {
-        return  $this->response;
+        return $this->response;
+    }
+
+    /**
+     * Provide Service Result
+     *
+     * @return mixed
+     */
+    public function getResult()
+    {
+        return $this->getResponse();
     }
 }

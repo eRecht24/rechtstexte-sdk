@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-use ERecht24\ApiClient;
+use eRecht24\RechtstexteSDK\ApiClient;
 
-use ERecht24\Model\Response;
-use ERecht24\Service\MessageGetService;
+use eRecht24\RechtstexteSDK\Model\Response;
+use eRecht24\RechtstexteSDK\Service\MessageGetService;
 use PHPUnit\Framework\TestCase;
 
 final class MessageGetServiceTest extends TestCase
@@ -53,11 +53,11 @@ final class MessageGetServiceTest extends TestCase
 
     private function getApiClient(
         string $key = "e81cbf18a5239377aa4972773d34cc2b81ebc672879581bce29a0a4c414bf117"
-    ) : ApiClient
+    ): ApiClient
     {
+        if ($key == "e81cbf18a5239377aa4972773d34cc2b81ebc672879581bce29a0a4c414bf117" && getenv('ERECHT24_API_KEY') !== false) {
+            $key = getenv('ERECHT24_API_KEY');
+        }
         return new ApiClient($key);
     }
 }
-
-
-

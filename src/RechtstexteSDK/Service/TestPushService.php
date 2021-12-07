@@ -1,19 +1,22 @@
 <?php
 declare(strict_types=1);
 
-namespace ERecht24\Service;
+namespace eRecht24\RechtstexteSDK\Service;
 
-use ERecht24\ApiClient;
-use ERecht24\Exception;
-use ERecht24\Interfaces\ServiceInterface;
-use ERecht24\Model;
-use ERecht24\Model\Client;
-use ERecht24\Model\LegalText;
-use ERecht24\Model\Response;
-use ERecht24\Service as BaseService;
+use eRecht24\RechtstexteSDK\ApiClient;
+use eRecht24\RechtstexteSDK\Exception;
+use eRecht24\RechtstexteSDK\Interfaces\ServiceInterface;
+use eRecht24\RechtstexteSDK\Model;
+use eRecht24\RechtstexteSDK\Model\Client;
+use eRecht24\RechtstexteSDK\Model\LegalText;
+use eRecht24\RechtstexteSDK\Model\Response;
+use eRecht24\RechtstexteSDK\Service as BaseService;
 
 class TestPushService extends BaseService implements ServiceInterface
 {
+    /**
+     * @var string
+     */
     protected $apiEndpoint = '/v1/clients/%s/testPush';
 
     /**
@@ -21,16 +24,22 @@ class TestPushService extends BaseService implements ServiceInterface
      */
     private $clientId;
 
+    /**
+     * @param ApiClient $apiClient
+     * @param int $clientId
+     */
     public function __construct(
         ApiClient $apiClient,
-        int $clientId
-    ) {
+        int       $clientId
+    )
+    {
         parent::__construct($apiClient);
         $this->clientId = $clientId;
     }
 
     /**
      * Execute service
+     *
      * @return ServiceInterface
      * @throws Exception
      */
@@ -39,8 +48,7 @@ class TestPushService extends BaseService implements ServiceInterface
         $this->response = $this->apiClient
             ->setPath(sprintf($this->getApiEndpoint(), $this->clientId))
             ->setMethod(ApiClient::HTTP_POST)
-            ->makeRequest()
-        ;
+            ->makeRequest();
 
         return $this;
     }

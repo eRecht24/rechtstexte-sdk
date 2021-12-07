@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-use ERecht24\ApiClient;
-use ERecht24\Exception as ERecht24Exception;
-use ERecht24\Model\Response;
+use eRecht24\RechtstexteSDK\ApiClient;
+use eRecht24\RechtstexteSDK\Exception as ERecht24Exception;
+use eRecht24\RechtstexteSDK\Model\Response;
 use PHPUnit\Framework\TestCase;
 
 final class ApiClientTest extends TestCase
@@ -17,13 +17,13 @@ final class ApiClientTest extends TestCase
         );
     }
 
-    public function testUseGetAsDefaultMethod() : void
+    public function testUseGetAsDefaultMethod(): void
     {
         $client = new ApiClient('test');
         $this->assertSame(ApiClient::HTTP_GET, $client->getMethod());
     }
 
-    public function testCanSetValidHTTPMethod() : void
+    public function testCanSetValidHTTPMethod(): void
     {
         $client = new ApiClient('test');
 
@@ -40,7 +40,7 @@ final class ApiClientTest extends TestCase
         $this->assertSame(ApiClient::HTTP_GET, $client->getMethod());
     }
 
-    public function testCanNotSetInvalidHTTPMethod() : void
+    public function testCanNotSetInvalidHTTPMethod(): void
     {
         $client = new ApiClient('test');
 
@@ -48,20 +48,20 @@ final class ApiClientTest extends TestCase
         $client->setMethod('Not valid');
     }
 
-    public function testUseSlashAsDefaultPath() : void
+    public function testUseSlashAsDefaultPath(): void
     {
         $client = new ApiClient('test');
         $this->assertSame('/', $client->getPath());
     }
 
-    public function testCanNotUnsetPath() : void
+    public function testCanNotUnsetPath(): void
     {
         $client = new ApiClient('test');
         $client->setPath('');
         $this->assertSame('/', $client->getPath());
     }
 
-    public function testPathSlashIsAutomaticallyAdded() : void
+    public function testPathSlashIsAutomaticallyAdded(): void
     {
         $client = new ApiClient('test');
 
@@ -70,10 +70,10 @@ final class ApiClientTest extends TestCase
         $this->assertSame('/test', $client->getPath());
     }
 
-    public function testCanMakeRequest() : void
+    public function testCanMakeRequest(): void
     {
         $client = new ApiClient('test');
-        $response =  $client->makeRequest();
+        $response = $client->makeRequest();
 
         $this->assertInstanceOf(
             Response::class,
@@ -81,6 +81,3 @@ final class ApiClientTest extends TestCase
         );
     }
 }
-
-
-
