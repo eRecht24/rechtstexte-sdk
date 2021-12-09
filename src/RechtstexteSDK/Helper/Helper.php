@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace eRecht24\RechtstexteSDK;
+namespace eRecht24\RechtstexteSDK\Helper;
 
 abstract class Helper
 {
@@ -11,9 +11,7 @@ abstract class Helper
      * @param string $value
      * @return string
      */
-    public static function studly(
-        string $value
-    ): string
+    public static function studly(string $value): string
     {
         $value = ucwords(str_replace(['-', '_'], ' ', $value));
 

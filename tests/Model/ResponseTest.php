@@ -1,8 +1,9 @@
 <?php
 declare(strict_types=1);
 
-use eRecht24\RechtstexteSDK\Model\Response;
+namespace eRecht24\RechtstexteSDK\Tests\Model;
 
+use eRecht24\RechtstexteSDK\Model\Response;
 use PHPUnit\Framework\TestCase;
 
 final class ResponseTest extends TestCase
@@ -34,7 +35,7 @@ final class ResponseTest extends TestCase
         $response->fill($updates);
 
         foreach ($updates as $key => $value)
-            $this->assertSame($value, $response->$key);
+            $this->assertSame($value, $response->getAttribute($key));
     }
 
     public function testUnsetPropertiesAreNotInitialized(): void
@@ -45,7 +46,7 @@ final class ResponseTest extends TestCase
         $response = new Response($attributes);
 
         $notExpectedKeys = array_diff(
-            array_keys($response->getFillable()),
+            array_keys($response->getProperties()),
             array_keys($attributes)
         );
 
@@ -61,9 +62,9 @@ final class ResponseTest extends TestCase
             "body" => "",
         ]);
 
-        $response->setAttribute('code', 100);
+        $response->setCode(100);
 
-        $this->assertSame(100, $response->code);
+        $this->assertSame(100, $response->getCode());
     }
 
     public function testGetAttribute(): void
@@ -73,7 +74,7 @@ final class ResponseTest extends TestCase
             "body" => "",
         ]);
 
-        $this->assertSame("", $response->getAttribute('body'));
+        $this->assertSame("", $response->getBody());
     }
 
     public function testIgnoreInvalidProperties(): void
@@ -91,10 +92,10 @@ final class ResponseTest extends TestCase
         $response = new Response(array_merge($valid, $invalid));
 
         foreach ($valid as $key => $value)
-            $this->assertSame($value, $response->$key);
+            $this->assertSame($value, $response->getAttribute($key));
 
         foreach ($invalid as $key => $value)
-            $this->assertSame(null, $response->$key);
+            $this->assertSame(null, $response->getAttribute($key));
     }
 
     public function testIsSuccessWorks(): void
@@ -106,7 +107,7 @@ final class ResponseTest extends TestCase
 
         $this->assertSame(true, $response->isSuccess());
 
-        $response->setAttribute('code', 404);
+        $response->setCode(404);
         $this->assertSame(false, $response->isSuccess());
     }
 
@@ -132,10 +133,10 @@ final class ResponseTest extends TestCase
             "body" => "",
         ]);
 
-        $this->assertSame(null, $response->body_data);
+        $this->assertSame(null, $response->getBodyDataAsArray());
 
         $newData = ["test" => "testValue"];
-        $response->setAttribute('body', json_encode($newData));
-        $this->assertSame($newData, $response->body_data);
+        $response->setBody(json_encode($newData));
+        $this->assertSame($newData, $response->getBodyDataAsArray());
     }
 }

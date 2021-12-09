@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace eRecht24\RechtstexteSDK;
+namespace eRecht24\RechtstexteSDK\Model;
 
 class Collection
 {
     /**
-     * The items contained in the collection.
+     * The items in the collection.
      *
      * @var array
      */
@@ -17,19 +17,27 @@ class Collection
      *
      * @param array $items
      */
-    public function __construct(
-        array $items = []
-    )
+    public function __construct(array $items = [])
     {
         $this->items = $items;
     }
 
     /**
-     * Get all of the items in the collection.
+     * Get all items from the collection.
      *
      * @return array
      */
     public function all(): array
+    {
+        return $this->items;
+    }
+
+    /**
+     * Get all items from the collection.
+     *
+     * @return array
+     */
+    public function getItems(): array
     {
         return $this->items;
     }
@@ -45,7 +53,6 @@ class Collection
         if (array_key_exists($key, $this->items))
             return $this->items[$key];
 
-
         return null;
     }
 
@@ -56,7 +63,7 @@ class Collection
      */
     public function isEmpty(): bool
     {
-        return empty($this->items);
+        return (0 == $this->count());
     }
 
     /**
@@ -97,13 +104,26 @@ class Collection
     }
 
     /**
-     * Provide last element
+     * Provide the first element
+     *
+     * @return null|mixed
+     */
+    public function first()
+    {
+        if ($this->isEmpty())
+            return null;
+
+        return reset($this->items);
+    }
+
+    /**
+     * Provide the last element
      *
      * @return null|mixed
      */
     public function last()
     {
-        if (empty($this->items))
+        if ($this->isEmpty())
             return null;
 
         return end($this->items);

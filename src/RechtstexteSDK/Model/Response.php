@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 namespace eRecht24\RechtstexteSDK\Model;
 
-use eRecht24\RechtstexteSDK\Exception;
-use eRecht24\RechtstexteSDK\Model;
+use eRecht24\RechtstexteSDK\Exceptions\Exception;
 
 /**
  * Class Response
@@ -12,73 +11,139 @@ use eRecht24\RechtstexteSDK\Model;
  *
  * @property int code
  * @property string body
- *
- * magic properties
- * @property array body_data
  */
-class Response extends Model
+class Response extends BaseResponse
 {
     /**
-     * @var string[]
-     */
-    protected $fillable = ['code', 'body'];
-
-    /**
-     * @return mixed
-     */
-    public function getCode()
-    {
-        return $this->code;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getBody()
-    {
-        return $this->body;
-    }
-
-    /**
-     * Provide response body as array
+     * allowed properties
      *
-     * @return ?array
+     * @var array
      */
-    public function getBodyDataAttribute(): ?array
+    protected $properties = [
+        'code',
+        'body'
+    ];
+
+    /**
+     * Function provides body data as array
+     *
+     * @return null|array
+     */
+    public function getBodyDataAsArray(): ?array
     {
         try {
-            return json_decode($this->body, true);
-        } catch (Exception $e) {
-            return null;
+            $bodyData = json_decode($this->getBody(), true);
+        } catch (\Exception $e) {
+            $bodyData = null;
         }
+
+        return $bodyData;
     }
 
     /**
-     * Function checks if request was successful
+     * Function provides specific body data by key
+     *
+     * @param string $key
+     * @return mixed
+     */
+    public function getBodyDataByKey(string $key)
+    {
+        $bodyData = $this->getBodyDataAsArray();
+
+        if (is_null($bodyData))
+            return null;
+
+        if (!array_key_exists($key, $bodyData))
+            return null;
+
+        return $bodyData[$key];
+    }
+
+    /**
+     * Checks if request was successful
      *
      * @return bool
      */
     public function isSuccess(): bool
     {
-        return (200 === $this->code);
+        return in_array(
+            $this->getCode(),
+            [self::HTTP_OK, self::HTTP_NO_CONTENT]
+        );
     }
 
     /**
-     * Function provides specific body_data by key
+     * Get message by language
      *
-     * @param string $key
-     * @return mixed|null
+     * @param string $lang
+     * @return string|null
      */
-    public function getBodyDataByKey(
-        string $key
-    )
+    public function getMessage(string $lang = 'en'): ?string
     {
-        if (is_null($this->body_data))
-            return null;
+        switch (strtolower($lang)) {
+            case 'de':
+                $message = $this->getBodyDataByKey('message_de');
+                break;
 
-        if (!array_key_exists($key, $this->body_data))
-            return null;
+            default:
+                $message = $this->getBodyDataByKey('message');
+        }
 
-        return $this->body_data[$key];
+        return $message;
+    }
+
+    /**
+     * Get error message if failed response
+     *
+     * @param string $lang
+     * @return string|null
+     */
+    public function getErrorMessage(string $lang = 'en'): ?string
+    {
+        $message = null;
+
+        if (!$this->isSuccess()) {
+            $message = $this->getMessage($lang);
+        }
+
+        return $message;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getCode(): ?int
+    {
+        return $this->getAttribute('code');
+    }
+
+    /**
+     * @param int $code
+     * @return Response
+     */
+    public function setCode(int $code): Response
+    {
+        $this->setAttribute('code', $code);
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getBody(): ?string
+    {
+        return $this->getAttribute('body');
+    }
+
+    /**
+     * @param string $body
+     * @return Response
+     */
+    public function setBody(string $body): Response
+    {
+        $this->setAttribute('body', $body);
+
+        return $this;
     }
 }

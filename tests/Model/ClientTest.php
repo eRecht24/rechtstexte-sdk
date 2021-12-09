@@ -1,8 +1,9 @@
 <?php
 declare(strict_types=1);
 
-use eRecht24\RechtstexteSDK\Model\Client;
+namespace eRecht24\RechtstexteSDK\Tests\Model;
 
+use eRecht24\RechtstexteSDK\Model\Client;
 use PHPUnit\Framework\TestCase;
 
 final class ClientTest extends TestCase
@@ -51,7 +52,7 @@ final class ClientTest extends TestCase
         $client->fill($updates);
 
         foreach ($updates as $key => $value)
-            $this->assertSame($value, $client->$key);
+            $this->assertSame($value, $client->getAttribute($key));
     }
 
     public function testUnsetPropertiesAreIgnoredInitially(): void
@@ -78,9 +79,9 @@ final class ClientTest extends TestCase
             "project_id" => 2,
         ]);
 
-        $client->setAttribute('client_id', 100);
+        $client->setClientId(100);
 
-        $this->assertSame(100, $client->client_id);
+        $this->assertSame(100, $client->getClientId());
     }
 
     public function testGetAttribute(): void
@@ -90,7 +91,7 @@ final class ClientTest extends TestCase
             "project_id" => 2,
         ]);
 
-        $this->assertSame(1, $client->getAttribute('client_id'));
+        $this->assertSame(1, $client->getClientId());
     }
 
     public function testIgnoreInvalidProperties(): void
@@ -116,9 +117,9 @@ final class ClientTest extends TestCase
         $client = new Client(array_merge($valid, $invalid));
 
         foreach ($valid as $key => $value)
-            $this->assertSame($value, $client->$key);
+            $this->assertSame($value, $client->getAttribute($key));
 
         foreach ($invalid as $key => $value)
-            $this->assertSame(null, $client->$key);
+            $this->assertSame(null, $client->getAttribute($key));
     }
 }

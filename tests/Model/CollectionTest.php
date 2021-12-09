@@ -1,7 +1,11 @@
 <?php
 declare(strict_types=1);
 
-use eRecht24\RechtstexteSDK\Collection;
+namespace Model;
+
+namespace eRecht24\RechtstexteSDK\Tests\Model;
+
+use eRecht24\RechtstexteSDK\Model\Collection;
 use PHPUnit\Framework\TestCase;
 
 final class CollectionTest extends TestCase

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace eRecht24\RechtstexteSDK;
+namespace eRecht24\RechtstexteSDK\Exceptions;
 
 use Exception as BaseException;
 

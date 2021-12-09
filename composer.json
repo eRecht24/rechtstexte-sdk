@@ -2,7 +2,7 @@
   "name": "erecht24/rechtstexte-sdk",
   "description": "API client library for eRecht24 Rechtstexte-API",
   "type": "library",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "license": "proprietary",
   "authors": [
     {
@@ -23,5 +23,10 @@
   },
   "require-dev": {
     "phpunit/phpunit": "*"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "eRecht24\\RechtstexteSDK\\Tests\\": "tests/"
+    }
   }
 }
