@@ -87,7 +87,7 @@ class BaseResponse extends BaseModel
      *
      * @var array
      */
-    public static array $httpStatusCodes = [
+    public static $httpStatusCodes = [
         100 => 'Continue',
         101 => 'Switching Protocols',
         102 => 'Processing', // RFC2518
