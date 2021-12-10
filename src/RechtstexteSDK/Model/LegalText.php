@@ -56,17 +56,6 @@ abstract class LegalText extends BaseModel
     }
 
     /**
-     * @param string $createdAt
-     * @return LegalText
-     */
-    public function setCreatedAt(string $createdAt): LegalText
-    {
-        $this->setAttribute('created', $createdAt);
-
-        return $this;
-    }
-
-    /**
      * @return string|null
      */
     public function getModifiedAt(): ?string

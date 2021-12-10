@@ -24,6 +24,30 @@ interface ApiInterface
     public function getResponse(): Response;
 
     /**
+     * Provide response HTTP code
+     *
+     * @return int|null
+     */
+    public function getResponseCode(): ?int;
+
+    /**
+     * Provide response body
+     *
+     * @return string|null
+     */
+    public function getResponseBody(): ?string;
+
+    /**
+     * @return array|null
+     */
+    public function getResponseBodyAsArray(): ?array;
+
+    /**
+     * @return bool|null
+     */
+    public function isLastResponseSuccess(): ?bool;
+
+    /**
      * @param string $lang
      * @return string|null
      */

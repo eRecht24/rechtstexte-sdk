@@ -56,6 +56,62 @@ class ApiHandler implements ApiInterface
     }
 
     /**
+     * Provide response HTTP code
+     *
+     * @return int|null
+     */
+    public function getResponseCode(): ?int
+    {
+        if ($this->response instanceof Response) {
+            $this->response->getCode();
+        }
+
+        return null;
+    }
+
+    /**
+     * Provide response body
+     *
+     * @return string|null
+     */
+    public function getResponseBody(): ?string
+    {
+        if ($this->response instanceof Response) {
+            $this->response->getBody();
+        }
+
+        return null;
+    }
+
+    /**
+     * Provide response body as array
+     *
+     * @return array|null
+     */
+    public function getResponseBodyAsArray(): ?array
+    {
+        if ($this->response instanceof Response) {
+            $this->response->getBodyDataAsArray();
+        }
+
+        return null;
+    }
+
+    /**
+     * Provide status of last response
+     *
+     * @return bool|null
+     */
+    public function isLastResponseSuccess(): ?bool
+    {
+        if ($this->response instanceof Response) {
+            return $this->response->isSuccess();
+        }
+
+        return null;
+    }
+
+    /**
      * Provide last error message
      *
      * @param string $lang
@@ -89,6 +145,8 @@ class ApiHandler implements ApiInterface
      */
     public function createClient(Client $client): Client
     {
+        $this->reset();
+
         $this->response = $this->endpointService->executeService(
             'client_create',
             [],
@@ -112,6 +170,8 @@ class ApiHandler implements ApiInterface
      */
     public function updateClient(Client $client): Client
     {
+        $this->reset();
+
         $this->response = $this->endpointService->executeService(
             'client_update',
             [$client->getClientId()],
@@ -134,6 +194,8 @@ class ApiHandler implements ApiInterface
      */
     public function deleteClient($client): bool
     {
+        $this->reset();
+
         if ($client instanceof Client) {
             $this->response = $this->endpointService->executeService(
                 'client_delete',
@@ -158,6 +220,8 @@ class ApiHandler implements ApiInterface
      */
     public function getClientList(): ?Collection
     {
+        $this->reset();
+
         $this->response = $this->endpointService->executeService('client_list');
 
         if ($this->response->isSuccess()) {
@@ -180,6 +244,8 @@ class ApiHandler implements ApiInterface
      */
     public function getImprint(): ?Imprint
     {
+        $this->reset();
+
         $this->response = $this->endpointService->executeService('imprint_get');
 
         if ($this->response->isSuccess()) {
@@ -197,6 +263,8 @@ class ApiHandler implements ApiInterface
      */
     public function getPrivacyPolicy(): ?PrivacyPolicy
     {
+        $this->reset();
+
         $this->response = $this->endpointService->executeService('private_policy_get');
 
         if ($this->response->isSuccess()) {
@@ -214,6 +282,8 @@ class ApiHandler implements ApiInterface
      */
     public function getPrivacyPolicySocialMedia(): ?PrivacyPolicySocialMedia
     {
+        $this->reset();
+
         $this->response = $this->endpointService->executeService('private_policy_social_get');
 
         if ($this->response->isSuccess()) {
@@ -232,6 +302,8 @@ class ApiHandler implements ApiInterface
      */
     public function getMessage(string $lang = 'en'): ?string
     {
+        $this->reset();
+
         $this->response = $this->endpointService->executeService('message_get');
 
         if ($this->response->isSuccess()) {
@@ -251,6 +323,8 @@ class ApiHandler implements ApiInterface
      */
     public function fireTestPush(int $clientId, string $type = 'ping'): bool
     {
+        $this->reset();
+
         $this->response = $this->endpointService->executeService(
             'test_push',
             [$clientId],
