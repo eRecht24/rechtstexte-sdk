@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace eRecht24\RechtstexteSDK;
 
 use eRecht24\RechtstexteSDK\Exceptions\Exception;
+use eRecht24\RechtstexteSDK\Helper\Helper;
 use eRecht24\RechtstexteSDK\Interfaces\ApiInterface;
 use eRecht24\RechtstexteSDK\Interfaces\EndpointInterface;
 use eRecht24\RechtstexteSDK\Model\Collection;
@@ -27,14 +28,15 @@ class ApiHandler implements ApiInterface
     protected $response;
 
     /**
-     * ApiClient constructor.
+     * ApiHandler constructor.
      *
      * @param string $apiKey
+     * @param string $pluginKey
      * @throws Exception
      */
-    public function __construct(string $apiKey)
+    public function __construct(string $apiKey, string $pluginKey)
     {
-        $this->endpointService = new EndpointService($apiKey);
+        $this->endpointService = new EndpointService($apiKey, $pluginKey);
     }
 
     /**

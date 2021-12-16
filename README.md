@@ -1,7 +1,7 @@
 # eRecht24 Rechtstexte-SDK
-The eRecht24 Rechtstexte-SDK allows your service/server to interact with the eRecht24.de API.
+The eRecht24 Rechtstexte-SDK allows your service/server to interact with the eRecht24 Rechtstexte-API.
 This package is under official supported by eRecht24.de.
-We would recommend using this package in order to use the eRecht24.de services.
+We would recommend using this package in order to use the eRecht24 Rechtstexte-API services.
 
 ## Requirements
 [PHP 7.1 or better](https://www.php.net/)
@@ -14,15 +14,24 @@ composer require erecht24/rechtstexte-sdk:"<2.0"
 ```
 
 ##############################################################################
+
 (if available at any packagist/satis there will be text here)
+
 ##############################################################################
 
 ## Quickstart
 ### Create your API key
-Keys may be generated using the [eRecht24 Projekt Manager](https://www.e-recht24.de/mitglieder/tools/projekt-manager/).
+API keys may be generated using the [eRecht24 Projekt Manager](https://www.e-recht24.de/mitglieder/tools/projekt-manager/).
 There is a key for development and testing purpose. Feel free to use it:
 
 ```e81cbf18a5239377aa4972773d34cc2b81ebc672879581bce29a0a4c414bf117```
+
+### Getting your developer/plugin key
+##############################################################################
+
+(todo)
+
+##############################################################################
 
 ### The legal text model
 The [base model](./docs/legal_text.md) for three different legal text types.
@@ -70,7 +79,7 @@ use eRecht24\RechtstexteSDK\Model\Client;
 use eRecht24\RechtstexteSDK\Exceptions\Exception;
 
 // initialize api handler
-$apiHandler = new ApiHandler('ENTER-YOUR-API-KEY-HERE');
+$apiHandler = new ApiHandler('YOUR-API-KEY', 'YOUR-PLUGIN-KEY');
 
 // the new client data
 $newClient = (new Client())
@@ -106,7 +115,7 @@ See full documentation of the [API handler](./docs/api_handler.md) for other ser
 Please check out our [Terms of use](LICENSE).
 
 ## Services
-The eRecht24.de API documentation can be found [here](https://docs.api.e-recht24.de/).
+The eRecht24 Rechtstexte-API documentation can be found [here](https://docs.api.e-recht24.de/).
 
 
 

@@ -17,42 +17,44 @@ class EndpointService implements EndpointInterface
     const API_SCHEME = "https";
     const API_HOST = "api.e-recht24.de";
 
+    const API_ENDPOINT_PREFIX = '/v1';
+    const API_ENDPOINT_CLIENTS = self::API_ENDPOINT_PREFIX . '/clients';
     const API_ENDPOINTS = [
         'client_create' => [
             'method' => self::HTTP_POST,
-            'path' => '/v1/clients',
+            'path' => self::API_ENDPOINT_CLIENTS,
         ],
         'client_update' => [
             'method' => self::HTTP_PUT,
-            'path' => '/v1/clients/%s',
+            'path' => self::API_ENDPOINT_CLIENTS . '/%s',
         ],
         'client_delete' => [
             'method' => self::HTTP_DELETE,
-            'path' => '/v1/clients/%s',
+            'path' => self::API_ENDPOINT_CLIENTS . '/%s',
         ],
         'client_list' => [
             'method' => self::HTTP_GET,
-            'path' => '/v1/clients',
+            'path' => self::API_ENDPOINT_CLIENTS,
         ],
         'imprint_get' => [
             'method' => self::HTTP_GET,
-            'path' => '/v1/imprint',
+            'path' => self::API_ENDPOINT_PREFIX . '/imprint',
         ],
         'private_policy_get' => [
             'method' => self::HTTP_GET,
-            'path' => '/v1/privacyPolicy',
+            'path' => self::API_ENDPOINT_PREFIX . '/privacyPolicy',
         ],
         'private_policy_social_get' => [
             'method' => self::HTTP_GET,
-            'path' => '/v1/privacyPolicySocialMedia',
+            'path' => self::API_ENDPOINT_PREFIX . '/privacyPolicySocialMedia',
         ],
         'message_get' => [
             'method' => self::HTTP_GET,
-            'path' => '/v1/message',
+            'path' => self::API_ENDPOINT_PREFIX . '/message',
         ],
         'test_push' => [
             'method' => self::HTTP_POST,
-            'path' => '/v1/clients/%s/testPush',
+            'path' => self::API_ENDPOINT_CLIENTS . '/%s/testPush',
         ],
     ];
 
@@ -60,6 +62,11 @@ class EndpointService implements EndpointInterface
      * @var string
      */
     private $apiKey;
+
+    /**
+     * @var string
+     */
+    private $pluginKey;
 
     /**
      * @var string
@@ -80,13 +87,15 @@ class EndpointService implements EndpointInterface
      * EndpointService constructor.
      *
      * @param string $apiKey
+     * @param string $pluginKey
      * @throws Exception
      */
-    public function __construct(string $apiKey)
+    public function __construct(string $apiKey, string $pluginKey)
     {
         $this->checkBasicFunctions();
 
         $this->apiKey = $apiKey;
+        $this->pluginKey = $pluginKey;
     }
 
     /**
@@ -156,12 +165,16 @@ class EndpointService implements EndpointInterface
             curl_setopt($ch, CURLOPT_MAXREDIRS, 5);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-            curl_setopt($ch, CURLOPT_ENCODING, "");
+            curl_setopt($ch, CURLOPT_ENCODING, '');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
             curl_setopt($ch, CURLOPT_HTTPHEADER, [
-                "cache-control: no-cache",
-                "content-type: application/json",
-                sprintf("eRecht24: %s", $this->getApiKey())
+                'cache-control: no-cache',
+                'content-type: application/json',
+                // v1
+                sprintf('eRecht24: %s', $this->getApiKey()),
+                // v2
+                sprintf('eRecht24-api-key: %s', $this->getApiKey()),
+                sprintf('eRecht24-plugin-key: %s', $this->getPluginKey())
             ]);
 
             if (!empty($postData))
@@ -188,7 +201,7 @@ class EndpointService implements EndpointInterface
     }
 
     /**
-     * Provide API key for Authorisation
+     * Provide API key for authorisation
      *
      * @return string
      */
@@ -198,7 +211,17 @@ class EndpointService implements EndpointInterface
     }
 
     /**
-     * Function provides full url for cURL
+     * Provide plugin key for authorisation
+     *
+     * @return string
+     */
+    public function getPluginKey(): string
+    {
+        return $this->pluginKey;
+    }
+
+    /**
+     * Provides full url for cURL
      *
      * @return string
      */
@@ -246,7 +269,7 @@ class EndpointService implements EndpointInterface
     }
 
     /**
-     * Set Path for url generation
+     * Set path for url generation
      *
      * @param string $path
      * @return EndpointInterface
@@ -273,7 +296,7 @@ class EndpointService implements EndpointInterface
     }
 
     /**
-     * Set Post fields for Request
+     * Set post fields for Request
      *
      * @param array|null $postFields
      * @return EndpointInterface
@@ -286,7 +309,7 @@ class EndpointService implements EndpointInterface
     }
 
     /**
-     * Provide post fields for Request
+     * Provide post fields for request
      *
      * @return ?array
      */

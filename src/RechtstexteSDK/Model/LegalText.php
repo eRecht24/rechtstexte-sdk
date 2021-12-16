@@ -18,6 +18,16 @@ namespace eRecht24\RechtstexteSDK\Model;
  */
 abstract class LegalText extends BaseModel
 {
+    const TEXT_TYPE_IMPRINT = 'imprint';
+    const TEXT_TYPE_PRIVACY_POLICY = 'privacy_policy';
+    const TEXT_TYPE_PRIVACY_POLICY_SOCIAL_MEDIA = 'privacy_policy_social_media';
+
+    const ALLOWED_DOCUMENT_TYPES = [
+        self::TEXT_TYPE_IMPRINT,
+        self::TEXT_TYPE_PRIVACY_POLICY,
+        self::TEXT_TYPE_PRIVACY_POLICY_SOCIAL_MEDIA,
+    ];
+
     /**
      * allowed properties
      *
@@ -36,6 +46,17 @@ abstract class LegalText extends BaseModel
      * @var string
      */
     protected $type;
+
+    /**
+     * Checks if $type is a valid document type
+     *
+     * @param string $type
+     * @return bool
+     */
+    public static function isValidDocumentType(string $type): bool
+    {
+        return in_array($type, self::ALLOWED_DOCUMENT_TYPES);
+    }
 
     /**
      * Provide legal text type

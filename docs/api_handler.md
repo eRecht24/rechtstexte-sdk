@@ -2,12 +2,12 @@
 In order to minimize dependencies, our api handler provides all functions on top of the [cURL Library](https://www.php.net/manual/en/book.curl.php).
 
 ## The service
-Get the main service handler with your api key.
+Get the main service handler with your `api_key` and `plugin_key`.
 ```php
 use eRecht24\RechtstexteSDK\ApiHandler;
 
 // initialize api handler
-$apiHandler = new ApiHandler('ENTER-YOUR-API-KEY-HERE');
+$apiHandler = new ApiHandler('YOUR-API-KEY', 'YOUR-PLUGIN-KEY');
 ```
 
 ## The interface

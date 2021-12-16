@@ -23,7 +23,7 @@ $updatedClientData = new Client([
 We recommend using the first method.
 
 ## Request the service handler
-With your `api-key`, the [API handler](./api_handler.md) and `$updatedClientData` you are now able to initialize and request the api.
+With the [API handler](./api_handler.md) and `$updatedClientData` you are now able to initialize and request the api.
 ```php
 // update project client
 $client = $apiHandler->updateClient($updatedClientData);
@@ -42,7 +42,7 @@ use eRecht24\RechtstexteSDK\ApiHandler;
 use eRecht24\RechtstexteSDK\Model\Client;
 
 // initialize api handler
-$apiHandler = new ApiHandler('ENTER-YOUR-API-KEY-HERE');
+$apiHandler = new ApiHandler('YOUR-API-KEY', 'YOUR-PLUGIN-KEY');
 
 // initialize the updated client data
 $updatedClientData = (new Client())

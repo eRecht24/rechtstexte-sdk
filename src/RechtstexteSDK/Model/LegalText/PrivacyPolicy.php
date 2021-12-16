@@ -15,6 +15,8 @@ use eRecht24\RechtstexteSDK\Model\LegalText;
  * @property string modified
  * @property string warnings
  * @property string pushed
+ *
+ * @property string type
  */
 class PrivacyPolicy extends LegalText
 {
@@ -23,5 +25,5 @@ class PrivacyPolicy extends LegalText
     /**
      * @var string
      */
-    protected $type = 'privacy_policy';
+    protected $type = self::TEXT_TYPE_PRIVACY_POLICY;
 }

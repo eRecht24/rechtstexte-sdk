@@ -15,6 +15,8 @@ use eRecht24\RechtstexteSDK\Model\LegalText;
  * @property string modified
  * @property string warnings
  * @property string pushed
+ *
+ * @property string type
  */
 class PrivacyPolicySocialMedia extends LegalText
 {
@@ -23,5 +25,5 @@ class PrivacyPolicySocialMedia extends LegalText
     /**
      * @var string
      */
-    protected $type = 'privacy_policy_social_media';
+    protected $type = self::TEXT_TYPE_PRIVACY_POLICY_SOCIAL_MEDIA;
 }

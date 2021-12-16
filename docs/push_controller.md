@@ -12,23 +12,23 @@ class PushController
         $params = $request->getParams();
 
         // validate Secret
-        $secret = $params['erecht24_secret'] ?? '';
+        $secret = $params[Helper::ERECHT24_PUSH_PARAM_SECRET] ?? '';
         if (!validateSecret($secret)) {
             return sendResponse('Unauthorized request.', 401);
         }
 
         // validate type
-        $type = $params['erecht24_type'] ?? '';
+        $type = $params[Helper::ERECHT24_PUSH_PARAM_TYPE] ?? '';
         if (!Helper::isValidPushType($type)) {
             return sendResponse('Invalid type requested.', 422);
         }
 
         switch ($type) {
-            case 'ping':
-                return sendResponse(Helper::PING_RESPONSE, 200);
-            case 'imprint':
-            case 'privacyPolicy':
-            case 'privacyPolicySocialMedia':
+            case Helper::PUSH_TYPE_PING:
+                return sendResponse(Helper::getPingResponse(), 200);
+            case Helper::PUSH_TYPE_IMPRINT:
+            case Helper::PUSH_TYPE_PRIVACY_POLICY:
+            case Helper::PUSH_TYPE_PRIVACY_POLICY_SOCIAL_MEDIA:
                 return handleWhateverIsTodo($type);
         }
     }

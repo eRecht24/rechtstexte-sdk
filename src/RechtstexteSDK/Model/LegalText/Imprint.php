@@ -15,6 +15,8 @@ use eRecht24\RechtstexteSDK\Model\LegalText;
  * @property string modified
  * @property string warnings
  * @property string pushed
+ *
+ * @property string type
  */
 class Imprint extends LegalText
 {
@@ -23,5 +25,5 @@ class Imprint extends LegalText
     /**
      * @var string
      */
-    protected $type = 'imprint';
+    protected $type = self::TEXT_TYPE_IMPRINT;
 }
