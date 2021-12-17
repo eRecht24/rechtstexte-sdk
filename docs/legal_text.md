@@ -121,3 +121,25 @@ class PrivacyPolicySocialMedia extends LegalText
 }
 ```
 **Note** :The classes are for extensions. There may be document specific modifications in the future.
+
+## Legal text wrapper class
+The class reflects all types of legal text documents. That way it is easy to 
+```php
+use eRecht24\RechtstexteSDK\Helper\Helper;
+use \eRecht24\RechtstexteSDK\Model\LegalText;
+use \eRecht24\RechtstexteSDK\LegalTextHandler;
+
+    { ... }
+
+    switch ($documentType) {
+        case Helper::PUSH_TYPE_IMPRINT:
+        case Helper::PUSH_TYPE_PRIVACY_POLICY:
+        case Helper::PUSH_TYPE_PRIVACY_POLICY_SOCIAL_MEDIA:
+            $docWrapper = new LegalTextHandler('YOUR_API_KEY', $documentType);
+            /* @var LegalText $legalText */
+            $legalText = $docWrapper->importDocument();
+            return;
+    }
+
+    { ... }
+```

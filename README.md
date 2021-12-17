@@ -26,15 +26,13 @@ There is a key for development and testing purpose. Feel free to use it:
 
 ```e81cbf18a5239377aa4972773d34cc2b81ebc672879581bce29a0a4c414bf117```
 
-### Getting your developer/plugin key
-##############################################################################
-
-(todo)
-
-##############################################################################
+### Getting your developer key (or plugin key)
+Please note that all plugins contacting the eRecht24 Rechtstexte-API must send a verified developer key and an API key.
+The developer key (or plugin key) is a unique key issued by eRecht24 to each developer to identify the different plugins communicating with the eRecht24 Rechtstexte-API.
+Keys are issued after you signed our terms and conditions for the API. Please contact us: <a href="mailto:api@e-recht24.de">api@e-recht24.de</a>
 
 ### The legal text model
-The [base model](./docs/legal_text.md) for three different legal text types.
+The [base model](./docs/legal_text.md#legal-text-model) for three different legal text types.
 
 - [Imprint](./docs/legal_text.md#imprint)
 - [Privacy policy](./docs/legal_text.md#privacy-policy)

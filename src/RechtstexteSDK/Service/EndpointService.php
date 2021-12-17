@@ -170,6 +170,7 @@ class EndpointService implements EndpointInterface
             curl_setopt($ch, CURLOPT_HTTPHEADER, [
                 'cache-control: no-cache',
                 'content-type: application/json',
+                // @TODO remove v1
                 // v1
                 sprintf('eRecht24: %s', $this->getApiKey()),
                 // v2

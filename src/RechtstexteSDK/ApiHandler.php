@@ -31,11 +31,19 @@ class ApiHandler implements ApiInterface
      * ApiHandler constructor.
      *
      * @param string $apiKey
-     * @param string $pluginKey
+     * @param string|null $pluginKey
      * @throws Exception
      */
-    public function __construct(string $apiKey, string $pluginKey)
+    public function __construct(string $apiKey, ?string $pluginKey = null)
     {
+        if (is_null($pluginKey)) {
+            if (false !== getenv('ERECHT24_PLUGIN_KEY')) {
+                $pluginKey = getenv('ERECHT24_PLUGIN_KEY');
+            } elseif (defined('ERECHT24_PLUGIN_KEY')) {
+                $pluginKey = ERECHT24_PLUGIN_KEY;
+            }
+        }
+
         $this->endpointService = new EndpointService($apiKey, $pluginKey);
     }
 

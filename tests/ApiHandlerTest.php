@@ -12,7 +12,7 @@ final class ApiHandlerTest extends TestCase
 {
     public function testCanBeCreatedFromString(): void
     {
-        $client = new ApiHandler('test');
+        $client = new ApiHandler('test-api-key', 'test-plugin-key');
 
         $this->assertInstanceOf(ApiHandler::class, $client);
     }

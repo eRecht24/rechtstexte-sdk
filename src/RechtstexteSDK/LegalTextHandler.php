@@ -25,12 +25,12 @@ class LegalTextHandler extends ApiHandler
      *
      * @param string $apiKey
      * @param string $documentType
-     *
-     * @throws \Exception
+     * @param string|null $pluginKey
+     * @throws Exception
      */
-    public function __construct(string $apiKey, string $documentType)
+    public function __construct(string $apiKey, string $documentType, ?string $pluginKey = null)
     {
-        parent::__construct($apiKey, '');
+        parent::__construct($apiKey, $pluginKey);
 
         switch ($documentType) {
             case Helper::PUSH_TYPE_IMPRINT:
@@ -52,7 +52,7 @@ class LegalTextHandler extends ApiHandler
                 break;
 
             default:
-                throw new Exception('Invalid document type.');
+                throw new Exception('Invalid legal text type.');
         }
     }
 

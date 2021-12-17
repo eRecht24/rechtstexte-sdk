@@ -12,22 +12,24 @@ use eRecht24\RechtstexteSDK\Model\Response;
 trait ApiHandlerTrait
 {
     /**
-     * @param string $key
+     * @param string $apiKey
+     * @param string $pluginKey
      * @return ApiHandler
      * @throws Exception
      */
     public function getApiHandler(
-        string $key = 'e81cbf18a5239377aa4972773d34cc2b81ebc672879581bce29a0a4c414bf117'
+        string $apiKey = 'e81cbf18a5239377aa4972773d34cc2b81ebc672879581bce29a0a4c414bf117',
+        string $pluginKey = '???'
     ): ApiHandler
     {
-        if ('e81cbf18a5239377aa4972773d34cc2b81ebc672879581bce29a0a4c414bf117' == $key
+        if ('e81cbf18a5239377aa4972773d34cc2b81ebc672879581bce29a0a4c414bf117' == $apiKey
             &&
             false !== getenv('ERECHT24_API_KEY')
         ) {
-            $key = getenv('ERECHT24_API_KEY');
+            $apiKey = getenv('ERECHT24_API_KEY');
         }
 
-        return new ApiHandler($key);
+        return new ApiHandler($apiKey, $pluginKey);
     }
 
     /**
