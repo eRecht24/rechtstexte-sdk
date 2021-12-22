@@ -39,19 +39,23 @@ final class GetMessageTest extends TestCase
         $service = $this->getApiHandler();
 
         $message = $service->getMessage();
-        $this->assertIsString($message);
-
         $response = $service->getResponse();
+
         $this->assertInstanceOf(Response::class, $response);
-
-        $this->assertSame(200, $response->getCode());
         $this->assertSame(true, $response->isSuccess());
+        if (!is_null($message)) {
+            $this->assertIsString($message);
+            $this->assertSame(200, $response->getCode());
 
-        $bodyData = $response->getBodyDataAsArray();
-        $this->assertArrayHasKey('message', $bodyData);
-        $this->assertArrayHasKey('message_de', $bodyData);
-        $this->assertArrayHasKey('call2action', $bodyData);
-        $this->assertArrayHasKey('call2action_de', $bodyData);
-        $this->assertArrayHasKey('link', $bodyData);
+            $bodyData = $response->getBodyDataAsArray();
+            $this->assertArrayHasKey('message', $bodyData);
+            $this->assertArrayHasKey('message_de', $bodyData);
+            $this->assertArrayHasKey('call2action', $bodyData);
+            $this->assertArrayHasKey('call2action_de', $bodyData);
+            $this->assertArrayHasKey('link', $bodyData);
+        } else {
+            $this->assertNull($message);
+            $this->assertSame(204, $response->getCode());
+        }
     }
 }

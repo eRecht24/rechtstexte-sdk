@@ -5,6 +5,7 @@ namespace eRecht24\RechtstexteSDK;
 
 use eRecht24\RechtstexteSDK\Exceptions\Exception;
 use eRecht24\RechtstexteSDK\Helper\Helper;
+use eRecht24\RechtstexteSDK\Helper\Language as Lang;
 use eRecht24\RechtstexteSDK\Interfaces\ApiInterface;
 use eRecht24\RechtstexteSDK\Interfaces\EndpointInterface;
 use eRecht24\RechtstexteSDK\Model\Collection;
@@ -127,7 +128,7 @@ class ApiHandler implements ApiInterface
      * @param string $lang
      * @return string|null
      */
-    public function getLastErrorMessage(string $lang = 'en'): ?string
+    public function getLastErrorMessage(string $lang = Lang::EN_EN): ?string
     {
         if ($this->response instanceof Response) {
             return $this->response->getErrorMessage($lang);
@@ -158,7 +159,7 @@ class ApiHandler implements ApiInterface
         $this->reset();
 
         $this->response = $this->endpointService->executeService(
-            'client_create',
+            EndpointService::API_ENDPOINT_CLIENT_CREATE,
             [],
             $client->getAttributes()
         );
@@ -183,7 +184,7 @@ class ApiHandler implements ApiInterface
         $this->reset();
 
         $this->response = $this->endpointService->executeService(
-            'client_update',
+            EndpointService::API_ENDPOINT_CLIENT_UPDATE,
             [$client->getClientId()],
             $client->getAttributes()
         );
@@ -208,12 +209,12 @@ class ApiHandler implements ApiInterface
 
         if ($client instanceof Client) {
             $this->response = $this->endpointService->executeService(
-                'client_delete',
+                EndpointService::API_ENDPOINT_CLIENT_DELETE,
                 [$client->getClientId()]
             );
         } else {
             $this->response = $this->endpointService->executeService(
-                'client_delete',
+                EndpointService::API_ENDPOINT_CLIENT_DELETE,
                 [$client]
             );
         }
@@ -225,82 +226,81 @@ class ApiHandler implements ApiInterface
     /**
      * ClientListService
      *
-     * @return Collection|null
+     * @return Collection
      * @throws Exception
      */
-    public function getClientList(): ?Collection
+    public function getClientList(): Collection
     {
         $this->reset();
 
-        $this->response = $this->endpointService->executeService('client_list');
+        $this->response = $this->endpointService->executeService(EndpointService::API_ENDPOINT_CLIENT_LIST);
 
+        $result = new Collection();
         if ($this->response->isSuccess()) {
-            $result = new Collection();
             foreach ($this->response->getBodyDataAsArray() as $clientData) {
                 $result->add(new Client($clientData));
             }
 
-            return $result;
         }
 
-        return null;
+        return $result;
     }
 
     /**
      * ImprintGetService
      *
-     * @return null|Imprint
+     * @return Imprint
      * @throws Exception
      */
-    public function getImprint(): ?Imprint
+    public function getImprint(): Imprint
     {
         $this->reset();
 
-        $this->response = $this->endpointService->executeService('imprint_get');
+        $this->response = $this->endpointService->executeService(EndpointService::API_ENDPOINT_IMPRINT_GET);
 
         if ($this->response->isSuccess()) {
             return new Imprint($this->response->getBodyDataAsArray());
         }
 
-        return null;
+        return new Imprint();
     }
 
     /**
      * PrivacyPolicyGetService
      *
-     * @return null|PrivacyPolicy
+     * @return PrivacyPolicy
      * @throws Exception
      */
-    public function getPrivacyPolicy(): ?PrivacyPolicy
+    public function getPrivacyPolicy(): PrivacyPolicy
     {
         $this->reset();
 
-        $this->response = $this->endpointService->executeService('private_policy_get');
+        $this->response = $this->endpointService->executeService(EndpointService::API_ENDPOINT_PRIVATE_POLICY_GET);
 
         if ($this->response->isSuccess()) {
             return new PrivacyPolicy($this->response->getBodyDataAsArray());
         }
 
-        return null;
+        return new PrivacyPolicy();
     }
 
     /**
      * PrivacyPolicySocialMediaGetService
      *
-     * @return null|PrivacyPolicySocialMedia
+     * @return PrivacyPolicySocialMedia
      * @throws Exception
      */
-    public function getPrivacyPolicySocialMedia(): ?PrivacyPolicySocialMedia
+    public function getPrivacyPolicySocialMedia(): PrivacyPolicySocialMedia
     {
         $this->reset();
 
-        $this->response = $this->endpointService->executeService('private_policy_social_get');
+        $this->response = $this->endpointService->executeService(EndpointService::API_ENDPOINT_PRIVATE_POLICY_SOCIAL_GET);
 
         if ($this->response->isSuccess()) {
             return new PrivacyPolicySocialMedia($this->response->getBodyDataAsArray());
         }
 
-        return null;
+        return new PrivacyPolicySocialMedia();
     }
 
     /**
@@ -310,11 +310,11 @@ class ApiHandler implements ApiInterface
      * @return null|string
      * @throws Exception
      */
-    public function getMessage(string $lang = 'en'): ?string
+    public function getMessage(string $lang = Lang::EN_EN): ?string
     {
         $this->reset();
 
-        $this->response = $this->endpointService->executeService('message_get');
+        $this->response = $this->endpointService->executeService(EndpointService::API_ENDPOINT_MESSAGE_GET);
 
         if ($this->response->isSuccess()) {
             return $this->response->getMessage($lang);
@@ -336,7 +336,7 @@ class ApiHandler implements ApiInterface
         $this->reset();
 
         $this->response = $this->endpointService->executeService(
-            'test_push',
+            EndpointService::API_ENDPOINT_TEST_PUSH,
             [$clientId],
             ['type' => $type]
         );

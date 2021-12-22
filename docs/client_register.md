@@ -67,7 +67,7 @@ try {
         $secret = $client->getSecret();
         // store value to storage
         
-        $client_id = $service->getClientId();
+        $client_id = $client->getClientId();
         // processing if needed  
     }
 

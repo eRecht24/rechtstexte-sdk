@@ -15,46 +15,59 @@ class EndpointService implements EndpointInterface
     const HTTP_DELETE = "DELETE";
 
     const API_SCHEME = "https";
-    const API_HOST = "api.e-recht24.de";
+//    const API_HOST = "api.e-recht24.de";
+    const API_HOST = "sandbox.api.e-recht24.de";
 
-    const API_ENDPOINT_PREFIX = '/v1';
+    const API_ENDPOINT_PREFIX = '/v2';
     const API_ENDPOINT_CLIENTS = self::API_ENDPOINT_PREFIX . '/clients';
+    const API_ENDPOINT_CLIENT_CREATE = 'client_create';
+    const API_ENDPOINT_CLIENT_UPDATE = 'client_update';
+    const API_ENDPOINT_CLIENT_DELETE = 'client_delete';
+    const API_ENDPOINT_CLIENT_LIST = 'client_list';
+    const API_ENDPOINT_IMPRINT_GET = 'imprint_get';
+    const API_ENDPOINT_PRIVATE_POLICY_GET = 'private_policy_get';
+    const API_ENDPOINT_PRIVATE_POLICY_SOCIAL_GET = 'private_policy_social_get';
+    const API_ENDPOINT_MESSAGE_GET = 'message_get';
+    const API_ENDPOINT_TEST_PUSH = 'test_push';
+
+    const API_ENDPOINT_DEFINITION_METHOD = 'method';
+    const API_ENDPOINT_DEFINITION_PATH = 'path';
     const API_ENDPOINTS = [
-        'client_create' => [
-            'method' => self::HTTP_POST,
-            'path' => self::API_ENDPOINT_CLIENTS,
+        self::API_ENDPOINT_CLIENT_CREATE => [
+            self::API_ENDPOINT_DEFINITION_METHOD => self::HTTP_POST,
+            self::API_ENDPOINT_DEFINITION_PATH => self::API_ENDPOINT_CLIENTS,
         ],
-        'client_update' => [
-            'method' => self::HTTP_PUT,
-            'path' => self::API_ENDPOINT_CLIENTS . '/%s',
+        self::API_ENDPOINT_CLIENT_UPDATE => [
+            self::API_ENDPOINT_DEFINITION_METHOD => self::HTTP_PUT,
+            self::API_ENDPOINT_DEFINITION_PATH => self::API_ENDPOINT_CLIENTS . '/%s',
         ],
-        'client_delete' => [
-            'method' => self::HTTP_DELETE,
-            'path' => self::API_ENDPOINT_CLIENTS . '/%s',
+        self::API_ENDPOINT_CLIENT_DELETE => [
+            self::API_ENDPOINT_DEFINITION_METHOD => self::HTTP_DELETE,
+            self::API_ENDPOINT_DEFINITION_PATH => self::API_ENDPOINT_CLIENTS . '/%s',
         ],
-        'client_list' => [
-            'method' => self::HTTP_GET,
-            'path' => self::API_ENDPOINT_CLIENTS,
+        self::API_ENDPOINT_CLIENT_LIST => [
+            self::API_ENDPOINT_DEFINITION_METHOD => self::HTTP_GET,
+            self::API_ENDPOINT_DEFINITION_PATH => self::API_ENDPOINT_CLIENTS,
         ],
-        'imprint_get' => [
-            'method' => self::HTTP_GET,
-            'path' => self::API_ENDPOINT_PREFIX . '/imprint',
+        self::API_ENDPOINT_IMPRINT_GET => [
+            self::API_ENDPOINT_DEFINITION_METHOD => self::HTTP_GET,
+            self::API_ENDPOINT_DEFINITION_PATH => self::API_ENDPOINT_PREFIX . '/imprint',
         ],
-        'private_policy_get' => [
-            'method' => self::HTTP_GET,
-            'path' => self::API_ENDPOINT_PREFIX . '/privacyPolicy',
+        self::API_ENDPOINT_PRIVATE_POLICY_GET => [
+            self::API_ENDPOINT_DEFINITION_METHOD => self::HTTP_GET,
+            self::API_ENDPOINT_DEFINITION_PATH => self::API_ENDPOINT_PREFIX . '/privacyPolicy',
         ],
-        'private_policy_social_get' => [
-            'method' => self::HTTP_GET,
-            'path' => self::API_ENDPOINT_PREFIX . '/privacyPolicySocialMedia',
+        self::API_ENDPOINT_PRIVATE_POLICY_SOCIAL_GET => [
+            self::API_ENDPOINT_DEFINITION_METHOD => self::HTTP_GET,
+            self::API_ENDPOINT_DEFINITION_PATH => self::API_ENDPOINT_PREFIX . '/privacyPolicySocialMedia',
         ],
-        'message_get' => [
-            'method' => self::HTTP_GET,
-            'path' => self::API_ENDPOINT_PREFIX . '/message',
+        self::API_ENDPOINT_MESSAGE_GET => [
+            self::API_ENDPOINT_DEFINITION_METHOD => self::HTTP_GET,
+            self::API_ENDPOINT_DEFINITION_PATH => self::API_ENDPOINT_PREFIX . '/message',
         ],
-        'test_push' => [
-            'method' => self::HTTP_POST,
-            'path' => self::API_ENDPOINT_CLIENTS . '/%s/testPush',
+        self::API_ENDPOINT_TEST_PUSH => [
+            self::API_ENDPOINT_DEFINITION_METHOD => self::HTTP_POST,
+            self::API_ENDPOINT_DEFINITION_PATH => self::API_ENDPOINT_CLIENTS . '/%s/testPush',
         ],
     ];
 
@@ -131,8 +144,8 @@ class EndpointService implements EndpointInterface
             throw new Exception('invalid service id', 500);
 
         $endPointData = self::API_ENDPOINTS[$endPointId];
-        $this->setPath(vsprintf($endPointData['path'], $urlParams))
-            ->setMethod($endPointData['method'])
+        $this->setPath(vsprintf($endPointData[self::API_ENDPOINT_DEFINITION_PATH], $urlParams))
+            ->setMethod($endPointData[self::API_ENDPOINT_DEFINITION_METHOD])
             ->setPostFields($postFields);
 
         return $this->makeRequest(
@@ -170,10 +183,6 @@ class EndpointService implements EndpointInterface
             curl_setopt($ch, CURLOPT_HTTPHEADER, [
                 'cache-control: no-cache',
                 'content-type: application/json',
-                // @TODO remove v1
-                // v1
-                sprintf('eRecht24: %s', $this->getApiKey()),
-                // v2
                 sprintf('eRecht24-api-key: %s', $this->getApiKey()),
                 sprintf('eRecht24-plugin-key: %s', $this->getPluginKey())
             ]);

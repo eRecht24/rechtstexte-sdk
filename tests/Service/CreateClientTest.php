@@ -36,16 +36,16 @@ final class CreateClientTest extends TestCase
         $this->assertArrayHasKey('token', $bodyData);
     }
 
-    public function test400ForInvalidHTTPMethod(): void
+    public function test400ForInvalidHttpMethod(): void
     {
         $service = $this->getApiHandler();
         $this->forceExactTwoClients($service);
 
         $newClient = new Client([
             'push_method' => 'INVALID',
-            'push_uri' => 'https://www.test.de',
+            'push_uri' => $this->getRandomDomain(),
             'cms' => 'CI',
-            'plugin_name' => 'erecht24/apiclient',
+            'plugin_name' => $this->getPluginName(),
         ]);
         $client = $service->createClient($newClient);
 
@@ -53,7 +53,7 @@ final class CreateClientTest extends TestCase
         $this->assertInstanceOf(Response::class, $response);
 
         $this->assertSame(false, $response->isSuccess());
-        $this->assertSame(400, $response->getCode());
+        $this->assertSame(422, $response->getCode());
 
         $bodyData = $response->getBodyDataAsArray();
         $this->assertArrayHasKey('message', $bodyData);
@@ -68,7 +68,7 @@ final class CreateClientTest extends TestCase
         $newClient = new Client([
             'push_method' => 'GET',
             'cms' => 'CI',
-            'plugin_name' => 'erecht24/apiclient',
+            'plugin_name' => $this->getPluginName(),
         ]);
         $client = $service->createClient($newClient);
 
@@ -76,7 +76,7 @@ final class CreateClientTest extends TestCase
         $this->assertInstanceOf(Response::class, $response);
 
         $this->assertSame(false, $response->isSuccess());
-        $this->assertSame(400, $response->getCode());
+        $this->assertSame(422, $response->getCode());
 
         $bodyData = $response->getBodyDataAsArray();
         $this->assertArrayHasKey('message', $bodyData);
@@ -90,9 +90,9 @@ final class CreateClientTest extends TestCase
 
         $data = [
             'push_method' => 'GET',
-            'push_uri' => 'https://www.test.de',
+            'push_uri' => $this->getRandomDomain(),
             'cms' => 'CI',
-            'plugin_name' => 'erecht24/apiclient',
+            'plugin_name' => $this->getPluginName(),
         ];
         $newClient = new Client($data);
         $client = $service->createClient($newClient);
@@ -120,9 +120,9 @@ final class CreateClientTest extends TestCase
 
         $newClient = new Client([
             'push_method' => 'GET',
-            'push_uri' => 'https://www.test.de',
+            'push_uri' => $this->getRandomDomain(),
             'cms' => 'CI',
-            'plugin_name' => 'erecht24/apiclient',
+            'plugin_name' => $this->getPluginName(),
         ]);
         $client = $service->createClient($newClient);
 

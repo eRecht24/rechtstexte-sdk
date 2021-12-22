@@ -23,7 +23,8 @@ final class GetClientListTest extends TestCase
         $service = $this->getApiHandler('invalid');
 
         $clients = $service->getClientList();
-        $this->assertSame(null, $clients);
+        $this->assertInstanceOf(Collection::class, $clients);
+        $this->assertSame(0, $clients->count());
 
         $response = $service->getResponse();
         $this->assertInstanceOf(Response::class, $response);

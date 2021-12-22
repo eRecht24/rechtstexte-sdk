@@ -20,20 +20,31 @@ namespace eRecht24\RechtstexteSDK\Model;
  */
 class Client extends BaseModel
 {
+    const ATTRIBUTE_CLIENT_ID = 'client_id';
+    const ATTRIBUTE_PROJECT_ID = 'project_id';
+    const ATTRIBUTE_PUSH_METHOD = 'push_method';
+    const ATTRIBUTE_PUSH_URI = 'push_uri';
+    const ATTRIBUTE_CMS = 'cms';
+    const ATTRIBUTE_CMS_VERSION = 'cms_version';
+    const ATTRIBUTE_PLUGIN_NAME = 'plugin_name';
+    const ATTRIBUTE_AUTHOR_MAIL = 'author_mail';
+    const ATTRIBUTE_CREATED_AT = 'created_at';
+    const ATTRIBUTE_UPDATED_AT = 'updated_at';
+
     /**
      * @var array
      */
     protected $properties = [
-        'client_id',
-        'project_id',
-        'push_method',
-        'push_uri',
-        'cms',
-        'cms_version',
-        'plugin_name',
-        'author_mail',
-        'created_at',
-        'updated_at',
+        self::ATTRIBUTE_CLIENT_ID,
+        self::ATTRIBUTE_PROJECT_ID,
+        self::ATTRIBUTE_PUSH_METHOD,
+        self::ATTRIBUTE_PUSH_URI,
+        self::ATTRIBUTE_CMS,
+        self::ATTRIBUTE_CMS_VERSION,
+        self::ATTRIBUTE_PLUGIN_NAME,
+        self::ATTRIBUTE_AUTHOR_MAIL,
+        self::ATTRIBUTE_CREATED_AT,
+        self::ATTRIBUTE_UPDATED_AT,
     ];
 
     /**
@@ -65,7 +76,7 @@ class Client extends BaseModel
      */
     public function getCreatedAt(): ?string
     {
-        return $this->getAttribute('created_at');
+        return $this->getAttribute(self::ATTRIBUTE_CREATED_AT);
     }
 
     /**
@@ -73,7 +84,7 @@ class Client extends BaseModel
      */
     public function getUpdatedAt(): ?string
     {
-        return $this->getAttribute('updated_at');
+        return $this->getAttribute(self::ATTRIBUTE_UPDATED_AT);
     }
 
     /**
@@ -81,7 +92,7 @@ class Client extends BaseModel
      */
     public function getClientId(): ?int
     {
-        return $this->getAttribute('client_id');
+        return $this->getAttribute(self::ATTRIBUTE_CLIENT_ID);
     }
 
     /**
@@ -90,7 +101,7 @@ class Client extends BaseModel
      */
     public function setClientId(?int $clientId): Client
     {
-        $this->setAttribute('client_id', (int) $clientId);
+        $this->setAttribute(self::ATTRIBUTE_CLIENT_ID, (int) $clientId);
 
         return $this;
     }
@@ -100,7 +111,7 @@ class Client extends BaseModel
      */
     public function getProjectId(): ?int
     {
-        return $this->getAttribute('project_id');
+        return $this->getAttribute(self::ATTRIBUTE_PROJECT_ID);
     }
 
     /**
@@ -109,7 +120,7 @@ class Client extends BaseModel
      */
     public function setProjectId(int $projectId): Client
     {
-        $this->setAttribute('project_id', $projectId);
+        $this->setAttribute(self::ATTRIBUTE_PROJECT_ID, $projectId);
 
         return $this;
     }
@@ -119,7 +130,7 @@ class Client extends BaseModel
      */
     public function getPushMethod(): ?string
     {
-        return $this->getAttribute('push_method');
+        return $this->getAttribute(self::ATTRIBUTE_PUSH_METHOD);
     }
 
     /**
@@ -128,7 +139,7 @@ class Client extends BaseModel
      */
     public function setPushMethod(string $pushMethod): Client
     {
-        $this->setAttribute('push_method', $pushMethod);
+        $this->setAttribute(self::ATTRIBUTE_PUSH_METHOD, $pushMethod);
 
         return $this;
     }
@@ -138,7 +149,7 @@ class Client extends BaseModel
      */
     public function getPushUri(): ?string
     {
-        return $this->getAttribute('push_uri');
+        return $this->getAttribute(self::ATTRIBUTE_PUSH_URI);
     }
 
     /**
@@ -147,7 +158,7 @@ class Client extends BaseModel
      */
     public function setPushUri(string $pushUri): Client
     {
-        $this->setAttribute('push_uri', $pushUri);
+        $this->setAttribute(self::ATTRIBUTE_PUSH_URI, $pushUri);
 
         return $this;
     }
@@ -157,7 +168,7 @@ class Client extends BaseModel
      */
     public function getCms(): ?string
     {
-        return $this->getAttribute('cms');
+        return $this->getAttribute(self::ATTRIBUTE_CMS);
     }
 
     /**
@@ -166,7 +177,7 @@ class Client extends BaseModel
      */
     public function setCms(string $cms): Client
     {
-        $this->setAttribute('cms', $cms);
+        $this->setAttribute(self::ATTRIBUTE_CMS, $cms);
 
         return $this;
     }
@@ -176,7 +187,7 @@ class Client extends BaseModel
      */
     public function getCmsVersion(): ?string
     {
-        return $this->getAttribute('cms_version');
+        return $this->getAttribute(self::ATTRIBUTE_CMS_VERSION);
     }
 
     /**
@@ -185,7 +196,7 @@ class Client extends BaseModel
      */
     public function setCmsVersion(string $cmsVersion): Client
     {
-        $this->setAttribute('cms_version', $cmsVersion);
+        $this->setAttribute(self::ATTRIBUTE_CMS_VERSION, $cmsVersion);
 
         return $this;
     }
@@ -195,7 +206,7 @@ class Client extends BaseModel
      */
     public function getPluginName(): ?string
     {
-        return $this->getAttribute('plugin_name');
+        return $this->getAttribute(self::ATTRIBUTE_PLUGIN_NAME);
     }
 
     /**
@@ -204,7 +215,7 @@ class Client extends BaseModel
      */
     public function setPluginName(string $pluginName): Client
     {
-        $this->setAttribute('plugin_name', $pluginName);
+        $this->setAttribute(self::ATTRIBUTE_PLUGIN_NAME, $pluginName);
 
         return $this;
     }
@@ -214,7 +225,7 @@ class Client extends BaseModel
      */
     public function getAuthorMail(): ?string
     {
-        return $this->getAttribute('author_mail');
+        return $this->getAttribute(self::ATTRIBUTE_AUTHOR_MAIL);
     }
 
     /**
@@ -223,7 +234,7 @@ class Client extends BaseModel
      */
     public function setAuthorMail(string $authorMail): Client
     {
-        $this->setAttribute('author_mail', $authorMail);
+        $this->setAttribute(self::ATTRIBUTE_AUTHOR_MAIL, $authorMail);
 
         return $this;
     }

@@ -51,7 +51,7 @@ final class UpdateClientTest extends TestCase
         $this->assertInstanceOf(Response::class, $response);
 
         $this->assertSame(false, $response->isSuccess());
-        $this->assertSame(400, $response->getCode());
+        $this->assertSame(422, $response->getCode());
 
         $bodyData = $response->getBodyDataAsArray();
         $this->assertArrayHasKey('message', $bodyData);
@@ -72,7 +72,7 @@ final class UpdateClientTest extends TestCase
         $this->assertInstanceOf(Response::class, $response);
 
         $this->assertSame(false, $response->isSuccess());
-        $this->assertSame(400, $response->getCode());
+        $this->assertSame(422, $response->getCode());
 
         $bodyData = $response->getBodyDataAsArray();
         $this->assertArrayHasKey('message', $bodyData);
@@ -85,11 +85,11 @@ final class UpdateClientTest extends TestCase
         $client = $this->getRemoteClient($service);
 
         $updates = [
-            'push_method' => 'PUT',
-            'push_uri' => 'https://www.test.de/update' . rand(1, 1000),
+            'push_method' => 'POST',
+            'push_uri' => $this->getRandomDomain('update'),
             'cms' => 'WORDPRESS Update',
             'cms_version' => 'v' . rand(1, 100),
-            'plugin_name' => 'erecht24/apiclient:' . rand(1, 1000),
+            'plugin_name' => $this->getPluginName() . ':' . rand(1, 1000),
             'author_mail' => 'update@update.de',
         ];
         $client->fill($updates);

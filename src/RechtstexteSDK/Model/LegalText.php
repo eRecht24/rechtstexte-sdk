@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace eRecht24\RechtstexteSDK\Model;
 
+use eRecht24\RechtstexteSDK\Helper\Language as Lang;
+
 /**
  * Class LegalText
  * @package eRecht24\RechtstexteSDK
@@ -28,18 +30,25 @@ abstract class LegalText extends BaseModel
         self::TEXT_TYPE_PRIVACY_POLICY_SOCIAL_MEDIA,
     ];
 
+    const ATTRIBUTE_HTML_DE = 'html_de';
+    const ATTRIBUTE_HTML_EN = 'html_en';
+    const ATTRIBUTE_CREATED_AT = 'created';
+    const ATTRIBUTE_MODIFIED_AT = 'modified';
+    const ATTRIBUTE_WARNINGS = 'warnings';
+    const ATTRIBUTE_PUSHED = 'pushed';
+
     /**
      * allowed properties
      *
      * @var array
      */
     protected $properties = [
-        'html_de',
-        'html_en',
-        'created',
-        'modified',
-        'warnings',
-        'pushed',
+        self::ATTRIBUTE_HTML_DE,
+        self::ATTRIBUTE_HTML_EN,
+        self::ATTRIBUTE_CREATED_AT,
+        self::ATTRIBUTE_MODIFIED_AT,
+        self::ATTRIBUTE_WARNINGS,
+        self::ATTRIBUTE_PUSHED,
     ];
 
     /**
@@ -73,7 +82,7 @@ abstract class LegalText extends BaseModel
      */
     public function getCreatedAt(): ?string
     {
-        return $this->getAttribute('created');
+        return $this->getAttribute(self::ATTRIBUTE_CREATED_AT);
     }
 
     /**
@@ -81,22 +90,22 @@ abstract class LegalText extends BaseModel
      */
     public function getModifiedAt(): ?string
     {
-        return $this->getAttribute('modified');
+        return $this->getAttribute(self::ATTRIBUTE_MODIFIED_AT);
     }
 
     /**
      * @param string $lang
      * @return string|null
      */
-    public function getHtml(string $lang = 'en'): ?string
+    public function getHtml(string $lang = Lang::EN_EN): ?string
     {
         switch (strtolower($lang)) {
-            case 'de':
-                $html = $this->getAttribute('html_de');
+            case Lang::DE_DE:
+                $html = $this->getAttribute(self::ATTRIBUTE_HTML_DE);
                 break;
 
             default:
-                $html = $this->getAttribute('html_en');
+                $html = $this->getAttribute(self::ATTRIBUTE_HTML_EN);
         }
 
         return $html;
@@ -107,7 +116,7 @@ abstract class LegalText extends BaseModel
      */
     public function getHtmlDE(): ?string
     {
-        return $this->getAttribute('html_de');
+        return $this->getAttribute(self::ATTRIBUTE_HTML_DE);
     }
 
     /**
@@ -115,7 +124,7 @@ abstract class LegalText extends BaseModel
      */
     public function getHtmlEN(): ?string
     {
-        return $this->getAttribute('html_en');
+        return $this->getAttribute(self::ATTRIBUTE_HTML_EN);
     }
 
     /**
@@ -123,15 +132,15 @@ abstract class LegalText extends BaseModel
      * @param string $lang
      * @return LegalText
      */
-    public function setHtml(string $html, string $lang = 'en'): LegalText
+    public function setHtml(string $html, string $lang = Lang::EN_EN): LegalText
     {
         switch (strtolower($lang)) {
-            case 'de':
-                $this->setAttribute('html_de', $html);
+            case Lang::DE_DE:
+                $this->setAttribute(self::ATTRIBUTE_HTML_DE, $html);
                 break;
 
             default:
-                $this->setAttribute('html_en', $html);
+                $this->setAttribute(self::ATTRIBUTE_HTML_EN, $html);
         }
 
         return $this;
@@ -143,7 +152,7 @@ abstract class LegalText extends BaseModel
      */
     public function setHtmlDE(string $html): LegalText
     {
-        $this->setAttribute('html_de', $html);
+        $this->setAttribute(self::ATTRIBUTE_HTML_DE, $html);
 
         return $this;
     }
@@ -154,7 +163,7 @@ abstract class LegalText extends BaseModel
      */
     public function setHtmlEN(string $html): LegalText
     {
-        $this->setAttribute('html_en', $html);
+        $this->setAttribute(self::ATTRIBUTE_HTML_EN, $html);
 
         return $this;
     }
@@ -164,7 +173,7 @@ abstract class LegalText extends BaseModel
      */
     public function getWarnings(): ?string
     {
-        return $this->getAttribute('warnings');
+        return $this->getAttribute(self::ATTRIBUTE_WARNINGS);
     }
 
     /**
@@ -173,7 +182,7 @@ abstract class LegalText extends BaseModel
      */
     public function setWarnings(string $warnings): LegalText
     {
-        $this->setAttribute('warnings', $warnings);
+        $this->setAttribute(self::ATTRIBUTE_WARNINGS, $warnings);
 
         return $this;
     }
@@ -183,7 +192,7 @@ abstract class LegalText extends BaseModel
      */
     public function getPushed(): ?string
     {
-        return $this->getAttribute('pushed');
+        return $this->getAttribute(self::ATTRIBUTE_PUSHED);
     }
 
     /**
@@ -192,7 +201,7 @@ abstract class LegalText extends BaseModel
      */
     public function setPushed(string $pushed): LegalText
     {
-        $this->setAttribute('pushed', $pushed);
+        $this->setAttribute(self::ATTRIBUTE_PUSHED, $pushed);
 
         return $this;
     }

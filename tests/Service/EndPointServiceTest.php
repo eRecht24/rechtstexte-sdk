@@ -32,7 +32,7 @@ final class EndPointServiceTest extends TestCase
         $this->assertSame(EndpointService::HTTP_GET, $service->getMethod());
     }
 
-    public function testCanSetValidHTTPMethod(): void
+    public function testCanSetValidHttpMethod(): void
     {
         $client = $this->getEndpointService();
 
@@ -49,7 +49,7 @@ final class EndPointServiceTest extends TestCase
         $this->assertSame(EndpointService::HTTP_GET, $client->getMethod());
     }
 
-    public function testCanNotSetInvalidHTTPMethod(): void
+    public function testCanNotSetInvalidHttpMethod(): void
     {
         $client = $this->getEndpointService();
 
@@ -83,7 +83,7 @@ final class EndPointServiceTest extends TestCase
     public function testCanMakeRequest(): void
     {
         $client = $this->getEndpointService();
-        $response = $client->makeRequest('/v1/clients', EndpointService::HTTP_GET);
+        $response = $client->makeRequest('/v2/clients', EndpointService::HTTP_GET);
 
         $this->assertInstanceOf(
             Response::class,

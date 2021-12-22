@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace eRecht24\RechtstexteSDK\Model;
 
 use eRecht24\RechtstexteSDK\Exceptions\Exception;
+use eRecht24\RechtstexteSDK\Helper\Language as Lang;
 
 /**
  * Class Response
@@ -14,14 +15,17 @@ use eRecht24\RechtstexteSDK\Exceptions\Exception;
  */
 class Response extends BaseResponse
 {
+    const ATTRIBUTE_CODE = 'code';
+    const ATTRIBUTE_BODY = 'body';
+
     /**
      * allowed properties
      *
      * @var array
      */
     protected $properties = [
-        'code',
-        'body'
+        self::ATTRIBUTE_CODE,
+        self::ATTRIBUTE_BODY,
     ];
 
     /**
@@ -66,10 +70,17 @@ class Response extends BaseResponse
      */
     public function isSuccess(): bool
     {
-        return in_array(
-            $this->getCode(),
-            [self::HTTP_OK, self::HTTP_NO_CONTENT]
-        );
+        return ($this->getCode() < self::HTTP_BAD_REQUEST);
+    }
+
+    /**
+     * Checks if request was not successful
+     *
+     * @return bool
+     */
+    public function isError(): bool
+    {
+        return !$this->isSuccess();
     }
 
     /**
@@ -78,10 +89,10 @@ class Response extends BaseResponse
      * @param string $lang
      * @return string|null
      */
-    public function getMessage(string $lang = 'en'): ?string
+    public function getMessage(string $lang = Lang::EN_EN): ?string
     {
         switch (strtolower($lang)) {
-            case 'de':
+            case Lang::DE_DE:
                 $message = $this->getBodyDataByKey('message_de');
                 break;
 
@@ -98,7 +109,7 @@ class Response extends BaseResponse
      * @param string $lang
      * @return string|null
      */
-    public function getErrorMessage(string $lang = 'en'): ?string
+    public function getErrorMessage(string $lang = Lang::EN_EN): ?string
     {
         $message = null;
 
@@ -114,7 +125,7 @@ class Response extends BaseResponse
      */
     public function getCode(): ?int
     {
-        return $this->getAttribute('code');
+        return $this->getAttribute(self::ATTRIBUTE_CODE);
     }
 
     /**
@@ -123,7 +134,7 @@ class Response extends BaseResponse
      */
     public function setCode(int $code): Response
     {
-        $this->setAttribute('code', $code);
+        $this->setAttribute(self::ATTRIBUTE_CODE, $code);
 
         return $this;
     }
@@ -133,7 +144,7 @@ class Response extends BaseResponse
      */
     public function getBody(): ?string
     {
-        return $this->getAttribute('body');
+        return $this->getAttribute(self::ATTRIBUTE_BODY);
     }
 
     /**
@@ -142,7 +153,7 @@ class Response extends BaseResponse
      */
     public function setBody(string $body): Response
     {
-        $this->setAttribute('body', $body);
+        $this->setAttribute(self::ATTRIBUTE_BODY, $body);
 
         return $this;
     }

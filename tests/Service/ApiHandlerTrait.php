@@ -19,7 +19,7 @@ trait ApiHandlerTrait
      */
     public function getApiHandler(
         string $apiKey = 'e81cbf18a5239377aa4972773d34cc2b81ebc672879581bce29a0a4c414bf117',
-        string $pluginKey = '???'
+        string $pluginKey = '3jh4uhn8u69i97kj9timk466748996ikhkjhlk67plli08lhkijgh8z4363gr53v'
     ): ApiHandler
     {
         if ('e81cbf18a5239377aa4972773d34cc2b81ebc672879581bce29a0a4c414bf117' == $apiKey
@@ -30,6 +30,29 @@ trait ApiHandlerTrait
         }
 
         return new ApiHandler($apiKey, $pluginKey);
+    }
+
+    /**
+     * @param string $path
+     * @return string
+     */
+    public function getRandomDomain($path = ''): string
+    {
+        $domain = 'https://' . rand(0, 9999) . '.unit.test';
+
+        if ($path) {
+            $domain .= '/' . $path;
+        }
+
+        return $domain;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPluginName(): string
+    {
+        return 'erecht24/apiclient';
     }
 
     /**
@@ -59,12 +82,12 @@ trait ApiHandlerTrait
     public function addDummyClient(ApiHandler $handler): Client
     {
         return $handler->createClient(new Client([
-            'push_method' => 'POST',
-            'push_uri' => 'https://unit.test.tv/channel/push',
+            'push_method' => 'GET',
+            'push_uri' => $this->getRandomDomain('channel/push'),
             'cms' => 'JML4',
             'cms_version' => '4.2.17',
             'plugin_name' => 'erecht24/rechtstexte-sdk',
-            'author_mail' => 'testi.testman@test.tv',
+            'author_mail' => 'testi.testman@unit.test',
         ]));
     }
 

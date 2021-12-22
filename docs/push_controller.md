@@ -1,7 +1,8 @@
 # Push controller example
 When the eRecht24 server pushes a notification to your client you have to ensure this request is authorized.
 This example shows in a very simple overview all steps needed to be done.
-The `Helper` methods will help you handle the `type` validation and ping processing.
+The `Helper` methods will help you handle either the ping processing as well as the `type` validation.
+Furthermore there is a wrapper `LegalTextHandler` to manage the most used functions of all kinds of text types.
 ```php
 use eRecht24\RechtstexteSDK\Helper\Helper;
 use eRecht24\RechtstexteSDK\LegalTextHandler;
@@ -39,7 +40,7 @@ class PushController
                 $legalText = $legalTextHandler->importDocument();
 
                 { ... }
-                $legalText->getHtmlDE();
+                $legalText->getHtmlDE(); // example
                 { ... }
 
                 return;

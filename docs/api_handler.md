@@ -1,4 +1,4 @@
-# The API handler
+# The API handler class
 In order to minimize dependencies, our api handler provides all functions on top of the [cURL Library](https://www.php.net/manual/en/book.curl.php).
 
 ## The service
@@ -49,7 +49,7 @@ interface ApiInterface
      * @param string $lang
      * @return string|null
      */
-    public function getLastErrorMessage(string $lang = 'en'): ?string;
+    public function getLastErrorMessage(string $lang = Lang::EN_EN): ?string;
 
     /**
      * @return ApiInterface
@@ -83,30 +83,30 @@ interface ApiInterface
     /**
      * Get the clients related to your project
      *
-     * @return Collection|null
+     * @return Collection
      */
-    public function getClientList(): ?Collection;
+    public function getClientList(): Collection;
 
     /**
      * Get the actual imprint text (all languages) for your project
      *
-     * @return null|Imprint
+     * @return Imprint
      */
-    public function getImprint(): ?Imprint;
+    public function getImprint(): Imprint;
 
     /**
      * Get the actual privacy policy text (all languages) for your project
      *
-     * @return null|PrivacyPolicy
+     * @return PrivacyPolicy
      */
-    public function getPrivacyPolicy(): ?PrivacyPolicy;
+    public function getPrivacyPolicy(): PrivacyPolicy;
 
     /**
      * Get the actual privacy policy social media text (all languages) for your project
      *
-     * @return null|PrivacyPolicySocialMedia
+     * @return PrivacyPolicySocialMedia
      */
-    public function getPrivacyPolicySocialMedia(): ?PrivacyPolicySocialMedia;
+    public function getPrivacyPolicySocialMedia(): PrivacyPolicySocialMedia;
 
     /**
      * Get a message from the server
@@ -114,7 +114,7 @@ interface ApiInterface
      * @param string $lang
      * @return null|string
      */
-    public function getMessage(string $lang = 'en'): ?string;
+    public function getMessage(string $lang = Lang::EN_EN): ?string;
 
     /**
      * Trigger the server to push a notification (default ping)

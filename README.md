@@ -27,7 +27,7 @@ There is a key for development and testing purpose. Feel free to use it:
 ```e81cbf18a5239377aa4972773d34cc2b81ebc672879581bce29a0a4c414bf117```
 
 ### Getting your developer key (or plugin key)
-Please note that all plugins contacting the eRecht24 Rechtstexte-API must send a verified developer key and an API key.
+Please note that all plugins contacting the eRecht24 Rechtstexte-API must send a verified developer key.
 The developer key (or plugin key) is a unique key issued by eRecht24 to each developer to identify the different plugins communicating with the eRecht24 Rechtstexte-API.
 Keys are issued after you signed our terms and conditions for the API. Please contact us: <a href="mailto:api@e-recht24.de">api@e-recht24.de</a>
 
@@ -38,6 +38,18 @@ The [base model](./docs/legal_text.md#legal-text-model) for three different lega
 - [Privacy policy](./docs/legal_text.md#privacy-policy)
 - [Privacy policy social media](./docs/legal_text.md#privacy-policy-social-media)
 
+You may use the wrapper class to import legal text types:
+```php
+switch ($type) {
+    case Helper::PUSH_TYPE_IMPRINT:
+    case Helper::PUSH_TYPE_PRIVACY_POLICY:
+    case Helper::PUSH_TYPE_PRIVACY_POLICY_SOCIAL_MEDIA:
+        $legalTextHandler = new LegalTextHandler('YOUR_API_KEY', $type);
+        /* @var LegalText $legalText */
+        $legalTextDoc = $legalTextHandler->importDocument();
+        $legalText = $legalTextDoc->getHtmlDE();
+{ ... }
+```
 After getting a document object you can read the html text:
 ```php
 if ($imprint = $apiHandler->getImprint()) {

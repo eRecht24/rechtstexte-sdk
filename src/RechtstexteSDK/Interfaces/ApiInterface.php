@@ -3,6 +3,7 @@
 namespace eRecht24\RechtstexteSDK\Interfaces;
 
 use eRecht24\RechtstexteSDK\Exceptions\Exception;
+use eRecht24\RechtstexteSDK\Helper\Language as Lang;
 use eRecht24\RechtstexteSDK\Model\Collection;
 use eRecht24\RechtstexteSDK\Model\LegalText\Imprint;
 use eRecht24\RechtstexteSDK\Model\LegalText\PrivacyPolicy;
@@ -51,7 +52,7 @@ interface ApiInterface
      * @param string $lang
      * @return string|null
      */
-    public function getLastErrorMessage(string $lang = 'en'): ?string;
+    public function getLastErrorMessage(string $lang = Lang::EN_EN): ?string;
 
     /**
      * @return ApiInterface
@@ -77,30 +78,30 @@ interface ApiInterface
     public function deleteClient($client): bool;
 
     /**
-     * @return Collection|null
+     * @return Collection
      */
-    public function getClientList(): ?Collection;
+    public function getClientList(): Collection;
 
     /**
-     * @return null|Imprint
+     * @return Imprint
      */
-    public function getImprint(): ?Imprint;
+    public function getImprint(): Imprint;
 
     /**
-     * @return null|PrivacyPolicy
+     * @return PrivacyPolicy
      */
-    public function getPrivacyPolicy(): ?PrivacyPolicy;
+    public function getPrivacyPolicy(): PrivacyPolicy;
 
     /**
-     * @return null|PrivacyPolicySocialMedia
+     * @return PrivacyPolicySocialMedia
      */
-    public function getPrivacyPolicySocialMedia(): ?PrivacyPolicySocialMedia;
+    public function getPrivacyPolicySocialMedia(): PrivacyPolicySocialMedia;
 
     /**
      * @param string $lang
      * @return null|string
      */
-    public function getMessage(string $lang = 'en'): ?string;
+    public function getMessage(string $lang = Lang::EN_EN): ?string;
 
     /**
      * @param int $clientId

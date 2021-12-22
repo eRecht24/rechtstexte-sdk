@@ -21,7 +21,7 @@ final class GetPrivacyPolicySocialMediaTest extends TestCase
         $service = $this->getApiHandler('invalid');
 
         $legalText = $service->getPrivacyPolicySocialMedia();
-        $this->assertSame(null, $legalText);
+        $this->assertInstanceOf(PrivacyPolicySocialMedia::class, $legalText);
 
         $response = $service->getResponse();
         $this->assertInstanceOf(Response::class, $response);
@@ -44,15 +44,23 @@ final class GetPrivacyPolicySocialMediaTest extends TestCase
         $response = $service->getResponse();
         $this->assertInstanceOf(Response::class, $response);
 
-        $this->assertSame(200, $response->getCode());
-        $this->assertSame(true, $response->isSuccess());
+        if (200 == $response->getCode()) {
+            $this->assertSame(true, $response->isSuccess());
 
-        $bodyData = $response->getBodyDataAsArray();
-        $this->assertArrayHasKey('html_de', $bodyData);
-        $this->assertArrayHasKey('html_en', $bodyData);
-        $this->assertArrayHasKey('created', $bodyData);
-        $this->assertArrayHasKey('modified', $bodyData);
-        $this->assertArrayHasKey('warnings', $bodyData);
-        $this->assertArrayHasKey('pushed', $bodyData);
+            $bodyData = $response->getBodyDataAsArray();
+            $this->assertArrayHasKey('html_de', $bodyData);
+            $this->assertArrayHasKey('html_en', $bodyData);
+            $this->assertArrayHasKey('created', $bodyData);
+            $this->assertArrayHasKey('modified', $bodyData);
+            $this->assertArrayHasKey('warnings', $bodyData);
+            $this->assertArrayHasKey('pushed', $bodyData);
+
+        } elseif (400 == $response->getCode()) {
+            $this->assertSame(true, $response->isError());
+
+            $bodyData = $response->getBodyDataAsArray();
+            $this->assertArrayHasKey('message', $bodyData);
+            $this->assertArrayHasKey('message_de', $bodyData);
+        }
     }
 }
