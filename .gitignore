@@ -5,3 +5,4 @@ composer.lock
 phpunit.xml
 phpcs.xml
 docker-compose.yml
+/_todo
