@@ -13,12 +13,6 @@ Add the package using composer:
 composer require erecht24/rechtstexte-sdk:"<2.0"
 ```
 
-##############################################################################
-
-(if available at any packagist/satis there will be text here)
-
-##############################################################################
-
 ## Quickstart
 ### Create your API key
 API keys may be generated using the [eRecht24 Projekt Manager](https://www.e-recht24.de/mitglieder/tools/projekt-manager/).
@@ -36,7 +30,7 @@ The [base model](./docs/legal_text.md#legal-text-model) for three different lega
 
 - [Imprint](./docs/legal_text.md#imprint)
 - [Privacy policy](./docs/legal_text.md#privacy-policy)
-- [Privacy policy social media](./docs/legal_text.md#privacy-policy-social-media)
+- [Privacy policy for social media](./docs/legal_text.md#privacy-policy-social-media)
 
 You may use the wrapper class to import legal text types:
 ```php
