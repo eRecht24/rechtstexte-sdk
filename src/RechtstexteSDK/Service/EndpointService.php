@@ -15,8 +15,7 @@ class EndpointService implements EndpointInterface
     const HTTP_DELETE = "DELETE";
 
     const API_SCHEME = "https";
-//    const API_HOST = "api.e-recht24.de";
-    const API_HOST = "sandbox.api.e-recht24.de";
+    const API_HOST = "api.e-recht24.de";
 
     const API_ENDPOINT_PREFIX = '/v2';
     const API_ENDPOINT_CLIENTS = self::API_ENDPOINT_PREFIX . '/clients';
