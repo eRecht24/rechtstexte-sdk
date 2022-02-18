@@ -123,6 +123,20 @@ class ApiHandler implements ApiInterface
     }
 
     /**
+     * Provide last error code
+     *
+     * @return int|null
+     */
+    public function getLastErrorCode(): ?int
+    {
+        if (false === $this->isLastResponseSuccess()) {
+            return $this->response->getCode();
+        }
+
+        return null;
+    }
+
+    /**
      * Provide last error message
      *
      * @param string $lang
