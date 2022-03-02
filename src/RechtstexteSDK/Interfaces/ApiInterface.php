@@ -49,6 +49,11 @@ interface ApiInterface
     public function isLastResponseSuccess(): ?bool;
 
     /**
+     * @return int|null
+     */
+    public function getLastErrorCode(): ?int;
+
+    /**
      * @param string $lang
      * @return string|null
      */

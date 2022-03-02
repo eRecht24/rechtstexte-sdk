@@ -42,6 +42,8 @@ class ApiHandler implements ApiInterface
                 $pluginKey = getenv('ERECHT24_PLUGIN_KEY');
             } elseif (defined('ERECHT24_PLUGIN_KEY')) {
                 $pluginKey = ERECHT24_PLUGIN_KEY;
+            } else {
+                $pluginKey = "";
             }
         }
 
@@ -117,6 +119,20 @@ class ApiHandler implements ApiInterface
     {
         if ($this->response instanceof Response) {
             return $this->response->isSuccess();
+        }
+
+        return null;
+    }
+
+    /**
+     * Provide last error code
+     *
+     * @return int|null
+     */
+    public function getLastErrorCode(): ?int
+    {
+        if (false === $this->isLastResponseSuccess()) {
+            return $this->response->getCode();
         }
 
         return null;

@@ -38,7 +38,7 @@ switch ($type) {
     case Helper::PUSH_TYPE_IMPRINT:
     case Helper::PUSH_TYPE_PRIVACY_POLICY:
     case Helper::PUSH_TYPE_PRIVACY_POLICY_SOCIAL_MEDIA:
-        $legalTextHandler = new LegalTextHandler('YOUR_API_KEY', $type);
+        $legalTextHandler = new LegalTextHandler('YOUR_API_KEY', $type, 'YOUR-PLUGIN-KEY');
         /* @var LegalText $legalText */
         $legalTextDoc = $legalTextHandler->importDocument();
         $legalText = $legalTextDoc->getHtmlDE();

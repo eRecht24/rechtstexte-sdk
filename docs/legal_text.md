@@ -135,7 +135,7 @@ use \eRecht24\RechtstexteSDK\LegalTextHandler;
         case Helper::PUSH_TYPE_IMPRINT:
         case Helper::PUSH_TYPE_PRIVACY_POLICY:
         case Helper::PUSH_TYPE_PRIVACY_POLICY_SOCIAL_MEDIA:
-            $docWrapper = new LegalTextHandler('YOUR_API_KEY', $documentType);
+            $docWrapper = new LegalTextHandler('YOUR_API_KEY', $documentType, 'YOUR-PLUGIN-KEY');
             /* @var LegalText $legalText */
             $legalText = $docWrapper->importDocument();
             return;
