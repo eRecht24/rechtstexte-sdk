@@ -42,6 +42,8 @@ class ApiHandler implements ApiInterface
                 $pluginKey = getenv('ERECHT24_PLUGIN_KEY');
             } elseif (defined('ERECHT24_PLUGIN_KEY')) {
                 $pluginKey = ERECHT24_PLUGIN_KEY;
+            } else {
+                $pluginKey = "";
             }
         }
 
