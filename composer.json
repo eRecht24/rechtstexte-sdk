@@ -2,7 +2,7 @@
   "name": "erecht24/rechtstexte-sdk",
   "description": "API client library for eRecht24 Rechtstexte-API",
   "type": "library",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "license": "proprietary",
   "authors": [
     {
@@ -18,7 +18,7 @@
   },
   "autoload": {
     "psr-4": {
-      "eRecht24\\RechtstexteSDK\\": "src/RechtstexteSDK"
+      "eRecht24\\RechtstexteSDK\\": "src/RechtstexteSDK/"
     }
   },
   "require-dev": {
