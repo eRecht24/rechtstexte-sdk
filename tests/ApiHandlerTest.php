@@ -16,4 +16,14 @@ final class ApiHandlerTest extends TestCase
 
         $this->assertInstanceOf(ApiHandler::class, $client);
     }
+
+    public function testLastErrorCodeAndMessage(): void
+    {
+        $client = new ApiHandler('test-api-key', 'test-plugin-key');
+        $client->getClientList();
+
+        // getting client list without login should fail with 401 status code
+        $this->assertEquals($client->getLastErrorCode(), 401);
+        $this->assertEquals($client->getLastErrorMessage(), "Invalid key for the eRecht24 API.");
+    }
 }
