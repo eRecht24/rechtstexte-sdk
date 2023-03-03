@@ -22,22 +22,6 @@ stages:
     reports:
       junit: report.xml
 
-php 7.1:
-  extends: .phpunit
-  image: php:7.1
-
-php 7.2:
-  extends: .phpunit
-  image: php:7.2
-  variables:
-    ERECHT24_API_KEY: $ERECHT24_API_KEY_PHP72
-
-php 7.3:
-  extends: .phpunit
-  image: php:7.3
-  variables:
-    ERECHT24_API_KEY: $ERECHT24_API_KEY_PHP73
-
 php 7.4:
   extends: .phpunit
   image: php:7.4
@@ -55,3 +39,7 @@ php 8.1:
   image: php:8.1
   variables:
     ERECHT24_API_KEY: $ERECHT24_API_KEY_PHP81
+
+php 8.2:
+  extends: .phpunit
+  image: php:8.2
