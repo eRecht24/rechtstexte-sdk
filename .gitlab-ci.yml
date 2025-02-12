@@ -43,3 +43,11 @@ php 8.1:
 php 8.2:
   extends: .phpunit
   image: php:8.2
+
+php 8.3:
+  extends: .phpunit
+  image: php:8.3
+
+php 8.2:
+  extends: .phpunit
+  image: php:8.4
